@@ -8,7 +8,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show navbar search when scrolled past 80vh
+      // Show navbar background and search when scrolled past 80vh
       const scrolled = window.scrollY > window.innerHeight * 0.8;
       setIsScrolled(scrolled);
     };
@@ -24,8 +24,10 @@ export const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
-      {/* Semi-transparent background */}
-      <div className="absolute inset-x-0 top-0 h-24 bg-black/20 backdrop-blur-sm" />
+      {/* Semi-transparent background - only show when scrolled */}
+      {isScrolled && (
+        <div className="absolute inset-x-0 top-0 h-24 bg-black/20 backdrop-blur-sm" />
+      )}
       
       <div className="relative max-w-[1400px] mx-auto flex items-center justify-between px-8 py-8">
         <div className="flex items-center">
