@@ -66,9 +66,9 @@ export const PerksSection = () => {
 
           <div className="flex flex-col items-center mt-24 text-white space-y-6">
             <Link to="/destinations" className="flex flex-col items-center space-y-4 group">
-              <ArrowUp className="w-6 h-6 animate-bounce text-secondary" />
+              <ArrowDown className="w-6 h-6 animate-bounce text-white" />
               <span className="text-lg tracking-wider font-light group-hover:text-secondary transition-colors">See our Places</span>
-              <ArrowDown className="w-6 h-6 animate-bounce text-secondary" />
+              <ArrowUp className="w-6 h-6 animate-bounce text-white" />
             </Link>
           </div>
         </div>
