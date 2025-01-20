@@ -36,7 +36,7 @@ export default {
           foreground: "#FFFFFF",
         },
         navy: {
-          DEFAULT: "#1A1F2C",
+          DEFAULT: "#0A1B2F",
           foreground: "#FFFFFF",
         },
       },
