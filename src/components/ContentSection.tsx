@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "./ui/carousel";
 import AutoplayPlugin from "embla-carousel-autoplay";
 
 const tags = [
@@ -51,6 +50,7 @@ export const ContentSection = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isTextPulsing, setIsTextPulsing] = useState(false);
   const [nextTag, setNextTag] = useState(tags[1]);
+  const [slidePosition, setSlidePosition] = useState(0);
 
   useEffect(() => {
     const plugin = AutoplayPlugin({
@@ -97,6 +97,9 @@ export const ContentSection = () => {
     const nextIndex = (currentIndex + 1) % tags.length;
     setNextTag(tags[nextIndex]);
     
+    // Update slide position
+    setSlidePosition(prev => prev - 100);
+    
     setTimeout(() => {
       setActiveTag(tags[nextIndex]);
       setNextTag(tags[(nextIndex + 1) % tags.length]);
@@ -141,42 +144,47 @@ export const ContentSection = () => {
         </div>
 
         <div className="relative overflow-hidden">
-          <div className={`grid grid-cols-2 gap-8 transition-all duration-1000 transform ${
-            isAnimating ? '-translate-x-full' : 'translate-x-0'
-          }`}>
-            <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src={slideContent[activeTag].image}
-                alt="Experience"
-                className="w-full h-[400px] object-cover"
-              />
-            </div>
-            <div className="flex items-center">
-              <p className={`text-3xl text-white leading-tight max-w-[80%] ${
-                isTextPulsing ? 'animate-text-pulse' : ''
-              }`}>
-                {slideContent[activeTag].text}
-              </p>
-            </div>
-          </div>
-
-          {/* Next slide positioned absolutely */}
-          <div className={`absolute top-0 left-0 w-full grid grid-cols-2 gap-8 transition-all duration-1000 transform ${
-            isAnimating ? 'translate-x-0' : 'translate-x-full'
-          }`}>
-            <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src={slideContent[nextTag].image}
-                alt="Next Experience"
-                className="w-full h-[400px] object-cover"
-              />
-            </div>
-            <div className="flex items-center">
-              <p className={`text-3xl text-white leading-tight max-w-[80%] ${
-                isTextPulsing ? 'animate-text-pulse' : ''
-              }`}>
-                {slideContent[nextTag].text}
-              </p>
+          <div 
+            className="transition-transform duration-1000 ease-in-out"
+            style={{ transform: `translateX(${slidePosition}%)` }}
+          >
+            <div className="flex">
+              <div className="flex-shrink-0 w-full">
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                    <img
+                      src={slideContent[activeTag].image}
+                      alt="Experience"
+                      className="w-full h-[400px] object-cover"
+                    />
+                  </div>
+                  <div className="flex items-center">
+                    <p className={`text-3xl text-white leading-tight max-w-[80%] ${
+                      isTextPulsing ? 'animate-text-pulse' : ''
+                    }`}>
+                      {slideContent[activeTag].text}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex-shrink-0 w-full">
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                    <img
+                      src={slideContent[nextTag].image}
+                      alt="Next Experience"
+                      className="w-full h-[400px] object-cover"
+                    />
+                  </div>
+                  <div className="flex items-center">
+                    <p className={`text-3xl text-white leading-tight max-w-[80%] ${
+                      isTextPulsing ? 'animate-text-pulse' : ''
+                    }`}>
+                      {slideContent[nextTag].text}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
