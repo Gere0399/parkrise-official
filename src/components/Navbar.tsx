@@ -22,12 +22,12 @@ export const Navbar = () => {
           />
         </div>
 
-        <div className="flex items-center space-x-8">
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-sm font-montserrat">Home</Button>
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-sm font-montserrat">Destinations</Button>
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-sm font-montserrat">Our brand</Button>
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-sm font-montserrat">For businesses</Button>
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-sm font-montserrat">Franchise</Button>
+        <div className="flex items-center space-x-4 mr-20">
+          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat">Home</Button>
+          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat">Destinations</Button>
+          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat">Our brand</Button>
+          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat">For businesses</Button>
+          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat">Franchise</Button>
         </div>
       </div>
     </nav>
