@@ -52,7 +52,7 @@ export const PerksSection = () => {
                       <div className="w-2.5 h-2.5 bg-white rounded-full" />
                     )}
                   </div>
-                  <span className="text-lg font-light tracking-wide group-hover:text-secondary transition-colors">
+                  <span className="text-base font-light tracking-wide group-hover:text-secondary transition-colors">
                     {perk.name}
                   </span>
                 </div>
@@ -63,9 +63,9 @@ export const PerksSection = () => {
 
         <div className="flex flex-col items-center mt-24 text-white space-y-6">
           <div className="flex flex-col items-center space-y-2">
-            <ArrowDown className="w-6 h-6" />
+            <ArrowDown className="w-6 h-6 animate-scroll" />
             <span className="text-lg tracking-wider">See this space</span>
-            <ArrowUp className="w-6 h-6" />
+            <ArrowUp className="w-6 h-6 animate-scroll" />
           </div>
         </div>
       </div>
