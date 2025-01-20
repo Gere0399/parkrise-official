@@ -28,8 +28,8 @@ export const SearchBar = () => {
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   
   const getRoomGuestLabel = (rooms: string, guests: string) => {
-    const roomText = `${rooms} ${Number(rooms) === 1 ? 'Room' : 'Rooms'}`;
-    const guestText = `${guests} ${Number(guests) === 1 ? 'Guest' : 'Guests'}`;
+    const roomText = `${rooms} ${Number(rooms) === 1 ? 'room' : 'rooms'}`;
+    const guestText = `${guests} ${Number(guests) === 1 ? 'guest' : 'guests'}`;
     return `${roomText}, ${guestText}`;
   };
 
@@ -124,38 +124,42 @@ export const SearchBar = () => {
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[200px] whitespace-nowrap">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[180px]">
             <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} />
           </SelectTrigger>
-          <SelectContent className="bg-white w-[280px]" position="popper" side="bottom" sideOffset={5}>
+          <SelectContent className="bg-white w-[280px]">
             <div className="px-3 py-2">
-              <p className="text-sm font-bold mb-2">Rooms</p>
-              <div className="grid grid-cols-3 gap-1">
+              <p className="text-sm font-semibold mb-2">Rooms</p>
+              <div className="grid grid-cols-3 gap-2">
                 {Array.from({length: 10}, (_, i) => i + 1).map((num) => (
-                  <SelectItem 
-                    key={`room-${num}`} 
-                    value={`${num}-${guests}`}
-                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center justify-between"
+                  <div
+                    key={`room-${num}`}
+                    onClick={() => {
+                      setRooms(num.toString());
+                    }}
+                    className="px-3 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
                   >
                     <span>{num}</span>
                     {num === Number(rooms) && <Check className="h-4 w-4 text-green-500" />}
-                  </SelectItem>
+                  </div>
                 ))}
               </div>
             </div>
-            <div className="border-t border-gray-200 my-1" />
+            <div className="border-t border-gray-200 my-2" />
             <div className="px-3 py-2">
-              <p className="text-sm font-bold mb-2">Guests</p>
-              <div className="grid grid-cols-3 gap-1">
-                {Array.from({length: 5}, (_, i) => i + 1).map((num) => (
-                  <SelectItem 
-                    key={`guest-${num}`} 
-                    value={`${rooms}-${num}`}
-                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center justify-between"
+              <p className="text-sm font-semibold mb-2">Guests</p>
+              <div className="grid grid-cols-3 gap-2">
+                {Array.from({length: 7}, (_, i) => i + 1).map((num) => (
+                  <div
+                    key={`guest-${num}`}
+                    onClick={() => {
+                      setGuests(num.toString());
+                    }}
+                    className="px-3 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
                   >
                     <span>{num}</span>
                     {num === Number(guests) && <Check className="h-4 w-4 text-green-500" />}
-                  </SelectItem>
+                  </div>
                 ))}
               </div>
             </div>
