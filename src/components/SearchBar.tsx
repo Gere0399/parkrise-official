@@ -35,7 +35,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-5xl px-2">
+    <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-5xl px-1">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
         <PopoverTrigger asChild>
           <div className="flex items-center space-x-2 pl-4 pr-2 h-full cursor-pointer">
