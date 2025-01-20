@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "./ui/carousel";
 import AutoplayPlugin from "embla-carousel-autoplay";
 
 const tags = [
@@ -90,7 +90,6 @@ export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
   const [autoplayPlugin, setAutoplayPlugin] = useState<ReturnType<typeof AutoplayPlugin> | null>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   useEffect(() => {
     const plugin = AutoplayPlugin({
@@ -170,19 +169,22 @@ export const ContentSection = () => {
             loop: true,
           }}
         >
-          <CarouselContent>
+          <CarouselContent className="transition-transform duration-500">
             {slideContent[activeTag].map((slide, index) => (
-              <CarouselItem key={index} className="transition-all duration-500 ease-in-out">
+              <CarouselItem 
+                key={index} 
+                className="transition-all duration-500 ease-in-out"
+              >
                 <div className="grid grid-cols-2 gap-8">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl transform transition-all duration-500 ease-in-out hover:scale-105">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
                     <img
                       src={slide.image}
                       alt="Experience"
-                      className="w-full h-[400px] object-cover transform transition-all duration-500 ease-in-out"
+                      className="w-full h-[400px] object-cover"
                     />
                   </div>
                   <div className="flex items-center">
-                    <p className="text-3xl text-white leading-tight max-w-[80%] animate-fade-in">
+                    <p className="text-3xl text-white leading-tight max-w-[80%]">
                       {slide.text}
                     </p>
                   </div>
@@ -190,6 +192,8 @@ export const ContentSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
+          <CarouselPrevious className="left-0 bg-white/10 hover:bg-white/20 border-none text-white" />
+          <CarouselNext className="right-0 bg-white/10 hover:bg-white/20 border-none text-white" />
         </Carousel>
       </div>
     </div>
