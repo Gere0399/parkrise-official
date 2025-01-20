@@ -13,7 +13,6 @@ const tags = [
   "Exploration",
 ];
 
-// Content for each tag's slides
 const slideContent = {
   "Socializing": [
     {
@@ -120,7 +119,6 @@ export const ContentSection = () => {
     }
   }, [isManualSelection, autoplayPlugin]);
 
-  // Auto-update active tag when slides change automatically
   useEffect(() => {
     if (!isManualSelection) {
       const autoChangeTimer = setInterval(() => {
@@ -174,13 +172,13 @@ export const ContentSection = () => {
         >
           <CarouselContent>
             {slideContent[activeTag].map((slide, index) => (
-              <CarouselItem key={index} className="transition-opacity duration-500">
+              <CarouselItem key={index} className="transition-all duration-500 ease-in-out">
                 <div className="grid grid-cols-2 gap-8">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl transition-transform duration-500 hover:scale-105">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl transform transition-all duration-500 ease-in-out hover:scale-105">
                     <img
                       src={slide.image}
                       alt="Experience"
-                      className="w-full h-[400px] object-cover transition-transform duration-500"
+                      className="w-full h-[400px] object-cover transform transition-all duration-500 ease-in-out"
                     />
                   </div>
                   <div className="flex items-center">
