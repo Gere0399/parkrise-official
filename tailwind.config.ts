@@ -49,6 +49,11 @@ export default {
           "0%": { opacity: "0", transform: "translateY(10px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "bounce-text": {
+          "0%, 100%": { transform: "translateX(0)" },
+          "25%": { transform: "translateX(-20px)" },
+          "75%": { transform: "translateX(20px)" },
+        },
         scroll: {
           "0%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(10px)" },

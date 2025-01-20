@@ -49,6 +49,7 @@ export const ContentSection = () => {
   const [autoplayPlugin, setAutoplayPlugin] = useState<ReturnType<typeof AutoplayPlugin> | null>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [textBouncing, setTextBouncing] = useState(false);
 
   useEffect(() => {
     const plugin = AutoplayPlugin({
@@ -88,14 +89,22 @@ export const ContentSection = () => {
   }, [isManualSelection]);
 
   const handleSlideChange = () => {
-    setIsAnimating(true);
+    setTextBouncing(true);
+    
+    // Start text bouncing animation for 2 seconds
     setTimeout(() => {
-      setActiveTag((prevTag) => {
-        const nextIndex = (tags.indexOf(prevTag) + 1) % tags.length;
-        return tags[nextIndex];
-      });
-      setIsAnimating(false);
-    }, 800);
+      setIsAnimating(true);
+      setTextBouncing(false);
+      
+      // After bouncing, trigger the slide transition
+      setTimeout(() => {
+        setActiveTag((prevTag) => {
+          const nextIndex = (tags.indexOf(prevTag) + 1) % tags.length;
+          return tags[nextIndex];
+        });
+        setIsAnimating(false);
+      }, 300);
+    }, 2000);
   };
 
   const handleTagClick = (tag: string) => {
@@ -122,9 +131,9 @@ export const ContentSection = () => {
               key={tag}
               variant="outline"
               onClick={() => handleTagClick(tag)}
-              className={`rounded-full border text-sm py-1.5 px-4 transition-colors ${
+              className={`rounded-full border text-sm py-1.5 px-4 transition-all transform ${
                 activeTag === tag 
-                  ? 'bg-white text-navy border-white hover:bg-white/90' 
+                  ? 'bg-white text-navy border-white hover:bg-white/90 scale-110' 
                   : 'bg-transparent text-white border-white hover:bg-white/10'
               }`}
             >
@@ -143,10 +152,8 @@ export const ContentSection = () => {
         >
           <CarouselContent>
             <CarouselItem key={activeTag}>
-              <div className={`grid grid-cols-2 gap-8 transition-all duration-800 transform ${
-                isAnimating 
-                  ? 'translate-y-4 scale-95 opacity-0' 
-                  : 'translate-y-0 scale-100 opacity-100'
+              <div className={`grid grid-cols-2 gap-8 transition-all duration-300 transform ${
+                isAnimating ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'
               }`}>
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
                   <img
@@ -156,7 +163,11 @@ export const ContentSection = () => {
                   />
                 </div>
                 <div className="flex items-center">
-                  <p className="text-3xl text-white leading-tight max-w-[80%]">
+                  <p className={`text-3xl text-white leading-tight max-w-[80%] transition-transform ${
+                    textBouncing 
+                      ? 'animate-[bounce-text_0.5s_ease-in-out_4]' 
+                      : ''
+                  }`}>
                     {slideContent[activeTag].text}
                   </p>
                 </div>
