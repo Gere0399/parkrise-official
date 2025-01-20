@@ -11,9 +11,9 @@ export const SearchBar = () => {
   const [duration, setDuration] = useState<Date>();
   
   return (
-    <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-10 w-full max-w-4xl divide-x divide-gray-200">
+    <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-4xl divide-x divide-gray-200 px-2">
       <div className="flex items-center space-x-2 px-4 h-full">
-        <MapPin className="w-4 h-4 text-[#00B2B2]" />
+        <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
         <input
           type="text"
           placeholder="Chandler, Arizona US"
@@ -21,11 +21,11 @@ export const SearchBar = () => {
         />
       </div>
       
-      <div className="px-4 h-full">
+      <div className="px-4 h-full flex items-center">
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="ghost" className="h-full pl-0 pr-4 font-normal">
-              <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2]" />
+              <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2] shrink-0" />
               <span className="truncate w-24 text-sm">
                 {arrival ? format(arrival, "PPP") : <span className="text-gray-500">Arrival</span>}
               </span>
@@ -42,11 +42,11 @@ export const SearchBar = () => {
         </Popover>
       </div>
 
-      <div className="px-4 h-full">
+      <div className="px-4 h-full flex items-center">
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="ghost" className="h-full pl-0 pr-4 font-normal">
-              <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2]" />
+              <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2] shrink-0" />
               <span className="truncate w-24 text-sm">
                 {duration ? format(duration, "PPP") : <span className="text-gray-500">Duration</span>}
               </span>
@@ -63,7 +63,7 @@ export const SearchBar = () => {
         </Popover>
       </div>
 
-      <div className="px-4 h-full">
+      <div className="px-4 h-full flex items-center">
         <Select>
           <SelectTrigger className="h-full border-0 bg-transparent w-[120px]">
             <SelectValue placeholder="1 Room, 1 Guest" className="truncate text-sm" />
@@ -77,7 +77,7 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <div className="px-4 h-full">
+      <div className="px-4 h-full flex items-center">
         <Select>
           <SelectTrigger className="h-full border-0 bg-transparent w-[120px]">
             <SelectValue placeholder="Special rates" className="truncate text-sm" />
@@ -93,7 +93,7 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-8 h-full rounded-full font-montserrat text-sm">
+      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-8 h-10 rounded-full font-montserrat text-sm mx-2">
         Let's GO!
       </Button>
     </div>
