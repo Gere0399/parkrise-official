@@ -112,7 +112,7 @@ export const ContentSection = () => {
       const timer = setTimeout(() => {
         setIsManualSelection(false);
         autoplayPlugin.play();
-      }, 20000);
+      }, 5000); // Changed to match the slide transition time
 
       return () => clearTimeout(timer);
     }
@@ -121,13 +121,15 @@ export const ContentSection = () => {
   useEffect(() => {
     if (!isManualSelection) {
       const autoChangeTimer = setInterval(() => {
-        const nextIndex = (tags.indexOf(activeTag) + 1) % tags.length;
-        setActiveTag(tags[nextIndex]);
-      }, 5000);
+        setActiveTag((prevTag) => {
+          const nextIndex = (tags.indexOf(prevTag) + 1) % tags.length;
+          return tags[nextIndex];
+        });
+      }, 5000); // Synchronized with slide transition time
 
       return () => clearInterval(autoChangeTimer);
     }
-  }, [activeTag, isManualSelection]);
+  }, [isManualSelection]);
 
   const handleTagClick = (tag: string) => {
     setActiveTag(tag);
