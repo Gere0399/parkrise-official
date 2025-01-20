@@ -91,6 +91,7 @@ export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
   const [autoplayPlugin, setAutoplayPlugin] = useState<ReturnType<typeof AutoplayPlugin> | null>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   useEffect(() => {
     const plugin = AutoplayPlugin({
@@ -118,6 +119,18 @@ export const ContentSection = () => {
       return () => clearTimeout(timer);
     }
   }, [isManualSelection, autoplayPlugin]);
+
+  // Auto-update active tag when slides change automatically
+  useEffect(() => {
+    if (!isManualSelection) {
+      const autoChangeTimer = setInterval(() => {
+        const nextIndex = (tags.indexOf(activeTag) + 1) % tags.length;
+        setActiveTag(tags[nextIndex]);
+      }, 5000);
+
+      return () => clearInterval(autoChangeTimer);
+    }
+  }, [activeTag, isManualSelection]);
 
   const handleTagClick = (tag: string) => {
     setActiveTag(tag);
