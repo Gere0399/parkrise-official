@@ -26,6 +26,7 @@ export const SearchBar = () => {
   const [guests, setGuests] = useState("1");
   const [location, setLocation] = useState("");
   const [isLocationOpen, setIsLocationOpen] = useState(false);
+  const [specialRate, setSpecialRate] = useState(""); // New state for special rates
   
   const getRoomGuestLabel = (rooms: string, guests: string) => {
     const roomText = `${rooms} ${Number(rooms) === 1 ? 'room' : 'rooms'}`;
@@ -123,7 +124,7 @@ export const SearchBar = () => {
           setGuests(g);
         }}>
           <SelectTrigger className="h-full border-0 bg-transparent w-[180px] text-gray-900">
-            <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} />
+            <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px]">
             <div className="px-3 py-2">
@@ -166,9 +167,9 @@ export const SearchBar = () => {
       </div>
 
       <div className="px-2 h-full flex items-center">
-        <Select>
+        <Select value={specialRate} onValueChange={setSpecialRate}>
           <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-gray-900">
-            <SelectValue placeholder="Special rates" />
+            <SelectValue>{specialRate || "Special rates"}</SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectItem value="group">Group</SelectItem>
