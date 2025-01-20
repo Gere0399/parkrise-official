@@ -23,12 +23,12 @@ export const SearchBar = () => {
         />
       </div>
       
-      <div className="px-3 h-full flex items-center">
+      <div className="px-2 h-full flex items-center">
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="ghost" className="h-full pl-0 pr-3 font-normal">
+            <Button variant="ghost" className="h-full pl-0 pr-2 font-normal">
               <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2] shrink-0" />
-              <span className="truncate w-20 text-sm">
+              <span className="truncate w-16 text-sm">
                 {arrival ? format(arrival, "MMM d") : <span className="text-gray-500">Arrival</span>}
               </span>
             </Button>
@@ -44,12 +44,12 @@ export const SearchBar = () => {
         </Popover>
       </div>
 
-      <div className="px-3 h-full flex items-center">
+      <div className="px-2 h-full flex items-center">
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="ghost" className="h-full pl-0 pr-3 font-normal">
+            <Button variant="ghost" className="h-full pl-0 pr-2 font-normal">
               <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2] shrink-0" />
-              <span className="truncate w-20 text-sm">
+              <span className="truncate w-16 text-sm">
                 {duration ? format(duration, "MMM d") : <span className="text-gray-500">Duration</span>}
               </span>
             </Button>
@@ -65,33 +65,41 @@ export const SearchBar = () => {
         </Popover>
       </div>
 
-      <div className="px-3 h-full flex items-center">
+      <div className="px-2 h-full flex items-center">
         <Select value={`${rooms}-${guests}`} onValueChange={(val) => {
           const [r, g] = val.split('-');
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[110px]">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[100px]">
             <SelectValue placeholder={`${rooms}R, ${guests}G`} className="truncate text-sm" />
           </SelectTrigger>
-          <SelectContent className="bg-white">
-            <div className="px-2 py-1.5">
-              <p className="text-sm font-semibold mb-1">Rooms</p>
-              <div className="space-y-1">
+          <SelectContent className="bg-white w-[280px]">
+            <div className="px-3 py-2">
+              <p className="text-sm font-bold mb-2">Rooms</p>
+              <div className="grid grid-cols-3 gap-1">
                 {Array.from({length: 10}, (_, i) => i + 1).map((num) => (
-                  <SelectItem key={`room-${num}`} value={`${num}-${guests}`}>
-                    {num} Room{num > 1 ? 's' : ''}
+                  <SelectItem 
+                    key={`room-${num}`} 
+                    value={`${num}-${guests}`}
+                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center"
+                  >
+                    {num}
                   </SelectItem>
                 ))}
               </div>
             </div>
             <div className="border-t border-gray-200 my-1" />
-            <div className="px-2 py-1.5">
-              <p className="text-sm font-semibold mb-1">Guests</p>
-              <div className="space-y-1">
+            <div className="px-3 py-2">
+              <p className="text-sm font-bold mb-2">Guests</p>
+              <div className="grid grid-cols-3 gap-1">
                 {Array.from({length: 5}, (_, i) => i + 1).map((num) => (
-                  <SelectItem key={`guest-${num}`} value={`${rooms}-${num}`}>
-                    {num} Guest{num > 1 ? 's' : ''}
+                  <SelectItem 
+                    key={`guest-${num}`} 
+                    value={`${rooms}-${num}`}
+                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center"
+                  >
+                    {num}
                   </SelectItem>
                 ))}
               </div>
@@ -100,9 +108,9 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <div className="px-3 h-full flex items-center">
+      <div className="px-2 h-full flex items-center">
         <Select>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[100px]">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[90px]">
             <SelectValue placeholder="Special" className="truncate text-sm" />
           </SelectTrigger>
           <SelectContent className="bg-white">
@@ -116,7 +124,7 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-6 h-10 rounded-full font-montserrat text-sm mx-2">
+      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mx-2">
         Let's GO!
       </Button>
     </div>
