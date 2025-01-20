@@ -9,7 +9,7 @@ const perks = [
 ];
 
 export const PerksSection = () => {
-  const [selectedPerk, setSelectedPerk] = useState("Food & Beverage");
+  const [selectedPerk, setSelectedPerk] = useState("Food & Beverages");
 
   return (
     <div className="bg-navy min-h-screen py-20 px-6">
