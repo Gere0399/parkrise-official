@@ -9,7 +9,7 @@ export const SearchBar = () => {
         <input
           type="text"
           placeholder="Chandler, Arizona US"
-          className="bg-transparent border-none focus:outline-none text-white w-40"
+          className="bg-transparent border-none focus:outline-none text-white w-40 font-montserrat"
         />
       </div>
       
@@ -18,7 +18,7 @@ export const SearchBar = () => {
         <input
           type="text"
           placeholder="Arrival"
-          className="bg-transparent border-none focus:outline-none text-white w-24"
+          className="bg-transparent border-none focus:outline-none text-white w-24 font-montserrat"
         />
       </div>
 
@@ -27,19 +27,19 @@ export const SearchBar = () => {
         <input
           type="text"
           placeholder="Duration"
-          className="bg-transparent border-none focus:outline-none text-white w-24"
+          className="bg-transparent border-none focus:outline-none text-white w-24 font-montserrat"
         />
       </div>
 
       <div className="flex items-center space-x-2 px-4 py-2 rounded-full bg-white/5">
-        <span className="text-white text-sm">1 Room, 1 Guest</span>
+        <span className="text-white text-sm font-montserrat">1 Room, 1 Guest</span>
       </div>
 
       <div className="flex items-center space-x-2 px-4 py-2 rounded-full bg-white/5">
-        <span className="text-white text-sm">Special rates</span>
+        <span className="text-white text-sm font-montserrat">Special rates</span>
       </div>
 
-      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-8 rounded-full">
+      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-8 rounded-full font-montserrat">
         Let's GO!
       </Button>
     </div>

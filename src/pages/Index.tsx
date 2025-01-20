@@ -5,7 +5,7 @@ import { ContentSection } from "@/components/ContentSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen font-montserrat">
       <div className="relative h-screen">
         {/* Video Background */}
         <div className="absolute inset-0 bg-navy/80">
