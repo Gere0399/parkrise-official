@@ -33,8 +33,6 @@ export const SearchBar = () => {
     return `${roomText}, ${guestText}`;
   };
 
-  // ... keep existing code (location popover section)
-
   return (
     <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-5xl divide-x divide-gray-200">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
@@ -125,7 +123,7 @@ export const SearchBar = () => {
           setGuests(g);
         }}>
           <SelectTrigger className="h-full border-0 bg-transparent w-[180px]">
-            <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} className="text-gray-900 text-sm" />
+            <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} className="text-navy" />
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px]">
             <div className="px-3 py-2">
@@ -137,10 +135,10 @@ export const SearchBar = () => {
                     onClick={() => {
                       setRooms(num.toString());
                     }}
-                    className="px-3 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between gap-1"
+                    className="px-2 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center"
                   >
-                    <span>{num}</span>
-                    {num === Number(rooms) && <Check className="h-4 w-4 text-green-500" />}
+                    <span className="mr-1">{num}</span>
+                    {num === Number(rooms) && <Check className="h-4 w-4 text-green-500 ml-auto" />}
                   </div>
                 ))}
               </div>
@@ -155,10 +153,10 @@ export const SearchBar = () => {
                     onClick={() => {
                       setGuests(num.toString());
                     }}
-                    className="px-3 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between gap-1"
+                    className="px-2 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center"
                   >
-                    <span>{num}</span>
-                    {num === Number(guests) && <Check className="h-4 w-4 text-green-500" />}
+                    <span className="mr-1">{num}</span>
+                    {num === Number(guests) && <Check className="h-4 w-4 text-green-500 ml-auto" />}
                   </div>
                 ))}
               </div>
