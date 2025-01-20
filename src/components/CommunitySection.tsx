@@ -5,7 +5,7 @@ const CommunitySection = () => {
   return (
     <div className="bg-[#F8F9FA] py-20">
       <div className="container mx-auto px-6 max-w-6xl">
-        <h2 className="text-4xl md:text-5xl font-bold text-navy mb-16 text-center">
+        <h2 className="text-4xl md:text-5xl font-medium text-navy mb-16 text-center">
           Become immersed in an engaging community
         </h2>
         
@@ -23,7 +23,7 @@ const CommunitySection = () => {
                     />
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed md:w-2/3 max-w-xl">
+                <p className="text-lg text-gray-700 leading-relaxed md:w-2/3 max-w-xl">
                   At Parkrise, we understand that comfort comes from feeling at home. 
                   That's why we provide thoughtfully designed spaces and essential 
                   resources that help you live life your way, no matter how long your stay.
@@ -45,7 +45,7 @@ const CommunitySection = () => {
                     />
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed md:w-2/3 max-w-xl">
+                <p className="text-lg text-gray-700 leading-relaxed md:w-2/3 max-w-xl">
                   Wellness is woven into every part of your stay at Parkrise. 
                   Explore the best of health and culture with our walking maps, 
                   farmer's markets, and artist workshops—designed to inspire 
@@ -68,7 +68,7 @@ const CommunitySection = () => {
                     />
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed md:w-2/3 max-w-xl">
+                <p className="text-lg text-gray-700 leading-relaxed md:w-2/3 max-w-xl">
                   At Parkrise, every meal is an opportunity to immerse yourself 
                   in the neighborhood. From grilling outdoors to savoring dishes 
                   from local food trucks that bring authentic flavors to life, 
