@@ -73,18 +73,22 @@ export const PerksSection = () => {
       </div>
 
       {/* Footer section */}
-      <footer className="bg-[#F1F1F1] py-12">
-        <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-            {/* Left section - Navigation */}
-            <div className="flex flex-wrap gap-6">
+      <footer className="bg-[#F1F1F1]">
+        {/* Navigation Row */}
+        <div className="border-b border-[#E5E5E5]">
+          <div className="max-w-[1200px] mx-auto px-8 md:px-12 py-6">
+            <div className="flex gap-8">
               <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Home</span>
               <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Residents</span>
               <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Our brand</span>
               <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">For Business</span>
             </div>
+          </div>
+        </div>
 
-            {/* Center logo */}
+        {/* Logo Row */}
+        <div className="border-b border-[#E5E5E5]">
+          <div className="max-w-[1200px] mx-auto px-8 md:px-12 py-6">
             <div className="flex justify-center">
               <img 
                 src="/lovable-uploads/892ce5e3-ffe0-420b-a9d5-5207bdf86152.png"
@@ -92,18 +96,30 @@ export const PerksSection = () => {
                 className="h-12"
               />
             </div>
+          </div>
+        </div>
 
-            {/* Right section - Contact & Copyright */}
-            <div className="flex flex-col items-end space-y-2">
+        {/* Contact Row */}
+        <div className="border-b border-[#E5E5E5]">
+          <div className="max-w-[1200px] mx-auto px-8 md:px-12 py-6">
+            <div className="flex justify-end items-center gap-8">
               <span className="text-sm text-[#222222] font-normal">hello@parkrise.com</span>
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Facebook</span>
-                <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Instagram</span>
-              </div>
-              <div className="flex items-center space-x-2 mt-2">
+              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Facebook</span>
+              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Instagram</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Row */}
+        <div className="max-w-[1200px] mx-auto px-8 md:px-12 py-6">
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-[#222222] font-normal">Live. Stay. Belong.</span>
+            <div className="flex items-center gap-8">
+              <div className="flex items-center space-x-2">
                 <span className="text-sm text-[#222222] font-normal">©Copyright</span>
                 <span className="text-sm text-[#222222] font-normal">Panama 2024</span>
               </div>
+              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Need help?</span>
             </div>
           </div>
         </div>
