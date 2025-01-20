@@ -133,10 +133,10 @@ export const SearchBar = () => {
                   <SelectItem 
                     key={`room-${num}`} 
                     value={`${num}-${guests}`}
-                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center justify-between"
+                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center"
                   >
-                    <span>{num} {num === 1 ? 'Room' : 'Rooms'}</span>
-                    {num === Number(rooms) && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                    {num === Number(rooms) && <Check className="h-4 w-4 text-green-500 mr-2" />}
+                    <span>{num}</span>
                   </SelectItem>
                 ))}
               </div>
@@ -149,10 +149,10 @@ export const SearchBar = () => {
                   <SelectItem 
                     key={`guest-${num}`} 
                     value={`${rooms}-${num}`}
-                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center justify-between"
+                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center"
                   >
-                    <span>{num} {num === 1 ? 'Guest' : 'Guests'}</span>
-                    {num === Number(guests) && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                    {num === Number(guests) && <Check className="h-4 w-4 text-green-500 mr-2" />}
+                    <span>{num}</span>
                   </SelectItem>
                 ))}
               </div>
