@@ -23,8 +23,11 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 py-8">
-      <div className="max-w-[1400px] mx-auto flex items-center justify-between px-8">
+    <nav className="fixed top-0 left-0 right-0 z-50">
+      {/* Semi-transparent background */}
+      <div className="absolute inset-x-0 top-0 h-24 bg-black/20 backdrop-blur-sm" />
+      
+      <div className="relative max-w-[1400px] mx-auto flex items-center justify-between px-8 py-8">
         <div className="flex items-center">
           <img 
             src="/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png" 
