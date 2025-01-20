@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+import AutoplayPlugin from "embla-carousel-autoplay";
 
 const tags = [
   "Socializing",
@@ -89,12 +89,11 @@ const slideContent = {
 
 export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
-  const [autoplayPlugin, setAutoplayPlugin] = useState<Autoplay | null>(null);
+  const [autoplayPlugin, setAutoplayPlugin] = useState<ReturnType<typeof AutoplayPlugin> | null>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
 
   useEffect(() => {
-    // Create autoplay plugin with options
-    const plugin = Autoplay({
+    const plugin = AutoplayPlugin({
       delay: 5000,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
@@ -102,17 +101,18 @@ export const ContentSection = () => {
     setAutoplayPlugin(plugin);
 
     return () => {
-      plugin.stop();
+      if (plugin) {
+        plugin.stop();
+      }
     };
   }, []);
 
   useEffect(() => {
-    if (isManualSelection) {
-      // Stop autoplay for 20 seconds after manual selection
-      autoplayPlugin?.stop();
+    if (isManualSelection && autoplayPlugin) {
+      autoplayPlugin.stop();
       const timer = setTimeout(() => {
         setIsManualSelection(false);
-        autoplayPlugin?.play();
+        autoplayPlugin.play();
       }, 20000);
 
       return () => clearTimeout(timer);
@@ -153,7 +153,7 @@ export const ContentSection = () => {
 
         <Carousel 
           className="w-full px-8"
-          plugins={[autoplayPlugin]}
+          plugins={autoplayPlugin ? [autoplayPlugin] : undefined}
           opts={{
             align: "start",
             loop: true,
