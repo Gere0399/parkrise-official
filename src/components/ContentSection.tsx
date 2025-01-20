@@ -14,34 +14,48 @@ const tags = [
 ];
 
 const slideContent = {
-  "Socializing": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-    text: "Relax, enjoy local food and hang around the lounge... music and good vibes on us"
-  },
-  "Cooking": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-    text: "Cook your favorite meals in our fully equipped shared kitchen spaces"
-  },
-  "Technology": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-    text: "Stay connected with high-speed WiFi and smart home features throughout"
-  },
-  "Feeling at Home": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-    text: "Experience the comfort of home with our thoughtfully designed living spaces"
-  },
-  "Wellness": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-    text: "Maintain your fitness routine in our 24/7 wellness center"
-  },
-  "Bed & Bath": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-    text: "Premium bedding and luxurious bath amenities for ultimate comfort"
-  },
-  "Exploration": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-    text: "Discover local attractions with our curated city guides"
-  }
+  "Socializing": [
+    {
+      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+      text: "Relax, enjoy local food and hang around the lounge... music and good vibes on us"
+    }
+  ],
+  "Cooking": [
+    {
+      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+      text: "Cook your favorite meals in our fully equipped shared kitchen spaces"
+    }
+  ],
+  "Technology": [
+    {
+      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+      text: "Stay connected with high-speed WiFi and smart home features throughout"
+    }
+  ],
+  "Feeling at Home": [
+    {
+      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+      text: "Experience the comfort of home with our thoughtfully designed living spaces"
+    }
+  ],
+  "Wellness": [
+    {
+      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+      text: "Maintain your fitness routine in our 24/7 wellness center"
+    }
+  ],
+  "Bed & Bath": [
+    {
+      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+      text: "Premium bedding and luxurious bath amenities for ultimate comfort"
+    }
+  ],
+  "Exploration": [
+    {
+      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+      text: "Discover local attractions with our curated city guides"
+    }
+  ]
 };
 
 export const ContentSection = () => {
@@ -128,22 +142,24 @@ export const ContentSection = () => {
           }}
         >
           <CarouselContent>
-            <CarouselItem>
-              <div className="grid grid-cols-2 gap-8">
-                <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-                  <img
-                    src={slideContent[activeTag].image}
-                    alt="Experience"
-                    className="w-full h-[400px] object-cover"
-                  />
+            {slideContent[activeTag].map((slide, index) => (
+              <CarouselItem key={index}>
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                    <img
+                      src={slide.image}
+                      alt="Experience"
+                      className="w-full h-[400px] object-cover"
+                    />
+                  </div>
+                  <div className="flex items-center">
+                    <p className="text-3xl text-white leading-tight max-w-[80%]">
+                      {slide.text}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <p className="text-3xl text-white leading-tight max-w-[80%]">
-                    {slideContent[activeTag].text}
-                  </p>
-                </div>
-              </div>
-            </CarouselItem>
+              </CarouselItem>
+            ))}
           </CarouselContent>
           <CarouselPrevious className="left-0 bg-white/10 hover:bg-white/20 border-none text-white" />
           <CarouselNext className="right-0 bg-white/10 hover:bg-white/20 border-none text-white" />
