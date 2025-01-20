@@ -19,14 +19,14 @@ export const PerksSection = () => {
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <div className="relative">
-            <div className="text-white text-sm mb-4 font-light tracking-wider absolute -top-8">
+          <div className="relative flex flex-col items-center">
+            <div className="text-white text-sm mb-4 font-light tracking-wider text-center w-full">
               Perk: <span className="border-b border-white/30 ml-2 pb-0.5">{selectedPerk}</span>
             </div>
             <img
               src="/lovable-uploads/5fe1c5dc-e65f-4ff0-b85e-aa3501d0132a.png"
               alt="Parkrise Space"
-              className="w-full max-w-[650px] mx-auto"
+              className="w-full max-w-[650px]"
             />
           </div>
 
