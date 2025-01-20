@@ -61,11 +61,16 @@ export const PerksSection = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center mt-24 text-white space-y-6">
-          <div className="flex flex-col items-center space-y-2">
-            <ArrowDown className="w-6 h-6 animate-scroll" />
-            <span className="text-lg tracking-wider">See this space</span>
-            <ArrowUp className="w-6 h-6 animate-scroll" />
+        <div className="flex flex-col items-center mt-24 text-white">
+          <div className="relative group cursor-pointer hover:scale-105 transition-transform duration-300">
+            <div className="flex flex-col items-center space-y-3">
+              <ArrowDown className="w-6 h-6 animate-bounce opacity-75 group-hover:opacity-100 transition-opacity" />
+              <span className="text-base tracking-wider bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent animate-pulse">
+                See this space
+              </span>
+              <ArrowUp className="w-6 h-6 animate-bounce opacity-75 group-hover:opacity-100 transition-opacity delay-150" />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl -mx-8 -my-4" />
           </div>
         </div>
       </div>
