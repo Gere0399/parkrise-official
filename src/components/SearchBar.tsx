@@ -38,7 +38,7 @@ export const SearchBar = () => {
     <div className="flex items-center justify-between bg-white rounded-full h-14 w-full max-w-4xl">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
         <PopoverTrigger asChild>
-          <div className="flex items-center pl-1 h-full cursor-pointer">
+          <div className="flex items-center pl-2 h-full cursor-pointer">
             <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
             <input
               type="text"
@@ -74,6 +74,56 @@ export const SearchBar = () => {
           </div>
         </PopoverContent>
       </Popover>
+
+      <div className="px-2 h-full flex items-center">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="ghost"
+              className="h-full border-0 bg-transparent hover:bg-transparent hover:text-[#00B2B2] px-2"
+            >
+              <CalendarIcon className="mr-2 h-4 w-4" />
+              {arrival ? (
+                format(arrival, "MMM dd, yyyy")
+              ) : (
+                <span className="text-gray-500">Check in</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={arrival}
+              onSelect={setArrival}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="ghost"
+              className="h-full border-0 bg-transparent hover:bg-transparent hover:text-[#00B2B2] px-2"
+            >
+              <CalendarIcon className="mr-2 h-4 w-4" />
+              {duration ? (
+                format(duration, "MMM dd, yyyy")
+              ) : (
+                <span className="text-gray-500">Check out</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={duration}
+              onSelect={setDuration}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+      </div>
 
       <div className="px-2 h-full flex items-center">
         <Select value={`${rooms}-${guests}`} onValueChange={(val) => {
