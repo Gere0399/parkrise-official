@@ -14,82 +14,41 @@ const tags = [
 ];
 
 const slideContent = {
-  "Socializing": [
-    {
-      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-      text: "Relax, enjoy local food and hang around the lounge... music and good vibes on us"
-    },
-    {
-      image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
-      text: "Connect with fellow travelers in our communal spaces designed for memorable moments"
-    }
-  ],
-  "Cooking": [
-    {
-      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-      text: "Cook your favorite meals in our fully equipped shared kitchen spaces"
-    },
-    {
-      image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
-      text: "Join our weekly cooking workshops and learn new recipes from around the world"
-    }
-  ],
-  "Technology": [
-    {
-      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-      text: "Stay connected with high-speed WiFi and smart home features throughout"
-    },
-    {
-      image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
-      text: "Work remotely from our tech-enabled co-working spaces"
-    }
-  ],
-  "Feeling at Home": [
-    {
-      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-      text: "Experience the comfort of home with our thoughtfully designed living spaces"
-    },
-    {
-      image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
-      text: "Personalize your space with our flexible furnishing options"
-    }
-  ],
-  "Wellness": [
-    {
-      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-      text: "Maintain your fitness routine in our 24/7 wellness center"
-    },
-    {
-      image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
-      text: "Join our yoga and meditation sessions for mind-body balance"
-    }
-  ],
-  "Bed & Bath": [
-    {
-      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-      text: "Premium bedding and luxurious bath amenities for ultimate comfort"
-    },
-    {
-      image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
-      text: "Spacious bathrooms with modern fixtures and rainfall showers"
-    }
-  ],
-  "Exploration": [
-    {
-      image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
-      text: "Discover local attractions with our curated city guides"
-    },
-    {
-      image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
-      text: "Join our guided tours and explore the neighborhood like a local"
-    }
-  ]
+  "Socializing": {
+    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+    text: "Relax, enjoy local food and hang around the lounge... music and good vibes on us"
+  },
+  "Cooking": {
+    image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
+    text: "Cook your favorite meals in our fully equipped shared kitchen spaces"
+  },
+  "Technology": {
+    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+    text: "Stay connected with high-speed WiFi and smart home features throughout"
+  },
+  "Feeling at Home": {
+    image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
+    text: "Experience the comfort of home with our thoughtfully designed living spaces"
+  },
+  "Wellness": {
+    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+    text: "Maintain your fitness routine in our 24/7 wellness center"
+  },
+  "Bed & Bath": {
+    image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
+    text: "Premium bedding and luxurious bath amenities for ultimate comfort"
+  },
+  "Exploration": {
+    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+    text: "Discover local attractions with our curated city guides"
+  }
 };
 
 export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
   const [autoplayPlugin, setAutoplayPlugin] = useState<ReturnType<typeof AutoplayPlugin> | null>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const plugin = AutoplayPlugin({
@@ -112,7 +71,7 @@ export const ContentSection = () => {
       const timer = setTimeout(() => {
         setIsManualSelection(false);
         autoplayPlugin.play();
-      }, 5000); // Changed to match the slide transition time
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
@@ -121,19 +80,23 @@ export const ContentSection = () => {
   useEffect(() => {
     if (!isManualSelection) {
       const autoChangeTimer = setInterval(() => {
+        setIsAnimating(true);
         setActiveTag((prevTag) => {
           const nextIndex = (tags.indexOf(prevTag) + 1) % tags.length;
           return tags[nextIndex];
         });
-      }, 5000); // Synchronized with slide transition time
+        setTimeout(() => setIsAnimating(false), 500);
+      }, 5000);
 
       return () => clearInterval(autoChangeTimer);
     }
   }, [isManualSelection]);
 
   const handleTagClick = (tag: string) => {
+    setIsAnimating(true);
     setActiveTag(tag);
     setIsManualSelection(true);
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
   return (
@@ -172,24 +135,22 @@ export const ContentSection = () => {
           }}
         >
           <CarouselContent>
-            {slideContent[activeTag].map((slide, index) => (
-              <CarouselItem key={index}>
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-                    <img
-                      src={slide.image}
-                      alt="Experience"
-                      className="w-full h-[400px] object-cover"
-                    />
-                  </div>
-                  <div className="flex items-center">
-                    <p className="text-3xl text-white leading-tight max-w-[80%]">
-                      {slide.text}
-                    </p>
-                  </div>
+            <CarouselItem key={activeTag} className={`transition-opacity duration-500 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
+              <div className="grid grid-cols-2 gap-8">
+                <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                  <img
+                    src={slideContent[activeTag].image}
+                    alt="Experience"
+                    className="w-full h-[400px] object-cover"
+                  />
                 </div>
-              </CarouselItem>
-            ))}
+                <div className="flex items-center">
+                  <p className="text-3xl text-white leading-tight max-w-[80%]">
+                    {slideContent[activeTag].text}
+                  </p>
+                </div>
+              </div>
+            </CarouselItem>
           </CarouselContent>
           <CarouselPrevious className="left-0 bg-white/10 hover:bg-white/20 border-none text-white" />
           <CarouselNext className="right-0 bg-white/10 hover:bg-white/20 border-none text-white" />
