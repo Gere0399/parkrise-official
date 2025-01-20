@@ -14,38 +14,40 @@ export const PerksSection = () => {
   return (
     <div className="bg-navy min-h-screen py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-5xl text-secondary font-medium text-center mb-20">
+        <h2 className="text-4xl md:text-5xl text-secondary font-medium text-center mb-20 leading-tight">
           Explore for yourself what makes<br />Parkrise perfect
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="relative">
-            <div className="text-white text-sm mb-4">
-              Perk: <span className="border-b border-white ml-2">{selectedPerk}</span>
+            <div className="text-white text-sm mb-6 font-light tracking-wider">
+              Perk: <span className="border-b border-white/50 ml-2 pb-1">{selectedPerk}</span>
             </div>
             <img
               src="/lovable-uploads/5fe1c5dc-e65f-4ff0-b85e-aa3501d0132a.png"
               alt="Parkrise Space"
-              className="w-full max-w-[500px] mx-auto"
+              className="w-full max-w-[600px] mx-auto"
             />
           </div>
 
-          <div className="space-y-4">
-            <p className="text-white text-xl mb-8">
+          <div className="space-y-8 lg:pt-12">
+            <p className="text-white text-xl lg:text-2xl font-light leading-relaxed">
               This is your space, and our neighborhood is about to be yours. Check out some of the Parkrise perks
             </p>
             
-            <div className="space-y-4">
+            <div className="space-y-6">
               {perks.map((perk) => (
                 <div
                   key={perk.id}
-                  className="flex items-center space-x-3 text-white cursor-pointer group"
+                  className="flex items-center space-x-4 text-white cursor-pointer group"
                   onClick={() => setSelectedPerk(perk.name)}
                 >
-                  <div className={`w-3 h-3 rounded-full ${
-                    selectedPerk === perk.name ? "bg-secondary" : "border-2 border-white"
+                  <div className={`w-4 h-4 rounded-full transition-all duration-200 ${
+                    selectedPerk === perk.name 
+                      ? "bg-secondary border-2 border-secondary" 
+                      : "border-2 border-white/70"
                   }`} />
-                  <span className="text-lg group-hover:text-secondary transition-colors">
+                  <span className="text-xl font-light group-hover:text-secondary transition-colors">
                     {perk.name}
                   </span>
                 </div>
@@ -55,8 +57,8 @@ export const PerksSection = () => {
         </div>
 
         <div className="flex flex-col items-center mt-20 text-white">
-          <span className="text-lg mb-2">See this space</span>
-          <div className="flex flex-col items-center space-y-2">
+          <span className="text-lg mb-6 tracking-wider">See this space</span>
+          <div className="flex flex-col items-center space-y-4">
             <ArrowDown className="w-6 h-6 animate-bounce" />
             <ArrowUp className="w-6 h-6" />
           </div>
