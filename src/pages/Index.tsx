@@ -14,7 +14,7 @@ const Index = () => {
             alt="Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/90" /> {/* Darker overlay */}
+          <div className="absolute inset-0 bg-black/90" />
         </div>
 
         {/* Content */}
@@ -22,7 +22,7 @@ const Index = () => {
           <Navbar />
           
           <div className="h-screen flex flex-col items-center justify-center px-6">
-            <h1 className="text-7xl font-bold text-white mb-16 animate-fade-in tracking-tight">
+            <h1 className="text-7xl font-bold text-white mb-8 animate-fade-in tracking-tight">
               Live. Stay. <span className="text-[#00B2B2]">Belong.</span>
             </h1>
             
