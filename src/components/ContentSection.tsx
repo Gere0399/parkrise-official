@@ -51,13 +51,19 @@ export const ContentSection = () => {
   const [nextTag, setNextTag] = useState(tags[1]);
 
   useEffect(() => {
+    let autoChangeTimer: NodeJS.Timeout;
+
     if (!isManualSelection) {
-      const autoChangeTimer = setInterval(() => {
+      autoChangeTimer = setInterval(() => {
         handleSlideChange();
       }, 5000);
-
-      return () => clearInterval(autoChangeTimer);
     }
+
+    return () => {
+      if (autoChangeTimer) {
+        clearInterval(autoChangeTimer);
+      }
+    };
   }, [activeTag, isManualSelection]);
 
   const handleSlideChange = () => {
@@ -70,10 +76,8 @@ export const ContentSection = () => {
     const nextIndex = (currentIndex + 1) % tags.length;
     setNextTag(tags[nextIndex]);
     
-    // Start slide animation
     setSlidePosition(-100);
     
-    // After animation completes, update active tag and reset position
     setTimeout(() => {
       setActiveTag(tags[nextIndex]);
       setNextTag(tags[(nextIndex + 1) % tags.length]);
@@ -88,19 +92,26 @@ export const ContentSection = () => {
       const currentIndex = tags.indexOf(activeTag);
       const newIndex = tags.indexOf(tag);
       
-      // Determine direction of slide
-      const direction = newIndex > currentIndex ? -100 : 100;
+      setIsManualSelection(true);
+      setIsAnimating(true);
+      setIsTextPulsing(true);
       
+      const direction = newIndex > currentIndex ? -100 : 100;
       setNextTag(tag);
       setSlidePosition(direction);
-      setIsManualSelection(true);
       
       setTimeout(() => {
         setActiveTag(tag);
         setNextTag(tags[(newIndex + 1) % tags.length]);
         setSlidePosition(0);
-        setIsManualSelection(false);
+        setIsAnimating(false);
+        setIsTextPulsing(false);
       }, 500);
+
+      // Reset autoplay after 15 seconds
+      setTimeout(() => {
+        setIsManualSelection(false);
+      }, 15000);
     }
   };
 
