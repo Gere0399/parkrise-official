@@ -90,6 +90,10 @@ export const PerksSection = () => {
                   <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Facebook</span>
                   <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Instagram</span>
                 </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[13px] text-[#222222] font-light">©Copyright</span>
+                  <span className="text-[13px] text-[#222222] font-light">Panama 2024</span>
+                </div>
               </div>
             </div>
           </div>
@@ -98,11 +102,11 @@ export const PerksSection = () => {
         {/* Logo Row */}
         <div className="border-b border-[#E5E5E5]">
           <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-            <div className="flex justify-center py-16">
+            <div className="flex justify-center py-20">
               <img 
                 src="/lovable-uploads/892ce5e3-ffe0-420b-a9d5-5207bdf86152.png"
                 alt="Parkrise Logo"
-                className="h-24"
+                className="h-32"
               />
             </div>
           </div>
@@ -111,13 +115,10 @@ export const PerksSection = () => {
         {/* Bottom Row */}
         <div className="max-w-[1200px] mx-auto px-8 md:px-12">
           <div className="flex justify-between items-start py-8">
-            <div className="flex items-center gap-2">
-              <span className="text-[13px] text-[#222222] font-light">©Copyright</span>
-              <span className="text-[13px] text-[#222222] font-light">Panama 2024</span>
-            </div>
+            <span className="text-[13px] text-[#222222] font-light">Live. Stay. Belong.</span>
             
-            <div className="flex items-start gap-12 border-l border-[#E5E5E5] pl-12">
-              <p className="text-[13px] text-[#222222] font-light max-w-[400px] text-left">
+            <div className="flex items-start gap-12">
+              <p className="text-[13px] text-[#222222] font-light max-w-[400px] text-left border-r border-[#E5E5E5] pr-12">
                 Parkrise redefines flexible working by creating a standard that is ahead of its time. With high-end amenities and services.
               </p>
               <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Need help?</span>
