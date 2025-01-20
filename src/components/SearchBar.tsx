@@ -80,7 +80,7 @@ export const SearchBar = () => {
           <PopoverTrigger asChild>
             <Button
               variant="ghost"
-              className="h-full border-0 bg-transparent hover:bg-transparent hover:text-[#00B2B2] px-2"
+              className="h-full border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-2"
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
               {arrival ? (
@@ -90,7 +90,7 @@ export const SearchBar = () => {
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
+          <PopoverContent className="w-auto p-0 bg-white shadow-lg rounded-lg border" align="start">
             <Calendar
               mode="single"
               selected={arrival}
@@ -104,7 +104,7 @@ export const SearchBar = () => {
           <PopoverTrigger asChild>
             <Button
               variant="ghost"
-              className="h-full border-0 bg-transparent hover:bg-transparent hover:text-[#00B2B2] px-2"
+              className="h-full border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-2"
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
               {duration ? (
@@ -114,7 +114,7 @@ export const SearchBar = () => {
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
+          <PopoverContent className="w-auto p-0 bg-white shadow-lg rounded-lg border" align="start">
             <Calendar
               mode="single"
               selected={duration}
