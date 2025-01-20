@@ -135,8 +135,10 @@ export const ContentSection = () => {
           }}
         >
           <CarouselContent>
-            <CarouselItem key={activeTag} className={`transition-opacity duration-500 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
-              <div className="grid grid-cols-2 gap-8">
+            <CarouselItem key={activeTag}>
+              <div className={`grid grid-cols-2 gap-8 transition-all duration-1000 ease-in-out transform ${
+                isAnimating ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'
+              }`}>
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
                   <img
                     src={slideContent[activeTag].image}
