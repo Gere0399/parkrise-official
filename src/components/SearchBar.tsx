@@ -35,17 +35,17 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-4xl">
+    <div className="flex items-center justify-between bg-white rounded-full h-14 w-full max-w-4xl">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
         <PopoverTrigger asChild>
-          <div className="flex items-center space-x-2 pl-2 pr-2 h-full cursor-pointer">
+          <div className="flex items-center pl-1 h-full cursor-pointer">
             <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
             <input
               type="text"
               placeholder="Search location..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="bg-transparent border-none focus:outline-none text-gray-900 w-full font-montserrat text-sm placeholder:text-gray-500"
+              className="bg-transparent border-none focus:outline-none text-gray-900 w-full font-montserrat text-sm placeholder:text-gray-500 px-2"
             />
             <ChevronDown className="w-4 h-4 text-gray-400" />
           </div>
@@ -140,7 +140,7 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mx-2">
+      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mr-1">
         Let's GO!
       </Button>
     </div>
