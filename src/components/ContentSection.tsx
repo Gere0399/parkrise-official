@@ -49,7 +49,7 @@ export const ContentSection = () => {
   const [autoplayPlugin, setAutoplayPlugin] = useState<ReturnType<typeof AutoplayPlugin> | null>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [textBouncing, setTextBouncing] = useState(false);
+  const [isTextPulsing, setIsTextPulsing] = useState(false);
 
   useEffect(() => {
     const plugin = AutoplayPlugin({
@@ -89,22 +89,21 @@ export const ContentSection = () => {
   }, [isManualSelection]);
 
   const handleSlideChange = () => {
-    setTextBouncing(true);
+    setIsAnimating(true);
+    setIsTextPulsing(true);
     
-    // Start text bouncing animation for 2 seconds
     setTimeout(() => {
-      setIsAnimating(true);
-      setTextBouncing(false);
+      setActiveTag((prevTag) => {
+        const nextIndex = (tags.indexOf(prevTag) + 1) % tags.length;
+        return tags[nextIndex];
+      });
+      setIsAnimating(false);
       
-      // After bouncing, trigger the slide transition
+      // Stop text pulsing after slide change
       setTimeout(() => {
-        setActiveTag((prevTag) => {
-          const nextIndex = (tags.indexOf(prevTag) + 1) % tags.length;
-          return tags[nextIndex];
-        });
-        setIsAnimating(false);
-      }, 300);
-    }, 2000);
+        setIsTextPulsing(false);
+      }, 1000);
+    }, 1000);
   };
 
   const handleTagClick = (tag: string) => {
@@ -152,7 +151,7 @@ export const ContentSection = () => {
         >
           <CarouselContent>
             <CarouselItem key={activeTag}>
-              <div className={`grid grid-cols-2 gap-8 transition-all duration-300 transform ${
+              <div className={`grid grid-cols-2 gap-8 transition-all duration-1000 transform ${
                 isAnimating ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'
               }`}>
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
@@ -164,9 +163,7 @@ export const ContentSection = () => {
                 </div>
                 <div className="flex items-center">
                   <p className={`text-3xl text-white leading-tight max-w-[80%] transition-transform ${
-                    textBouncing 
-                      ? 'animate-[bounce-text_0.5s_ease-in-out_4]' 
-                      : ''
+                    isTextPulsing ? 'animate-text-pulse' : ''
                   }`}>
                     {slideContent[activeTag].text}
                   </p>

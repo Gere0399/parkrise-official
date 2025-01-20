@@ -49,10 +49,10 @@ export default {
           "0%": { opacity: "0", transform: "translateY(10px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        "bounce-text": {
-          "0%, 100%": { transform: "translateX(0)" },
-          "25%": { transform: "translateX(-20px)" },
-          "75%": { transform: "translateX(20px)" },
+        "text-pulse": {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.1)" },
+          "100%": { transform: "scale(1)" },
         },
         scroll: {
           "0%": { transform: "translateY(0)" },
@@ -63,6 +63,7 @@ export default {
       animation: {
         "fade-in": "fade-in 0.5s ease-out",
         "fade-up": "fade-up 0.5s ease-out",
+        "text-pulse": "text-pulse 1s ease-in-out infinite",
         scroll: "scroll 2s ease-in-out infinite",
       },
     },
