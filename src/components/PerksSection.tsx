@@ -76,13 +76,12 @@ export const PerksSection = () => {
       <footer className="bg-[#F1F1F1] py-12">
         <div className="max-w-[1200px] mx-auto px-8 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-            {/* Left section */}
-            <div className="flex flex-col space-y-2">
-              <span className="text-sm text-[#222222] font-normal">hello@parkrise.com</span>
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-[#222222] font-normal">Facebook</span>
-                <span className="text-sm text-[#222222] font-normal">Instagram</span>
-              </div>
+            {/* Left section - Navigation */}
+            <div className="flex flex-wrap gap-6">
+              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Home</span>
+              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Residents</span>
+              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Our brand</span>
+              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">For Business</span>
             </div>
 
             {/* Center logo */}
@@ -94,9 +93,14 @@ export const PerksSection = () => {
               />
             </div>
 
-            {/* Right section */}
-            <div className="flex justify-end">
-              <div className="flex items-center space-x-2">
+            {/* Right section - Contact & Copyright */}
+            <div className="flex flex-col items-end space-y-2">
+              <span className="text-sm text-[#222222] font-normal">hello@parkrise.com</span>
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Facebook</span>
+                <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Instagram</span>
+              </div>
+              <div className="flex items-center space-x-2 mt-2">
                 <span className="text-sm text-[#222222] font-normal">©Copyright</span>
                 <span className="text-sm text-[#222222] font-normal">Panama 2024</span>
               </div>
