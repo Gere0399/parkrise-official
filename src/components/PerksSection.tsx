@@ -76,24 +76,24 @@ export const PerksSection = () => {
       <footer className="bg-[#F1F1F1]">
         {/* Navigation Row */}
         <div className="border-b border-[#E5E5E5]">
-          <div className="max-w-[1200px] mx-auto px-8 md:px-12 py-6">
-            <div className="flex gap-8">
-              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Home</span>
-              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Residents</span>
-              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Our brand</span>
-              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">For Business</span>
+          <div className="max-w-[1200px] mx-auto px-8 md:px-12">
+            <div className="flex gap-12 py-4">
+              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Home</span>
+              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Residents</span>
+              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Our brand</span>
+              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">For Business</span>
             </div>
           </div>
         </div>
 
         {/* Logo Row */}
         <div className="border-b border-[#E5E5E5]">
-          <div className="max-w-[1200px] mx-auto px-8 md:px-12 py-6">
-            <div className="flex justify-center">
+          <div className="max-w-[1200px] mx-auto px-8 md:px-12">
+            <div className="flex justify-center py-8">
               <img 
                 src="/lovable-uploads/892ce5e3-ffe0-420b-a9d5-5207bdf86152.png"
                 alt="Parkrise Logo"
-                className="h-12"
+                className="h-8"
               />
             </div>
           </div>
@@ -101,25 +101,25 @@ export const PerksSection = () => {
 
         {/* Contact Row */}
         <div className="border-b border-[#E5E5E5]">
-          <div className="max-w-[1200px] mx-auto px-8 md:px-12 py-6">
-            <div className="flex justify-end items-center gap-8">
-              <span className="text-sm text-[#222222] font-normal">hello@parkrise.com</span>
-              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Facebook</span>
-              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Instagram</span>
+          <div className="max-w-[1200px] mx-auto px-8 md:px-12">
+            <div className="flex justify-end items-center gap-12 py-4">
+              <span className="text-[13px] text-[#222222] font-light">hello@parkrise.com</span>
+              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Facebook</span>
+              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Instagram</span>
             </div>
           </div>
         </div>
 
         {/* Bottom Row */}
-        <div className="max-w-[1200px] mx-auto px-8 md:px-12 py-6">
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-[#222222] font-normal">Live. Stay. Belong.</span>
-            <div className="flex items-center gap-8">
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-[#222222] font-normal">©Copyright</span>
-                <span className="text-sm text-[#222222] font-normal">Panama 2024</span>
+        <div className="max-w-[1200px] mx-auto px-8 md:px-12">
+          <div className="flex justify-between items-center py-4">
+            <span className="text-[13px] text-[#222222] font-light">Live. Stay. Belong.</span>
+            <div className="flex items-center gap-12">
+              <div className="flex items-center gap-2">
+                <span className="text-[13px] text-[#222222] font-light">©Copyright</span>
+                <span className="text-[13px] text-[#222222] font-light">Panama 2024</span>
               </div>
-              <span className="text-sm text-[#222222] font-normal hover:text-secondary cursor-pointer">Need help?</span>
+              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Need help?</span>
             </div>
           </div>
         </div>
