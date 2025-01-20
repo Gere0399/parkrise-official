@@ -59,12 +59,17 @@ export default {
           "50%": { transform: "translateY(10px)" },
           "100%": { transform: "translateY(0)" },
         },
+        "slide-in": {
+          "0%": { transform: "translateX(-20px)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out",
         "fade-up": "fade-up 0.5s ease-out",
         "text-pulse": "text-pulse 1s ease-in-out infinite",
         scroll: "scroll 2s ease-in-out infinite",
+        "slide-in": "slide-in 0.5s ease-out",
       },
     },
   },

@@ -22,8 +22,9 @@ const Index = () => {
           <Navbar />
           
           <div className="h-screen flex flex-col items-center justify-center px-6">
-            <h1 className="text-7xl font-bold text-white mb-8 animate-fade-in tracking-tight">
-              Live. Stay. <span className="text-[#00B2B2]">Belong.</span>
+            <h1 className="text-7xl font-bold text-white mb-8 animate-[slide-in_0.5s_ease-out] tracking-tight">
+              <span className="inline-block transform translate-x-0">Live. Stay. </span>
+              <span className="text-[#00B2B2]">Belong.</span>
             </h1>
             
             <div className="w-full max-w-5xl animate-fade-up">

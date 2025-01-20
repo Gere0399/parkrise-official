@@ -76,48 +76,6 @@ export const SearchBar = () => {
       </Popover>
 
       <div className="px-2 h-full flex items-center">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="ghost" className="h-full pl-0 pr-2 font-normal">
-              <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2] shrink-0" />
-              <span className="text-sm text-gray-900">
-                {arrival ? format(arrival, "MMM d") : <span className="text-gray-500">Arrival</span>}
-              </span>
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0 bg-white" align="start">
-            <Calendar
-              mode="single"
-              selected={arrival}
-              onSelect={setArrival}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
-      </div>
-
-      <div className="px-2 h-full flex items-center">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="ghost" className="h-full pl-0 pr-2 font-normal">
-              <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2] shrink-0" />
-              <span className="text-sm text-gray-900">
-                {duration ? format(duration, "MMM d") : <span className="text-gray-500">Duration</span>}
-              </span>
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0 bg-white" align="start">
-            <Calendar
-              mode="single"
-              selected={duration}
-              onSelect={setDuration}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
-      </div>
-
-      <div className="px-2 h-full flex items-center">
         <Select value={`${rooms}-${guests}`} onValueChange={(val) => {
           const [r, g] = val.split('-');
           setRooms(r);
@@ -126,7 +84,7 @@ export const SearchBar = () => {
           <SelectTrigger className="h-full border-0 bg-transparent w-[180px] text-gray-900">
             <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
-          <SelectContent className="bg-white w-[280px]">
+          <SelectContent className="bg-white w-[280px] overflow-hidden">
             <div className="px-3 py-2">
               <p className="text-sm font-semibold mb-2">Rooms</p>
               <div className="grid grid-cols-3 gap-2">
@@ -171,7 +129,7 @@ export const SearchBar = () => {
           <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-gray-900">
             <SelectValue placeholder="Special rates" />
           </SelectTrigger>
-          <SelectContent className="bg-white">
+          <SelectContent className="bg-white overflow-hidden">
             <SelectItem value="group" className="cursor-pointer">Group</SelectItem>
             <SelectItem value="corporate" className="cursor-pointer">Corporate</SelectItem>
             <SelectItem value="seasonal" className="cursor-pointer">Seasonal</SelectItem>
