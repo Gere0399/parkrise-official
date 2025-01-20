@@ -15,8 +15,8 @@ export const SlideContent = ({ image, text, isTextPulsing }: SlideContentProps) 
         />
       </div>
       <div className="flex items-center">
-        <p className={`text-3xl text-white leading-tight max-w-[80%] ${
-          isTextPulsing ? 'animate-text-pulse' : ''
+        <p className={`text-3xl text-white leading-tight max-w-[80%] transition-all duration-300 ${
+          isTextPulsing ? 'scale-110' : 'scale-100'
         }`}>
           {text}
         </p>

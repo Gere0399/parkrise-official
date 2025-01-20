@@ -6,13 +6,12 @@ import { tags, slideContent } from "../data/slideContent";
 export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
   const [isManualSelection, setIsManualSelection] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isTextPulsing, setIsTextPulsing] = useState(false);
   const [slidePosition, setSlidePosition] = useState(0);
-  const [nextTag, setNextTag] = useState(tags[1]);
 
   useEffect(() => {
     let autoChangeTimer: NodeJS.Timeout;
+    let textPulseTimer: NodeJS.Timeout;
 
     if (!isManualSelection) {
       autoChangeTimer = setInterval(() => {
@@ -21,55 +20,52 @@ export const ContentSection = () => {
     }
 
     return () => {
-      if (autoChangeTimer) {
-        clearInterval(autoChangeTimer);
-      }
+      if (autoChangeTimer) clearInterval(autoChangeTimer);
+      if (textPulseTimer) clearTimeout(textPulseTimer);
     };
   }, [activeTag, isManualSelection]);
 
   const handleSlideChange = () => {
-    if (isAnimating) return;
-    
-    setIsAnimating(true);
-    setIsTextPulsing(true);
-    
     const currentIndex = tags.indexOf(activeTag);
     const nextIndex = (currentIndex + 1) % tags.length;
     
-    setNextTag(tags[nextIndex]);
+    // Start slide transition
     setSlidePosition(-100);
     
-    // Increased timeout to allow reading the slide content
+    // After slide completes, update active tag and reset position
     setTimeout(() => {
       setActiveTag(tags[nextIndex]);
-      setNextTag(tags[(nextIndex + 1) % tags.length]);
       setSlidePosition(0);
-      setIsAnimating(false);
-      setIsTextPulsing(false);
-    }, 1000); // Increased from 500ms to 1000ms for smoother transition
+      
+      // Trigger text pulse animation
+      setIsTextPulsing(true);
+      
+      // Reset text pulse after 300ms
+      setTimeout(() => {
+        setIsTextPulsing(false);
+      }, 300);
+    }, 500);
   };
 
   const handleTagClick = (tag: string) => {
-    if (tag !== activeTag && !isAnimating) {
+    if (tag !== activeTag) {
       const currentIndex = tags.indexOf(activeTag);
       const newIndex = tags.indexOf(tag);
       
       setIsManualSelection(true);
-      setIsAnimating(true);
-      setIsTextPulsing(true);
-      
-      const direction = newIndex > currentIndex ? -100 : 100;
-      setNextTag(tag);
-      setSlidePosition(direction);
+      setSlidePosition(-100);
       
       setTimeout(() => {
         setActiveTag(tag);
-        setNextTag(tags[(newIndex + 1) % tags.length]);
         setSlidePosition(0);
-        setIsAnimating(false);
-        setIsTextPulsing(false);
-      }, 1000); // Increased from 500ms to 1000ms
+        setIsTextPulsing(true);
+        
+        setTimeout(() => {
+          setIsTextPulsing(false);
+        }, 300);
+      }, 500);
 
+      // Reset manual selection after 15 seconds
       setTimeout(() => {
         setIsManualSelection(false);
       }, 15000);
@@ -94,25 +90,14 @@ export const ContentSection = () => {
 
         <div className="relative overflow-hidden">
           <div 
-            className="transition-transform duration-1000 ease-in-out"
+            className="transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(${slidePosition}%)` }}
           >
-            <div className="flex">
-              <div className="flex-shrink-0 w-full">
-                <SlideContent 
-                  image={slideContent[activeTag].image}
-                  text={slideContent[activeTag].text}
-                  isTextPulsing={isTextPulsing}
-                />
-              </div>
-              <div className="flex-shrink-0 w-full">
-                <SlideContent 
-                  image={slideContent[nextTag].image}
-                  text={slideContent[nextTag].text}
-                  isTextPulsing={isTextPulsing}
-                />
-              </div>
-            </div>
+            <SlideContent 
+              image={slideContent[activeTag].image}
+              text={slideContent[activeTag].text}
+              isTextPulsing={isTextPulsing}
+            />
           </div>
         </div>
       </div>
