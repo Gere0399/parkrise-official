@@ -74,14 +74,23 @@ export const PerksSection = () => {
 
       {/* Footer section */}
       <footer className="bg-[#F1F1F1]">
-        {/* Navigation Row */}
+        {/* Top Navigation Row */}
         <div className="border-b border-[#E5E5E5]">
           <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-            <div className="flex gap-12 py-4">
-              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Home</span>
-              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Residents</span>
-              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Our brand</span>
-              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">For Business</span>
+            <div className="flex justify-between items-center py-4">
+              <div className="flex gap-12">
+                <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Home</span>
+                <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Residents</span>
+                <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Our brand</span>
+                <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">For Business</span>
+              </div>
+              <div className="flex items-center gap-8">
+                <span className="text-[13px] text-[#222222] font-light">hello@parkrise.com</span>
+                <div className="flex flex-col items-end gap-1">
+                  <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Facebook</span>
+                  <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Instagram</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -89,31 +98,25 @@ export const PerksSection = () => {
         {/* Logo Row */}
         <div className="border-b border-[#E5E5E5]">
           <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-            <div className="flex justify-center py-8">
+            <div className="flex justify-center py-12">
               <img 
                 src="/lovable-uploads/892ce5e3-ffe0-420b-a9d5-5207bdf86152.png"
                 alt="Parkrise Logo"
-                className="h-8"
+                className="h-16"
               />
-            </div>
-          </div>
-        </div>
-
-        {/* Contact Row */}
-        <div className="border-b border-[#E5E5E5]">
-          <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-            <div className="flex justify-end items-center gap-12 py-4">
-              <span className="text-[13px] text-[#222222] font-light">hello@parkrise.com</span>
-              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Facebook</span>
-              <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Instagram</span>
             </div>
           </div>
         </div>
 
         {/* Bottom Row */}
         <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-          <div className="flex justify-between items-center py-4">
-            <span className="text-[13px] text-[#222222] font-light">Live. Stay. Belong.</span>
+          <div className="flex justify-between items-center py-8">
+            <div className="flex flex-col items-start gap-2">
+              <span className="text-[13px] text-[#222222] font-light">Live. Stay. Belong.</span>
+              <p className="text-[13px] text-[#222222] font-light max-w-[400px] text-left">
+                Parkrise redefines flexible working by creating a standard that is ahead of its time. With high-end amenities and services.
+              </p>
+            </div>
             <div className="flex items-center gap-12">
               <div className="flex items-center gap-2">
                 <span className="text-[13px] text-[#222222] font-light">©Copyright</span>
