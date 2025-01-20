@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import AutoplayPlugin from "embla-carousel-autoplay";
 
 const tags = [
   "Socializing",
@@ -45,39 +44,11 @@ const slideContent = {
 
 export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
-  const [autoplayPlugin, setAutoplayPlugin] = useState<ReturnType<typeof AutoplayPlugin> | null>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isTextPulsing, setIsTextPulsing] = useState(false);
   const [nextTag, setNextTag] = useState(tags[1]);
   const [slidePosition, setSlidePosition] = useState(0);
-
-  useEffect(() => {
-    const plugin = AutoplayPlugin({
-      delay: 5000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    });
-    setAutoplayPlugin(plugin);
-
-    return () => {
-      if (plugin) {
-        plugin.stop();
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isManualSelection && autoplayPlugin) {
-      autoplayPlugin.stop();
-      const timer = setTimeout(() => {
-        setIsManualSelection(false);
-        autoplayPlugin.play();
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isManualSelection, autoplayPlugin]);
 
   useEffect(() => {
     if (!isManualSelection) {
