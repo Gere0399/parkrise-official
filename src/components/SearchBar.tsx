@@ -12,6 +12,12 @@ export const SearchBar = () => {
   const [rooms, setRooms] = useState("1");
   const [guests, setGuests] = useState("1");
   
+  const getRoomGuestLabel = (rooms: string, guests: string) => {
+    const roomText = `${rooms} ${Number(rooms) === 1 ? 'Room' : 'Rooms'}`;
+    const guestText = `${guests} ${Number(guests) === 1 ? 'Guest' : 'Guests'}`;
+    return `${roomText}, ${guestText}`;
+  };
+
   return (
     <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-4xl divide-x divide-gray-200">
       <div className="flex items-center space-x-2 pl-4 pr-2 h-full">
@@ -72,7 +78,7 @@ export const SearchBar = () => {
           setGuests(g);
         }}>
           <SelectTrigger className="h-full border-0 bg-transparent w-[140px]">
-            <SelectValue placeholder={`${rooms} Room, ${guests} Guest`} className="text-sm" />
+            <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} className="text-sm" />
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px]">
             <div className="px-3 py-2">
