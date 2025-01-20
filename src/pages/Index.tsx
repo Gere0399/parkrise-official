@@ -2,6 +2,7 @@ import { ArrowDown } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { SearchBar } from "@/components/SearchBar";
 import { ContentSection } from "@/components/ContentSection";
+import CommunitySection from "@/components/CommunitySection";
 
 const Index = () => {
   return (
@@ -41,6 +42,7 @@ const Index = () => {
       </div>
 
       <ContentSection />
+      <CommunitySection />
     </div>
   );
 };
