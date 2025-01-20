@@ -49,7 +49,6 @@ export const ContentSection = () => {
   const [autoplayPlugin, setAutoplayPlugin] = useState<ReturnType<typeof AutoplayPlugin> | null>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [animationPhase, setAnimationPhase] = useState<'slow' | 'fast' | null>(null);
 
   useEffect(() => {
     const plugin = AutoplayPlugin({
@@ -89,23 +88,14 @@ export const ContentSection = () => {
   }, [isManualSelection]);
 
   const handleSlideChange = () => {
-    setAnimationPhase('slow');
     setIsAnimating(true);
-    
-    // First phase: slow scroll (1.5s)
     setTimeout(() => {
-      setAnimationPhase('fast');
-      
-      // Second phase: quick slide (0.3s)
-      setTimeout(() => {
-        setActiveTag((prevTag) => {
-          const nextIndex = (tags.indexOf(prevTag) + 1) % tags.length;
-          return tags[nextIndex];
-        });
-        setIsAnimating(false);
-        setAnimationPhase(null);
-      }, 300);
-    }, 1500);
+      setActiveTag((prevTag) => {
+        const nextIndex = (tags.indexOf(prevTag) + 1) % tags.length;
+        return tags[nextIndex];
+      });
+      setIsAnimating(false);
+    }, 800);
   };
 
   const handleTagClick = (tag: string) => {
@@ -153,12 +143,10 @@ export const ContentSection = () => {
         >
           <CarouselContent>
             <CarouselItem key={activeTag}>
-              <div className={`grid grid-cols-2 gap-8 transition-all transform ${
-                animationPhase === 'slow' 
-                  ? 'duration-[1500ms] ease-in translate-x-[20%] opacity-90'
-                  : animationPhase === 'fast'
-                    ? 'duration-300 ease-out translate-x-full opacity-0'
-                    : 'duration-0 translate-x-0 opacity-100'
+              <div className={`grid grid-cols-2 gap-8 transition-all duration-800 transform ${
+                isAnimating 
+                  ? 'translate-y-4 scale-95 opacity-0' 
+                  : 'translate-y-0 scale-100 opacity-100'
               }`}>
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
                   <img
