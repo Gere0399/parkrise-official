@@ -28,7 +28,7 @@ const Index = () => {
           <Navbar />
           
           <div className="h-screen flex flex-col items-center justify-center px-6">
-            <h1 className="text-6xl font-bold text-white mb-12 animate-fade-in">
+            <h1 className="text-7xl font-bold text-white mb-12 animate-fade-in tracking-tight">
               Live. Stay. <span className="text-primary">Belong.</span>
             </h1>
             
@@ -40,7 +40,7 @@ const Index = () => {
           {/* Scroll Indicator */}
           <div className="absolute bottom-8 left-8 text-white flex items-center animate-scroll">
             <ArrowDown className="w-6 h-6 mr-2" />
-            <span>Scroll</span>
+            <span className="text-sm uppercase tracking-wider">Scroll</span>
           </div>
         </div>
       </div>
