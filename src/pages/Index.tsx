@@ -4,6 +4,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { ContentSection } from "@/components/ContentSection";
 import CommunitySection from "@/components/CommunitySection";
 import { VideoSection } from "@/components/VideoSection";
+import { PerksSection } from "@/components/PerksSection";
 
 const Index = () => {
   return (
@@ -45,6 +46,7 @@ const Index = () => {
       <ContentSection />
       <CommunitySection />
       <VideoSection />
+      <PerksSection />
     </div>
   );
 };
