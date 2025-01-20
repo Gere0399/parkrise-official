@@ -50,6 +50,7 @@ export const ContentSection = () => {
   const [isManualSelection, setIsManualSelection] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isTextPulsing, setIsTextPulsing] = useState(false);
+  const [nextTag, setNextTag] = useState(tags[1]);
 
   useEffect(() => {
     const plugin = AutoplayPlugin({
@@ -92,17 +93,15 @@ export const ContentSection = () => {
     setIsAnimating(true);
     setIsTextPulsing(true);
     
+    const currentIndex = tags.indexOf(activeTag);
+    const nextIndex = (currentIndex + 1) % tags.length;
+    setNextTag(tags[nextIndex]);
+    
     setTimeout(() => {
-      setActiveTag((prevTag) => {
-        const nextIndex = (tags.indexOf(prevTag) + 1) % tags.length;
-        return tags[nextIndex];
-      });
+      setActiveTag(tags[nextIndex]);
+      setNextTag(tags[(nextIndex + 1) % tags.length]);
       setIsAnimating(false);
-      
-      // Stop text pulsing after slide change
-      setTimeout(() => {
-        setIsTextPulsing(false);
-      }, 1000);
+      setIsTextPulsing(false);
     }, 1000);
   };
 
@@ -141,39 +140,46 @@ export const ContentSection = () => {
           ))}
         </div>
 
-        <Carousel 
-          className="w-full px-8"
-          plugins={autoplayPlugin ? [autoplayPlugin] : undefined}
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-        >
-          <CarouselContent>
-            <CarouselItem key={activeTag}>
-              <div className={`grid grid-cols-2 gap-8 transition-all duration-1000 transform ${
-                isAnimating ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'
+        <div className="relative overflow-hidden">
+          <div className={`grid grid-cols-2 gap-8 transition-all duration-1000 transform ${
+            isAnimating ? '-translate-x-full' : 'translate-x-0'
+          }`}>
+            <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={slideContent[activeTag].image}
+                alt="Experience"
+                className="w-full h-[400px] object-cover"
+              />
+            </div>
+            <div className="flex items-center">
+              <p className={`text-3xl text-white leading-tight max-w-[80%] ${
+                isTextPulsing ? 'animate-text-pulse' : ''
               }`}>
-                <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-                  <img
-                    src={slideContent[activeTag].image}
-                    alt="Experience"
-                    className="w-full h-[400px] object-cover"
-                  />
-                </div>
-                <div className="flex items-center">
-                  <p className={`text-3xl text-white leading-tight max-w-[80%] transition-transform ${
-                    isTextPulsing ? 'animate-text-pulse' : ''
-                  }`}>
-                    {slideContent[activeTag].text}
-                  </p>
-                </div>
-              </div>
-            </CarouselItem>
-          </CarouselContent>
-          <CarouselPrevious className="left-0 bg-white/10 hover:bg-white/20 border-none text-white" />
-          <CarouselNext className="right-0 bg-white/10 hover:bg-white/20 border-none text-white" />
-        </Carousel>
+                {slideContent[activeTag].text}
+              </p>
+            </div>
+          </div>
+
+          {/* Next slide positioned absolutely */}
+          <div className={`absolute top-0 left-0 w-full grid grid-cols-2 gap-8 transition-all duration-1000 transform ${
+            isAnimating ? 'translate-x-0' : 'translate-x-full'
+          }`}>
+            <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={slideContent[nextTag].image}
+                alt="Next Experience"
+                className="w-full h-[400px] object-cover"
+              />
+            </div>
+            <div className="flex items-center">
+              <p className={`text-3xl text-white leading-tight max-w-[80%] ${
+                isTextPulsing ? 'animate-text-pulse' : ''
+              }`}>
+                {slideContent[nextTag].text}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
