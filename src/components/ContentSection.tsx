@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const tags = [
   "Socializing",
@@ -88,6 +89,40 @@ const slideContent = {
 
 export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
+  const [autoplayPlugin, setAutoplayPlugin] = useState<Autoplay | null>(null);
+  const [isManualSelection, setIsManualSelection] = useState(false);
+
+  useEffect(() => {
+    // Create autoplay plugin with options
+    const plugin = Autoplay({
+      delay: 5000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    });
+    setAutoplayPlugin(plugin);
+
+    return () => {
+      plugin.stop();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isManualSelection) {
+      // Stop autoplay for 20 seconds after manual selection
+      autoplayPlugin?.stop();
+      const timer = setTimeout(() => {
+        setIsManualSelection(false);
+        autoplayPlugin?.play();
+      }, 20000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isManualSelection, autoplayPlugin]);
+
+  const handleTagClick = (tag: string) => {
+    setActiveTag(tag);
+    setIsManualSelection(true);
+  };
 
   return (
     <div className="min-h-screen bg-navy py-20 px-6">
@@ -104,7 +139,7 @@ export const ContentSection = () => {
             <Button
               key={tag}
               variant="outline"
-              onClick={() => setActiveTag(tag)}
+              onClick={() => handleTagClick(tag)}
               className={`rounded-full border text-sm py-1.5 px-4 transition-colors ${
                 activeTag === tag 
                   ? 'bg-white text-navy border-white hover:bg-white/90' 
@@ -116,20 +151,27 @@ export const ContentSection = () => {
           ))}
         </div>
 
-        <Carousel className="w-full px-8">
+        <Carousel 
+          className="w-full px-8"
+          plugins={[autoplayPlugin]}
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+        >
           <CarouselContent>
             {slideContent[activeTag].map((slide, index) => (
-              <CarouselItem key={index}>
+              <CarouselItem key={index} className="transition-opacity duration-500">
                 <div className="grid grid-cols-2 gap-8">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl transition-transform duration-500 hover:scale-105">
                     <img
                       src={slide.image}
                       alt="Experience"
-                      className="w-full h-[400px] object-cover"
+                      className="w-full h-[400px] object-cover transition-transform duration-500"
                     />
                   </div>
                   <div className="flex items-center">
-                    <p className="text-3xl text-white leading-tight max-w-[80%]">
+                    <p className="text-3xl text-white leading-tight max-w-[80%] animate-fade-in">
                       {slide.text}
                     </p>
                   </div>
