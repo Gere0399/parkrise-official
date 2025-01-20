@@ -105,7 +105,7 @@ export const ContentSection = () => {
               key={tag}
               variant="outline"
               onClick={() => setActiveTag(tag)}
-              className={`rounded-full border-2 transition-colors ${
+              className={`rounded-full border text-sm py-1.5 px-4 transition-colors ${
                 activeTag === tag 
                   ? 'bg-white text-navy border-white hover:bg-white/90' 
                   : 'bg-transparent text-white border-white hover:bg-white/10'
