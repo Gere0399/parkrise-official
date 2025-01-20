@@ -54,7 +54,8 @@ export const Navbar = () => {
           </div>
         )}
 
-        <div className="flex items-center space-x-2 mr-20">
+        <div className="relative flex items-center space-x-2 mr-20">
+          <div className="absolute inset-x-0 -bottom-3 h-[1px] bg-black/20 backdrop-blur-sm"></div>
           <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Home</Button>
           <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Destinations</Button>
           <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Our brand</Button>
