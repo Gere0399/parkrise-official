@@ -26,7 +26,7 @@ export const SearchBar = () => {
   const [guests, setGuests] = useState("1");
   const [location, setLocation] = useState("");
   const [isLocationOpen, setIsLocationOpen] = useState(false);
-  const [specialRate, setSpecialRate] = useState(""); // New state for special rates
+  const [specialRate, setSpecialRate] = useState("");
   
   const getRoomGuestLabel = (rooms: string, guests: string) => {
     const roomText = `${rooms} ${Number(rooms) === 1 ? 'room' : 'rooms'}`;
@@ -35,7 +35,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-5xl divide-x divide-gray-200">
+    <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-5xl px-2">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
         <PopoverTrigger asChild>
           <div className="flex items-center space-x-2 pl-4 pr-2 h-full cursor-pointer">
@@ -172,12 +172,12 @@ export const SearchBar = () => {
             <SelectValue placeholder="Special rates" />
           </SelectTrigger>
           <SelectContent className="bg-white">
-            <SelectItem value="group">Group</SelectItem>
-            <SelectItem value="corporate">Corporate</SelectItem>
-            <SelectItem value="seasonal">Seasonal</SelectItem>
-            <SelectItem value="promotional">Promo</SelectItem>
-            <SelectItem value="membership">Member</SelectItem>
-            <SelectItem value="extended">Extended</SelectItem>
+            <SelectItem value="group" className="cursor-pointer">Group</SelectItem>
+            <SelectItem value="corporate" className="cursor-pointer">Corporate</SelectItem>
+            <SelectItem value="seasonal" className="cursor-pointer">Seasonal</SelectItem>
+            <SelectItem value="promotional" className="cursor-pointer">Promo</SelectItem>
+            <SelectItem value="membership" className="cursor-pointer">Member</SelectItem>
+            <SelectItem value="extended" className="cursor-pointer">Extended</SelectItem>
           </SelectContent>
         </Select>
       </div>
