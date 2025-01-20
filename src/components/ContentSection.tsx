@@ -92,10 +92,12 @@ export const ContentSection = () => {
   return (
     <div className="min-h-screen bg-navy py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-5xl font-bold text-secondary mb-2">
+        <h2 className="text-4xl font-semibold text-secondary mb-2">
           Live here in a furnished apartment-style suite.
         </h2>
-        <p className="text-5xl font-bold text-secondary mb-8">Or, stay for a quick trip.</p>
+        <p className="text-4xl font-semibold text-secondary mb-8">
+          Or, stay for a quick trip.
+        </p>
 
         <div className="flex flex-wrap gap-4 mb-12">
           {tags.map((tag) => (
@@ -114,7 +116,7 @@ export const ContentSection = () => {
           ))}
         </div>
 
-        <Carousel className="w-full">
+        <Carousel className="w-full px-8">
           <CarouselContent>
             {slideContent[activeTag].map((slide, index) => (
               <CarouselItem key={index}>
@@ -127,7 +129,7 @@ export const ContentSection = () => {
                     />
                   </div>
                   <div className="flex items-center">
-                    <p className="text-3xl text-white leading-relaxed">
+                    <p className="text-3xl text-white leading-tight max-w-[80%]">
                       {slide.text}
                     </p>
                   </div>
