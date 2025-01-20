@@ -8,13 +8,13 @@ const Index = () => {
     <div className="min-h-screen font-montserrat">
       <div className="relative h-screen">
         {/* Background Image with Overlay */}
-        <div className="absolute inset-0 bg-navy/80">
+        <div className="absolute inset-0">
           <img
             src="/lovable-uploads/a6fe6c8e-8b3a-4ac5-9834-8ee868d8cc5d.png"
             alt="Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/50" /> {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/80" /> {/* Darker overlay */}
         </div>
 
         {/* Content */}
@@ -22,8 +22,8 @@ const Index = () => {
           <Navbar />
           
           <div className="h-screen flex flex-col items-center justify-center px-6">
-            <h1 className="text-7xl font-bold text-white mb-12 animate-fade-in tracking-tight">
-              Live. Stay. <span className="text-primary">Belong.</span>
+            <h1 className="text-7xl font-bold text-white mb-16 animate-fade-in tracking-tight">
+              Live. Stay. <span className="text-[#00B2B2]">Belong.</span>
             </h1>
             
             <div className="w-full max-w-5xl animate-fade-up">
