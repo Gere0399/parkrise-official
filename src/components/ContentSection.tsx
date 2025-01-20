@@ -170,9 +170,12 @@ export const ContentSection = () => {
             duration: 1000,
           }}
         >
-          <CarouselContent>
+          <CarouselContent className="transition-opacity duration-500">
             {slideContent[activeTag].map((slide, index) => (
-              <CarouselItem key={index}>
+              <CarouselItem 
+                key={index}
+                className="opacity-0 transition-opacity duration-500 data-[active]:opacity-100"
+              >
                 <div className="grid grid-cols-2 gap-8">
                   <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
                     <img
