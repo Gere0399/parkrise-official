@@ -125,7 +125,7 @@ export const SearchBar = () => {
           setGuests(g);
         }}>
           <SelectTrigger className="h-full border-0 bg-transparent w-[180px]">
-            <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} />
+            <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} className="text-gray-900 text-sm" />
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px]">
             <div className="px-3 py-2">
@@ -137,7 +137,7 @@ export const SearchBar = () => {
                     onClick={() => {
                       setRooms(num.toString());
                     }}
-                    className="px-3 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
+                    className="px-3 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between gap-1"
                   >
                     <span>{num}</span>
                     {num === Number(rooms) && <Check className="h-4 w-4 text-green-500" />}
@@ -155,7 +155,7 @@ export const SearchBar = () => {
                     onClick={() => {
                       setGuests(num.toString());
                     }}
-                    className="px-3 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
+                    className="px-3 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between gap-1"
                   >
                     <span>{num}</span>
                     {num === Number(guests) && <Check className="h-4 w-4 text-green-500" />}
