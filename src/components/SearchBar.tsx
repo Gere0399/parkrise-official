@@ -25,7 +25,7 @@ export const SearchBar = () => {
         <input
           type="text"
           placeholder="Chandler, AZ"
-          className="bg-transparent border-none focus:outline-none text-gray-900 w-24 font-montserrat text-sm truncate"
+          className="bg-transparent border-none focus:outline-none text-gray-900 w-full font-montserrat text-sm"
         />
       </div>
       
@@ -34,7 +34,7 @@ export const SearchBar = () => {
           <PopoverTrigger asChild>
             <Button variant="ghost" className="h-full pl-0 pr-2 font-normal">
               <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2] shrink-0" />
-              <span className="truncate w-16 text-sm">
+              <span className="text-sm">
                 {arrival ? format(arrival, "MMM d") : <span className="text-gray-500">Arrival</span>}
               </span>
             </Button>
@@ -55,7 +55,7 @@ export const SearchBar = () => {
           <PopoverTrigger asChild>
             <Button variant="ghost" className="h-full pl-0 pr-2 font-normal">
               <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2] shrink-0" />
-              <span className="truncate w-16 text-sm">
+              <span className="text-sm">
                 {duration ? format(duration, "MMM d") : <span className="text-gray-500">Duration</span>}
               </span>
             </Button>
