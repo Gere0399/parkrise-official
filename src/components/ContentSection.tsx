@@ -90,6 +90,7 @@ export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
   const [autoplayPlugin, setAutoplayPlugin] = useState<ReturnType<typeof AutoplayPlugin> | null>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   useEffect(() => {
     const plugin = AutoplayPlugin({
@@ -167,25 +168,21 @@ export const ContentSection = () => {
           opts={{
             align: "start",
             loop: true,
-            duration: 1000,
           }}
         >
-          <CarouselContent className="transition-opacity duration-500">
+          <CarouselContent>
             {slideContent[activeTag].map((slide, index) => (
-              <CarouselItem 
-                key={index}
-                className="opacity-0 transition-opacity duration-500 data-[active]:opacity-100"
-              >
+              <CarouselItem key={index} className="transition-all duration-500 ease-in-out">
                 <div className="grid grid-cols-2 gap-8">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl transform transition-all duration-500 ease-in-out hover:scale-105">
                     <img
                       src={slide.image}
                       alt="Experience"
-                      className="w-full h-[400px] object-cover"
+                      className="w-full h-[400px] object-cover transform transition-all duration-500 ease-in-out"
                     />
                   </div>
                   <div className="flex items-center">
-                    <p className="text-3xl text-white leading-tight max-w-[80%]">
+                    <p className="text-3xl text-white leading-tight max-w-[80%] animate-fade-in">
                       {slide.text}
                     </p>
                   </div>
