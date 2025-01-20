@@ -33,8 +33,6 @@ export const SearchBar = () => {
     return `${roomText}, ${guestText}`;
   };
 
-  // ... keep existing code (location popover section)
-
   return (
     <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-5xl divide-x divide-gray-200">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
@@ -46,7 +44,7 @@ export const SearchBar = () => {
               placeholder="Search location..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="bg-transparent border-none focus:outline-none text-gray-900 w-full font-montserrat text-sm"
+              className="bg-transparent border-none focus:outline-none text-gray-900 w-full font-montserrat text-sm placeholder:text-gray-500"
             />
             <ChevronDown className="w-4 h-4 text-gray-400" />
           </div>
@@ -69,7 +67,7 @@ export const SearchBar = () => {
                 }}
               >
                 <span>{loc}</span>
-                {location === loc && <Check className="h-4 w-4 text-green-500" />}
+                {location === loc && <Check className="h-4 w-4 text-green-500 ml-1" />}
               </div>
             ))}
           </div>
@@ -81,7 +79,7 @@ export const SearchBar = () => {
           <PopoverTrigger asChild>
             <Button variant="ghost" className="h-full pl-0 pr-2 font-normal">
               <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2] shrink-0" />
-              <span className="text-sm">
+              <span className="text-sm text-gray-900">
                 {arrival ? format(arrival, "MMM d") : <span className="text-gray-500">Arrival</span>}
               </span>
             </Button>
@@ -102,7 +100,7 @@ export const SearchBar = () => {
           <PopoverTrigger asChild>
             <Button variant="ghost" className="h-full pl-0 pr-2 font-normal">
               <CalendarIcon className="mr-2 h-4 w-4 text-[#00B2B2] shrink-0" />
-              <span className="text-sm">
+              <span className="text-sm text-gray-900">
                 {duration ? format(duration, "MMM d") : <span className="text-gray-500">Duration</span>}
               </span>
             </Button>
@@ -125,7 +123,7 @@ export const SearchBar = () => {
           setGuests(g);
         }}>
           <SelectTrigger className="h-full border-0 bg-transparent w-[180px]">
-            <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} />
+            <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} className="text-gray-900" />
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px]">
             <div className="px-3 py-2">
@@ -137,10 +135,10 @@ export const SearchBar = () => {
                     onClick={() => {
                       setRooms(num.toString());
                     }}
-                    className="px-2 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
+                    className="px-2 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center gap-1"
                   >
-                    <span>{num}</span>
-                    {num === Number(rooms) && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                    <span className="text-gray-900">{num}</span>
+                    {num === Number(rooms) && <Check className="h-3.5 w-3.5 text-green-500" />}
                   </div>
                 ))}
               </div>
@@ -155,10 +153,10 @@ export const SearchBar = () => {
                     onClick={() => {
                       setGuests(num.toString());
                     }}
-                    className="px-2 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
+                    className="px-2 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center gap-1"
                   >
-                    <span>{num}</span>
-                    {num === Number(guests) && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                    <span className="text-gray-900">{num}</span>
+                    {num === Number(guests) && <Check className="h-3.5 w-3.5 text-green-500" />}
                   </div>
                 ))}
               </div>
@@ -170,7 +168,7 @@ export const SearchBar = () => {
       <div className="px-2 h-full flex items-center">
         <Select>
           <SelectTrigger className="h-full border-0 bg-transparent w-[140px]">
-            <SelectValue placeholder="Special rates" className="text-sm" />
+            <SelectValue placeholder="Special rates" className="text-gray-900" />
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectItem value="group">Group</SelectItem>
