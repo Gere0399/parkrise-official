@@ -92,10 +92,10 @@ export const ContentSection = () => {
   return (
     <div className="min-h-screen bg-navy py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-5xl font-bold text-secondary mb-4">
+        <h2 className="text-4xl font-bold text-secondary mb-2">
           Live here in a furnished apartment-style suite.
         </h2>
-        <p className="text-2xl text-white/90 mb-12">Or, stay for a quick trip.</p>
+        <p className="text-4xl text-secondary mb-8">Or, stay for a quick trip.</p>
 
         <div className="flex flex-wrap gap-4 mb-12">
           {tags.map((tag) => (
