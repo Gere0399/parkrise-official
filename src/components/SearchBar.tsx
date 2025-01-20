@@ -122,8 +122,8 @@ export const SearchBar = () => {
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[180px]">
-            <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} className="text-gray-900" />
+          <SelectTrigger className="h-full border-0 bg-transparent w-[180px] text-gray-900">
+            <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} />
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px]">
             <div className="px-3 py-2">
@@ -167,8 +167,8 @@ export const SearchBar = () => {
 
       <div className="px-2 h-full flex items-center">
         <Select>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[140px]">
-            <SelectValue placeholder="Special rates" className="text-gray-900" />
+          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-gray-900">
+            <SelectValue placeholder="Special rates" />
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectItem value="group">Group</SelectItem>
