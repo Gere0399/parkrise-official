@@ -90,7 +90,6 @@ export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
   const [autoplayPlugin, setAutoplayPlugin] = useState<ReturnType<typeof AutoplayPlugin> | null>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   useEffect(() => {
     const plugin = AutoplayPlugin({
@@ -168,11 +167,17 @@ export const ContentSection = () => {
           opts={{
             align: "start",
             loop: true,
+            duration: 50,
+            skipSnaps: false,
+            dragFree: false,
           }}
         >
-          <CarouselContent>
+          <CarouselContent className="transition-transform duration-500 ease-in-out">
             {slideContent[activeTag].map((slide, index) => (
-              <CarouselItem key={index} className="transition-all duration-500 ease-in-out">
+              <CarouselItem 
+                key={index} 
+                className="transition-all duration-500 ease-in-out"
+              >
                 <div className="grid grid-cols-2 gap-8">
                   <div className="bg-white rounded-2xl overflow-hidden shadow-xl transform transition-all duration-500 ease-in-out hover:scale-105">
                     <img
