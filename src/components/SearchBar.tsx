@@ -122,7 +122,7 @@ export const SearchBar = () => {
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[200px]">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[200px] whitespace-nowrap">
             <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} />
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px]" position="popper" side="bottom" sideOffset={5}>
@@ -133,10 +133,9 @@ export const SearchBar = () => {
                   <SelectItem 
                     key={`room-${num}`} 
                     value={`${num}-${guests}`}
-                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center justify-between"
+                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center"
                   >
-                    <span>{num}</span>
-                    {num === Number(rooms) && <Check className="h-4 w-4 text-green-500" />}
+                    {num}
                   </SelectItem>
                 ))}
               </div>
@@ -149,10 +148,9 @@ export const SearchBar = () => {
                   <SelectItem 
                     key={`guest-${num}`} 
                     value={`${rooms}-${num}`}
-                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center justify-between"
+                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center"
                   >
-                    <span>{num}</span>
-                    {num === Number(guests) && <Check className="h-4 w-4 text-green-500" />}
+                    {num}
                   </SelectItem>
                 ))}
               </div>
