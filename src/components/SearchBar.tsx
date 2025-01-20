@@ -33,6 +33,8 @@ export const SearchBar = () => {
     return `${roomText}, ${guestText}`;
   };
 
+  // ... keep existing code (location popover section)
+
   return (
     <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-5xl divide-x divide-gray-200">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
@@ -133,10 +135,10 @@ export const SearchBar = () => {
                   <SelectItem 
                     key={`room-${num}`} 
                     value={`${num}-${guests}`}
-                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center"
+                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center justify-between"
                   >
-                    {num === Number(rooms) && <Check className="h-4 w-4 text-green-500 mr-2" />}
                     <span>{num}</span>
+                    {num === Number(rooms) && <Check className="h-4 w-4 text-green-500" />}
                   </SelectItem>
                 ))}
               </div>
@@ -149,10 +151,10 @@ export const SearchBar = () => {
                   <SelectItem 
                     key={`guest-${num}`} 
                     value={`${rooms}-${num}`}
-                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center"
+                    className="px-2 py-1 rounded hover:bg-gray-100 cursor-pointer text-center flex items-center justify-between"
                   >
-                    {num === Number(guests) && <Check className="h-4 w-4 text-green-500 mr-2" />}
                     <span>{num}</span>
+                    {num === Number(guests) && <Check className="h-4 w-4 text-green-500" />}
                   </SelectItem>
                 ))}
               </div>
