@@ -14,7 +14,7 @@ export const SearchBar = () => {
   
   return (
     <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-4xl divide-x divide-gray-200">
-      <div className="flex items-center space-x-2 px-3 h-full">
+      <div className="flex items-center space-x-2 pl-4 pr-2 h-full">
         <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
         <input
           type="text"
@@ -71,8 +71,8 @@ export const SearchBar = () => {
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[120px]">
-            <SelectValue placeholder={`${rooms} Room, ${guests} Guest`} className="truncate text-sm" />
+          <SelectTrigger className="h-full border-0 bg-transparent w-[140px]">
+            <SelectValue placeholder={`${rooms} Room, ${guests} Guest`} className="text-sm" />
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px]">
             <div className="px-3 py-2">
@@ -110,8 +110,8 @@ export const SearchBar = () => {
 
       <div className="px-2 h-full flex items-center">
         <Select>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[120px]">
-            <SelectValue placeholder="Special rates" className="truncate text-sm" />
+          <SelectTrigger className="h-full border-0 bg-transparent w-[140px]">
+            <SelectValue placeholder="Special rates" className="text-sm" />
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectItem value="group">Group</SelectItem>
