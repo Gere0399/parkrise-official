@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { SearchBar } from "@/components/SearchBar";
 import { ContentSection } from "@/components/ContentSection";
 import CommunitySection from "@/components/CommunitySection";
+import { VideoSection } from "@/components/VideoSection";
 
 const Index = () => {
   return (
@@ -43,6 +44,7 @@ const Index = () => {
 
       <ContentSection />
       <CommunitySection />
+      <VideoSection />
     </div>
   );
 };
