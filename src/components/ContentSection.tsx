@@ -169,11 +169,11 @@ export const ContentSection = () => {
             loop: true,
           }}
         >
-          <CarouselContent className="transition-transform duration-500">
+          <CarouselContent className="transition-all duration-700 ease-in-out">
             {slideContent[activeTag].map((slide, index) => (
               <CarouselItem 
                 key={index} 
-                className="transition-all duration-500 ease-in-out"
+                className="transition-all duration-700 ease-in-out"
               >
                 <div className="grid grid-cols-2 gap-8">
                   <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
