@@ -14,7 +14,7 @@ export const TagButtons = ({ tags, activeTag, onTagClick }: TagButtonsProps) => 
           key={tag}
           variant="outline"
           onClick={() => onTagClick(tag)}
-          className={`rounded-full border text-sm py-1.5 px-4 transition-all transform ${
+          className={`rounded-full border text-sm py-1 px-4 h-8 transition-all transform ${
             activeTag === tag 
               ? 'bg-white text-navy border-white hover:bg-white/90 scale-110' 
               : 'bg-transparent text-white border-white hover:bg-white/10'
