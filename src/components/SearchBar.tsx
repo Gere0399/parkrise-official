@@ -34,7 +34,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-4xl divide-x divide-gray-200">
+    <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-5xl divide-x divide-gray-200">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
         <PopoverTrigger asChild>
           <div className="flex items-center space-x-2 pl-4 pr-2 h-full cursor-pointer">
@@ -122,7 +122,7 @@ export const SearchBar = () => {
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[180px]">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[200px]">
             <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} />
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px]" position="popper" side="bottom" sideOffset={5}>
@@ -177,7 +177,7 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mx-2">
+      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mx-4">
         Let's GO!
       </Button>
     </div>
