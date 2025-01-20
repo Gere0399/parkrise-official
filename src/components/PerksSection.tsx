@@ -12,9 +12,9 @@ export const PerksSection = () => {
   const [selectedPerk, setSelectedPerk] = useState("Food & Beverages");
 
   return (
-    <div className="bg-navy min-h-screen py-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl text-secondary font-medium text-center mb-24 leading-tight tracking-wide">
+    <div className="bg-navy min-h-screen py-20">
+      <div className="max-w-[1200px] mx-auto px-8 md:px-12">
+        <h2 className="text-3xl md:text-4xl text-secondary font-medium text-center mb-24 leading-tight tracking-wide">
           Explore for yourself what makes<br />Parkrise perfect
         </h2>
 
