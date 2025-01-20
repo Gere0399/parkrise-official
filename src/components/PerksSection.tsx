@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const perks = [
   { id: 1, name: "Outdoor Space" },
@@ -64,10 +65,11 @@ export const PerksSection = () => {
           </div>
 
           <div className="flex flex-col items-center mt-24 text-white space-y-6">
-            <div className="flex flex-col items-center space-y-4">
-              <span className="text-lg tracking-wider font-light">See our Places</span>
-              <ArrowDown className="w-6 h-6 animate-bounce" />
-            </div>
+            <Link to="/destinations" className="flex flex-col items-center space-y-4 group">
+              <ArrowUp className="w-6 h-6 animate-bounce text-secondary" />
+              <span className="text-lg tracking-wider font-light group-hover:text-secondary transition-colors">See our Places</span>
+              <ArrowDown className="w-6 h-6 animate-bounce text-secondary" />
+            </Link>
           </div>
         </div>
       </div>
