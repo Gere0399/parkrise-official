@@ -63,6 +63,10 @@ export default {
           "0%": { transform: "translateX(-20px)", opacity: "0" },
           "100%": { transform: "translateX(0)", opacity: "1" },
         },
+        "bounce-delayed": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-25%)" },
+        }
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out",
@@ -70,6 +74,7 @@ export default {
         "text-pulse": "text-pulse 1s ease-in-out infinite",
         scroll: "scroll 2s ease-in-out infinite",
         "slide-in": "slide-in 0.5s ease-out",
+        "bounce-delayed": "bounce-delayed 1s infinite 0.5s",
       },
     },
   },
