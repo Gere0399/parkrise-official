@@ -6,7 +6,11 @@ export const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <MapPin className="w-6 h-6 text-primary transform rotate-180" />
+          <img 
+            src="/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png" 
+            alt="Parkrise Logo" 
+            className="h-8 w-auto"
+          />
           <span className="text-primary text-2xl font-bold tracking-wider font-montserrat">PARKRISE</span>
         </div>
 

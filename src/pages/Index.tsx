@@ -7,20 +7,14 @@ const Index = () => {
   return (
     <div className="min-h-screen font-montserrat">
       <div className="relative h-screen">
-        {/* Video Background */}
+        {/* Background Image with Overlay */}
         <div className="absolute inset-0 bg-navy/80">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <img
+            src="/lovable-uploads/a6fe6c8e-8b3a-4ac5-9834-8ee868d8cc5d.png"
+            alt="Background"
             className="w-full h-full object-cover"
-          >
-            <source
-              src="https://assets.mixkit.co/videos/preview/mixkit-set-of-apartments-seen-from-the-street-39526-large.mp4"
-              type="video/mp4"
-            />
-          </video>
+          />
+          <div className="absolute inset-0 bg-black/50" /> {/* Dark overlay */}
         </div>
 
         {/* Content */}
