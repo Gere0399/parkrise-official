@@ -167,27 +167,22 @@ export const ContentSection = () => {
           opts={{
             align: "start",
             loop: true,
-            duration: 50,
-            skipSnaps: false,
-            dragFree: false,
+            duration: 1000,
           }}
         >
-          <CarouselContent className="transition-transform duration-500 ease-in-out">
+          <CarouselContent>
             {slideContent[activeTag].map((slide, index) => (
-              <CarouselItem 
-                key={index} 
-                className="transition-all duration-500 ease-in-out"
-              >
+              <CarouselItem key={index}>
                 <div className="grid grid-cols-2 gap-8">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl transform transition-all duration-500 ease-in-out hover:scale-105">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
                     <img
                       src={slide.image}
                       alt="Experience"
-                      className="w-full h-[400px] object-cover transform transition-all duration-500 ease-in-out"
+                      className="w-full h-[400px] object-cover"
                     />
                   </div>
                   <div className="flex items-center">
-                    <p className="text-3xl text-white leading-tight max-w-[80%] animate-fade-in">
+                    <p className="text-3xl text-white leading-tight max-w-[80%]">
                       {slide.text}
                     </p>
                   </div>
