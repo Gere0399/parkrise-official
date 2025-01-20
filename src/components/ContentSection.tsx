@@ -47,8 +47,7 @@ export const ContentSection = () => {
   const [isManualSelection, setIsManualSelection] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isTextPulsing, setIsTextPulsing] = useState(false);
-  const [nextTag, setNextTag] = useState(tags[1]);
-  const [slidePosition, setSlidePosition] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (!isManualSelection) {
@@ -58,7 +57,7 @@ export const ContentSection = () => {
 
       return () => clearInterval(autoChangeTimer);
     }
-  }, [activeTag, isManualSelection]);
+  }, [currentIndex, isManualSelection]);
 
   const handleSlideChange = () => {
     if (isAnimating) return;
@@ -66,16 +65,11 @@ export const ContentSection = () => {
     setIsAnimating(true);
     setIsTextPulsing(true);
     
-    const currentIndex = tags.indexOf(activeTag);
     const nextIndex = (currentIndex + 1) % tags.length;
-    setNextTag(tags[nextIndex]);
-    
-    setSlidePosition(prev => prev - 100);
+    setCurrentIndex(nextIndex);
+    setActiveTag(tags[nextIndex]);
     
     setTimeout(() => {
-      setActiveTag(tags[nextIndex]);
-      setNextTag(tags[(nextIndex + 1) % tags.length]);
-      setSlidePosition(0);
       setIsAnimating(false);
       setIsTextPulsing(false);
     }, 500);
@@ -83,9 +77,10 @@ export const ContentSection = () => {
 
   const handleTagClick = (tag: string) => {
     if (tag !== activeTag && !isAnimating) {
+      const newIndex = tags.indexOf(tag);
+      setCurrentIndex(newIndex);
       setActiveTag(tag);
       setIsManualSelection(true);
-      handleSlideChange();
       
       setTimeout(() => {
         setIsManualSelection(false);
@@ -121,47 +116,20 @@ export const ContentSection = () => {
         </div>
 
         <div className="relative overflow-hidden">
-          <div 
-            className="transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(${slidePosition}%)` }}
-          >
-            <div className="flex">
-              <div className="flex-shrink-0 w-full">
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-                    <img
-                      src={slideContent[activeTag].image}
-                      alt="Experience"
-                      className="w-full h-[400px] object-cover"
-                    />
-                  </div>
-                  <div className="flex items-center">
-                    <p className={`text-3xl text-white leading-tight max-w-[80%] ${
-                      isTextPulsing ? 'animate-text-pulse' : ''
-                    }`}>
-                      {slideContent[activeTag].text}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="flex-shrink-0 w-full">
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-                    <img
-                      src={slideContent[nextTag].image}
-                      alt="Next Experience"
-                      className="w-full h-[400px] object-cover"
-                    />
-                  </div>
-                  <div className="flex items-center">
-                    <p className={`text-3xl text-white leading-tight max-w-[80%] ${
-                      isTextPulsing ? 'animate-text-pulse' : ''
-                    }`}>
-                      {slideContent[nextTag].text}
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <div className="grid grid-cols-2 gap-8">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-500 transform">
+              <img
+                src={slideContent[activeTag].image}
+                alt="Experience"
+                className="w-full h-[400px] object-cover"
+              />
+            </div>
+            <div className="flex items-center">
+              <p className={`text-3xl text-white leading-tight max-w-[80%] transition-opacity duration-500 ${
+                isTextPulsing ? 'animate-text-pulse' : ''
+              }`}>
+                {slideContent[activeTag].text}
+              </p>
             </div>
           </div>
         </div>
