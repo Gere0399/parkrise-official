@@ -14,7 +14,7 @@ const Index = () => {
             alt="Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/80" /> {/* Darker overlay */}
+          <div className="absolute inset-0 bg-black/90" /> {/* Darker overlay */}
         </div>
 
         {/* Content */}
