@@ -1,4 +1,4 @@
-import { MapPin, ChevronDown } from "lucide-react";
+import { MapPin, ChevronDown, Check } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState, useEffect } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
