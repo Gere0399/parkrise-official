@@ -169,7 +169,7 @@ export const SearchBar = () => {
       <div className="px-2 h-full flex items-center">
         <Select value={specialRate} onValueChange={setSpecialRate}>
           <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-gray-900">
-            <SelectValue>{specialRate || "Special rates"}</SelectValue>
+            <SelectValue placeholder="Special rates" />
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectItem value="group">Group</SelectItem>
