@@ -58,9 +58,11 @@ export const ContentSection = () => {
 
       return () => clearInterval(autoChangeTimer);
     }
-  }, [isManualSelection]);
+  }, [activeTag, isManualSelection]);
 
   const handleSlideChange = () => {
+    if (isAnimating) return;
+    
     setIsAnimating(true);
     setIsTextPulsing(true);
     
@@ -68,22 +70,26 @@ export const ContentSection = () => {
     const nextIndex = (currentIndex + 1) % tags.length;
     setNextTag(tags[nextIndex]);
     
-    // Update slide position
     setSlidePosition(prev => prev - 100);
     
     setTimeout(() => {
       setActiveTag(tags[nextIndex]);
       setNextTag(tags[(nextIndex + 1) % tags.length]);
+      setSlidePosition(0);
       setIsAnimating(false);
       setIsTextPulsing(false);
-    }, 1000);
+    }, 500);
   };
 
   const handleTagClick = (tag: string) => {
-    if (tag !== activeTag) {
+    if (tag !== activeTag && !isAnimating) {
       setActiveTag(tag);
       setIsManualSelection(true);
       handleSlideChange();
+      
+      setTimeout(() => {
+        setIsManualSelection(false);
+      }, 5000);
     }
   };
 
@@ -116,7 +122,7 @@ export const ContentSection = () => {
 
         <div className="relative overflow-hidden">
           <div 
-            className="transition-transform duration-1000 ease-in-out"
+            className="transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(${slidePosition}%)` }}
           >
             <div className="flex">
