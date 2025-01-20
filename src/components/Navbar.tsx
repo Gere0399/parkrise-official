@@ -1,18 +1,28 @@
-import { MapPin, Search } from "lucide-react";
+import { MapPin, Search, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState, useEffect } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+
+const SAMPLE_LOCATIONS = [
+  "Phoenix, AZ",
+  "Scottsdale, AZ",
+  "Chandler, AZ",
+  "Mesa, AZ",
+  "Tempe, AZ",
+  "Las Vegas, NV",
+  "San Diego, CA",
+  "Los Angeles, CA"
+];
 
 export const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isNotAtTop, setIsNotAtTop] = useState(false);
+  const [isLocationOpen, setIsLocationOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show navbar background when not at top (y > 0)
       setIsNotAtTop(window.scrollY > 0);
-      
-      // Show search when scrolled past 80vh
       const scrolled = window.scrollY > window.innerHeight * 0.8;
       setIsScrolled(scrolled);
     };
@@ -21,14 +31,8 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleSearch = () => {
-    // Handle search functionality here
-    console.log("Searching for:", searchQuery);
-  };
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
-      {/* Semi-transparent background - show when not at top */}
       {isNotAtTop && (
         <div className="absolute inset-x-0 top-0 h-24 bg-black/20 backdrop-blur-sm transition-opacity duration-300" />
       )}
@@ -43,24 +47,37 @@ export const Navbar = () => {
         </div>
 
         {isScrolled && (
-          <div className="flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full w-64">
-            <MapPin className="w-3 h-3 text-white/70 shrink-0" />
-            <input
-              type="text"
-              placeholder="Search location..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-transparent border-none focus:outline-none text-white text-xs px-2 w-full font-montserrat truncate"
-            />
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={handleSearch}
-              className="h-6 w-6 p-1 hover:bg-white/10"
-            >
-              <Search className="h-4 w-4 text-white/70" />
-            </Button>
-          </div>
+          <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
+            <PopoverTrigger asChild>
+              <div className="flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full w-64 cursor-pointer">
+                <MapPin className="w-3 h-3 text-white/70 shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Search location..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="bg-transparent border-none focus:outline-none text-white text-xs px-2 w-full font-montserrat truncate"
+                />
+                <ChevronDown className="w-3 h-3 text-white/70" />
+              </div>
+            </PopoverTrigger>
+            <PopoverContent className="w-64 p-0" align="start">
+              <div className="py-2">
+                {SAMPLE_LOCATIONS.map((location) => (
+                  <div
+                    key={location}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                    onClick={() => {
+                      setSearchQuery(location);
+                      setIsLocationOpen(false);
+                    }}
+                  >
+                    {location}
+                  </div>
+                ))}
+              </div>
+            </PopoverContent>
+          </Popover>
         )}
 
         <div className="flex items-center space-x-2 mr-20">

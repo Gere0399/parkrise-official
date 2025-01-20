@@ -1,4 +1,4 @@
-import { Calendar as CalendarIcon, MapPin, Check } from "lucide-react";
+import { Calendar as CalendarIcon, MapPin, Check, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
@@ -6,11 +6,24 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { format } from "date-fns";
 import { useState } from "react";
 
+const SAMPLE_LOCATIONS = [
+  "Phoenix, AZ",
+  "Scottsdale, AZ",
+  "Chandler, AZ",
+  "Mesa, AZ",
+  "Tempe, AZ",
+  "Las Vegas, NV",
+  "San Diego, CA",
+  "Los Angeles, CA"
+];
+
 export const SearchBar = () => {
   const [arrival, setArrival] = useState<Date>();
   const [duration, setDuration] = useState<Date>();
   const [rooms, setRooms] = useState("1");
   const [guests, setGuests] = useState("1");
+  const [location, setLocation] = useState("");
+  const [isLocationOpen, setIsLocationOpen] = useState(false);
   
   const getRoomGuestLabel = (rooms: string, guests: string) => {
     const roomText = `${rooms} ${Number(rooms) === 1 ? 'Room' : 'Rooms'}`;
@@ -20,15 +33,38 @@ export const SearchBar = () => {
 
   return (
     <div className="flex items-center justify-center space-x-0 bg-white rounded-full h-14 w-full max-w-4xl divide-x divide-gray-200">
-      <div className="flex items-center space-x-2 pl-4 pr-2 h-full">
-        <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
-        <input
-          type="text"
-          placeholder="Chandler, AZ"
-          className="bg-transparent border-none focus:outline-none text-gray-900 w-full font-montserrat text-sm"
-        />
-      </div>
-      
+      <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
+        <PopoverTrigger asChild>
+          <div className="flex items-center space-x-2 pl-4 pr-2 h-full cursor-pointer">
+            <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
+            <input
+              type="text"
+              placeholder="Search location..."
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="bg-transparent border-none focus:outline-none text-gray-900 w-full font-montserrat text-sm"
+            />
+            <ChevronDown className="w-4 h-4 text-gray-400" />
+          </div>
+        </PopoverTrigger>
+        <PopoverContent className="p-0 w-[300px]" align="start">
+          <div className="py-2">
+            {SAMPLE_LOCATIONS.map((loc) => (
+              <div
+                key={loc}
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                onClick={() => {
+                  setLocation(loc);
+                  setIsLocationOpen(false);
+                }}
+              >
+                {loc}
+              </div>
+            ))}
+          </div>
+        </PopoverContent>
+      </Popover>
+
       <div className="px-2 h-full flex items-center">
         <Popover>
           <PopoverTrigger asChild>
