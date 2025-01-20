@@ -11,10 +11,10 @@ const CommunitySection = () => {
         
         <div className="flex flex-col space-y-8">
           {/* First Card */}
-          <Card className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+          <Card className="border-0 shadow-none">
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row md:items-center md:space-x-8">
-                <div className="w-full md:w-1/3 mb-6 md:mb-0">
+                <div className="w-full md:w-1/3 mb-6 md:mb-0 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4">
                   <img
                     src="/lovable-uploads/bf46281c-e655-4a66-b172-fac8e6646f87.png"
                     alt="Personalized Space"
@@ -29,10 +29,10 @@ const CommunitySection = () => {
           </Card>
 
           {/* Second Card */}
-          <Card className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+          <Card className="border-0 shadow-none">
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row md:items-center md:space-x-8">
-                <div className="w-full md:w-1/3 mb-6 md:mb-0">
+                <div className="w-full md:w-1/3 mb-6 md:mb-0 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4">
                   <img
                     src="/lovable-uploads/5fdb10c4-bece-475b-a595-c875e30e9961.png"
                     alt="Wellness Activities"
@@ -47,10 +47,10 @@ const CommunitySection = () => {
           </Card>
 
           {/* Third Card */}
-          <Card className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+          <Card className="border-0 shadow-none">
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row md:items-center md:space-x-8">
-                <div className="w-full md:w-1/3 mb-6 md:mb-0">
+                <div className="w-full md:w-1/3 mb-6 md:mb-0 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4">
                   <img
                     src="/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png"
                     alt="Culinary Experience"
