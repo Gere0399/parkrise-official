@@ -1,17 +1,19 @@
-import { MapPin, Search, ChevronDown } from "lucide-react";
+import { MapPin, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState, useEffect } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 const SAMPLE_LOCATIONS = [
-  "Phoenix, AZ",
-  "Scottsdale, AZ",
-  "Chandler, AZ",
-  "Mesa, AZ",
-  "Tempe, AZ",
+  "New York, NY",
+  "Los Angeles, CA",
+  "Chicago, IL",
+  "Houston, TX",
+  "Miami, FL",
+  "Seattle, WA",
+  "Boston, MA",
+  "Denver, CO",
   "Las Vegas, NV",
-  "San Diego, CA",
-  "Los Angeles, CA"
+  "San Francisco, CA"
 ];
 
 export const Navbar = () => {
@@ -61,18 +63,25 @@ export const Navbar = () => {
                 <ChevronDown className="w-3 h-3 text-white/70" />
               </div>
             </PopoverTrigger>
-            <PopoverContent className="w-64 p-0" align="start">
+            <PopoverContent 
+              className="w-64 p-0 bg-white" 
+              align="start"
+              side="bottom"
+              sideOffset={5}
+              alignOffset={-10}
+            >
               <div className="py-2">
                 {SAMPLE_LOCATIONS.map((location) => (
                   <div
                     key={location}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
                     onClick={() => {
                       setSearchQuery(location);
                       setIsLocationOpen(false);
                     }}
                   >
-                    {location}
+                    <span>{location}</span>
+                    {searchQuery === location && <Check className="h-4 w-4 text-green-500" />}
                   </div>
                 ))}
               </div>

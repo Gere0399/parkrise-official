@@ -7,14 +7,16 @@ import { format } from "date-fns";
 import { useState } from "react";
 
 const SAMPLE_LOCATIONS = [
-  "Phoenix, AZ",
-  "Scottsdale, AZ",
-  "Chandler, AZ",
-  "Mesa, AZ",
-  "Tempe, AZ",
+  "New York, NY",
+  "Los Angeles, CA",
+  "Chicago, IL",
+  "Houston, TX",
+  "Miami, FL",
+  "Seattle, WA",
+  "Boston, MA",
+  "Denver, CO",
   "Las Vegas, NV",
-  "San Diego, CA",
-  "Los Angeles, CA"
+  "San Francisco, CA"
 ];
 
 export const SearchBar = () => {
@@ -47,18 +49,25 @@ export const SearchBar = () => {
             <ChevronDown className="w-4 h-4 text-gray-400" />
           </div>
         </PopoverTrigger>
-        <PopoverContent className="p-0 w-[300px]" align="start">
+        <PopoverContent 
+          className="p-0 w-[300px] bg-white" 
+          align="start"
+          side="bottom"
+          sideOffset={5}
+          alignOffset={-10}
+        >
           <div className="py-2">
             {SAMPLE_LOCATIONS.map((loc) => (
               <div
                 key={loc}
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
                 onClick={() => {
                   setLocation(loc);
                   setIsLocationOpen(false);
                 }}
               >
-                {loc}
+                <span>{loc}</span>
+                {location === loc && <Check className="h-4 w-4 text-green-500" />}
               </div>
             ))}
           </div>
@@ -116,7 +125,7 @@ export const SearchBar = () => {
           <SelectTrigger className="h-full border-0 bg-transparent w-[180px]">
             <SelectValue placeholder={getRoomGuestLabel(rooms, guests)} />
           </SelectTrigger>
-          <SelectContent className="bg-white w-[280px]">
+          <SelectContent className="bg-white w-[280px]" position="popper" side="bottom" sideOffset={5}>
             <div className="px-3 py-2">
               <p className="text-sm font-bold mb-2">Rooms</p>
               <div className="grid grid-cols-3 gap-1">
