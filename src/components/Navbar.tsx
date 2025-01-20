@@ -5,16 +5,31 @@ import { useState, useEffect } from "react";
 export const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isActivelyScrolling, setIsActivelyScrolling] = useState(false);
 
   useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout;
+
     const handleScroll = () => {
-      // Show navbar background and search when scrolled past 80vh
+      // Show navbar background only while actively scrolling
+      setIsActivelyScrolling(true);
+      clearTimeout(scrollTimeout);
+      
+      // Hide background after 500ms of no scrolling
+      scrollTimeout = setTimeout(() => {
+        setIsActivelyScrolling(false);
+      }, 500);
+
+      // Show search when scrolled past 80vh
       const scrolled = window.scrollY > window.innerHeight * 0.8;
       setIsScrolled(scrolled);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(scrollTimeout);
+    };
   }, []);
 
   const handleSearch = () => {
@@ -24,9 +39,9 @@ export const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
-      {/* Semi-transparent background - only show when scrolled */}
-      {isScrolled && (
-        <div className="absolute inset-x-0 top-0 h-24 bg-black/20 backdrop-blur-sm" />
+      {/* Semi-transparent background - only show when actively scrolling */}
+      {isActivelyScrolling && (
+        <div className="absolute inset-x-0 top-0 h-24 bg-black/20 backdrop-blur-sm transition-opacity duration-300" />
       )}
       
       <div className="relative max-w-[1400px] mx-auto flex items-center justify-between px-8 py-8">
