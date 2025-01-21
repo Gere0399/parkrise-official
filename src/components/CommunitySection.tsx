@@ -4,9 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 
 const CommunitySection = () => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const videoObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const video = entry.target as HTMLVideoElement;
@@ -20,13 +21,34 @@ const CommunitySection = () => {
       { threshold: 0.5 }
     );
 
+    const animationObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in', 'opacity-100');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
     videoRefs.current.forEach((video) => {
-      if (video) observer.observe(video);
+      if (video) videoObserver.observe(video);
+    });
+
+    cardRefs.current.forEach((card) => {
+      if (card) {
+        card.classList.add('opacity-0');
+        animationObserver.observe(card);
+      }
     });
 
     return () => {
       videoRefs.current.forEach((video) => {
-        if (video) observer.unobserve(video);
+        if (video) videoObserver.unobserve(video);
+      });
+      cardRefs.current.forEach((card) => {
+        if (card) animationObserver.unobserve(card);
       });
     };
   }, []);
@@ -35,7 +57,6 @@ const CommunitySection = () => {
     const { data } = supabase.storage
       .from('videos-landing')
       .getPublicUrl(fileName);
-    console.log('Video URL for', fileName, ':', data?.publicUrl); // Debug log
     return data?.publicUrl || '';
   };
 
@@ -50,7 +71,10 @@ const CommunitySection = () => {
           {/* First Card */}
           <Card className="border-0 shadow-none">
             <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row md:items-center md:space-x-8">
+              <div 
+                ref={el => cardRefs.current[0] = el}
+                className="flex flex-col md:flex-row md:items-center md:space-x-8 transition-all duration-700"
+              >
                 <div className="w-full md:w-1/3 mb-6 md:mb-0">
                   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 -rotate-2">
                     <video
@@ -75,7 +99,10 @@ const CommunitySection = () => {
           {/* Second Card */}
           <Card className="border-0 shadow-none">
             <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row md:items-center md:space-x-8">
+              <div 
+                ref={el => cardRefs.current[1] = el}
+                className="flex flex-col md:flex-row md:items-center md:space-x-8 transition-all duration-700"
+              >
                 <div className="w-full md:w-1/3 mb-6 md:mb-0">
                   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 rotate-2">
                     <video
@@ -101,7 +128,10 @@ const CommunitySection = () => {
           {/* Third Card */}
           <Card className="border-0 shadow-none">
             <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row md:items-center md:space-x-8">
+              <div 
+                ref={el => cardRefs.current[2] = el}
+                className="flex flex-col md:flex-row md:items-center md:space-x-8 transition-all duration-700"
+              >
                 <div className="w-full md:w-1/3 mb-6 md:mb-0">
                   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 -rotate-1">
                     <video
