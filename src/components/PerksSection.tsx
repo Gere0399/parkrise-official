@@ -106,13 +106,13 @@ export const PerksSection = () => {
           </div>
 
           <div className="flex flex-col md:flex-row items-start gap-12 justify-center">
-            {/* Video Section */}
+            {/* Video Section - Updated height from h-[400px] to h-[350px] */}
             <div className="w-full md:w-1/2">
               <div className="relative rounded-lg overflow-hidden shadow-xl transition-all duration-500 transform">
                 <video
                   ref={videoRef}
                   src={getVideoUrl(selectedVideo)}
-                  className="w-full h-[400px] object-cover"
+                  className="w-full h-[350px] object-cover"
                   muted
                   playsInline
                   loop
