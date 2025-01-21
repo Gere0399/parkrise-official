@@ -5,6 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { format } from "date-fns";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SAMPLE_LOCATIONS = [
   "New York, NY",
@@ -20,6 +21,7 @@ const SAMPLE_LOCATIONS = [
 ];
 
 export const SearchBar = () => {
+  const navigate = useNavigate();
   const [arrival, setArrival] = useState<Date>();
   const [duration, setDuration] = useState<Date>();
   const [rooms, setRooms] = useState("1");
@@ -34,11 +36,21 @@ export const SearchBar = () => {
     return `${roomText}, ${guestText}`;
   };
 
+  const handleLocationSelect = (loc: string) => {
+    setLocation(loc);
+    setIsLocationOpen(false);
+    navigate('/destinations');
+  };
+
+  const handleSearch = () => {
+    navigate('/destinations');
+  };
+
   return (
     <div className="flex items-center justify-between bg-white rounded-full h-12 w-full max-w-5xl">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
         <PopoverTrigger asChild>
-          <div className="flex items-center pl-6 h-full cursor-pointer">
+          <div className="flex items-center pl-4 h-full cursor-pointer">
             <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
             <input
               type="text"
@@ -62,10 +74,7 @@ export const SearchBar = () => {
               <div
                 key={loc}
                 className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
-                onClick={() => {
-                  setLocation(loc);
-                  setIsLocationOpen(false);
-                }}
+                onClick={() => handleLocationSelect(loc)}
               >
                 <span>{loc}</span>
                 {location === loc && <Check className="h-4 w-4 text-green-500 ml-1" />}
@@ -75,14 +84,14 @@ export const SearchBar = () => {
         </PopoverContent>
       </Popover>
 
-      <div className="px-2 h-full flex items-center">
+      <div className="flex items-center">
         <Popover>
           <PopoverTrigger asChild>
             <Button
               variant="ghost"
               className="h-full border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-2"
             >
-              <CalendarIcon className="mr-2 h-4 w-4" />
+              <CalendarIcon className="mr-1 h-4 w-4" />
               {arrival ? (
                 format(arrival, "MMM dd, yyyy")
               ) : (
@@ -106,7 +115,7 @@ export const SearchBar = () => {
               variant="ghost"
               className="h-full border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-2"
             >
-              <CalendarIcon className="mr-2 h-4 w-4" />
+              <CalendarIcon className="mr-1 h-4 w-4" />
               {duration ? (
                 format(duration, "MMM dd, yyyy")
               ) : (
@@ -123,15 +132,13 @@ export const SearchBar = () => {
             />
           </PopoverContent>
         </Popover>
-      </div>
 
-      <div className="px-2 h-full flex items-center">
         <Select value={`${rooms}-${guests}`} onValueChange={(val) => {
           const [r, g] = val.split('-');
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[180px] text-gray-900">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[160px] text-gray-900">
             <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px] overflow-hidden">
@@ -172,11 +179,9 @@ export const SearchBar = () => {
             </div>
           </SelectContent>
         </Select>
-      </div>
 
-      <div className="px-2 h-full flex items-center">
         <Select value={specialRate} onValueChange={setSpecialRate}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-gray-900">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[120px] text-gray-900">
             <SelectValue placeholder="Special rates" />
           </SelectTrigger>
           <SelectContent className="bg-white overflow-hidden">
@@ -190,7 +195,10 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mr-1">
+      <Button 
+        onClick={handleSearch}
+        className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mr-1"
+      >
         Let's GO!
       </Button>
     </div>
