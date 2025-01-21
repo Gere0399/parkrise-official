@@ -53,7 +53,7 @@ export const SearchBar = () => {
               placeholder="Search location..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="bg-transparent border-none focus:outline-none text-[#222222] w-full font-montserrat text-sm placeholder:text-[#403E43] px-2"
+              className="bg-transparent border-none focus:outline-none text-[#222222] w-full font-montserrat text-sm placeholder:text-[#222222] px-2"
             />
             <ChevronDown className="w-4 h-4 text-gray-400" />
           </div>
@@ -91,7 +91,7 @@ export const SearchBar = () => {
               {arrival ? (
                 <span className="text-[#222222]">{format(arrival, "MMM dd, yyyy")}</span>
               ) : (
-                <span className="text-[#403E43]">Check in</span>
+                <span className="text-[#222222]">Check in</span>
               )}
             </Button>
           </PopoverTrigger>
@@ -115,7 +115,7 @@ export const SearchBar = () => {
               {duration ? (
                 <span className="text-[#222222]">{format(duration, "MMM dd, yyyy")}</span>
               ) : (
-                <span className="text-[#403E43]">Check out</span>
+                <span className="text-[#222222]">Check out</span>
               )}
             </Button>
           </PopoverTrigger>
@@ -136,7 +136,7 @@ export const SearchBar = () => {
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-[#403E43] px-2">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-[#222222] px-2">
             <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px] overflow-hidden">
@@ -181,7 +181,7 @@ export const SearchBar = () => {
 
       <div className="h-full flex items-center -ml-2">
         <Select value={specialRate} onValueChange={setSpecialRate}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[130px] text-[#403E43] px-2">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[130px] text-[#222222] px-2">
             <SelectValue placeholder="Special rates" />
           </SelectTrigger>
           <SelectContent className="bg-white overflow-hidden">
