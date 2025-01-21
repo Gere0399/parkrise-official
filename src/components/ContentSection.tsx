@@ -14,9 +14,15 @@ export const ContentSection = () => {
     let textPulseTimer: NodeJS.Timeout;
 
     if (!isManualSelection) {
+      // Calculate total duration of all videos for the current tag
+      const totalDuration = slideContent[activeTag].videos.reduce(
+        (acc, video) => acc + video.duration,
+        0
+      );
+
       autoChangeTimer = setInterval(() => {
         handleSlideChange();
-      }, 5000);
+      }, totalDuration * 1000); // Convert to milliseconds
     }
 
     return () => {
@@ -29,18 +35,13 @@ export const ContentSection = () => {
     const currentIndex = tags.indexOf(activeTag);
     const nextIndex = (currentIndex + 1) % tags.length;
     
-    // Start slide transition
     setSlidePosition(-100);
     
-    // After slide completes, update active tag and reset position
     setTimeout(() => {
       setActiveTag(tags[nextIndex]);
       setSlidePosition(0);
-      
-      // Trigger text pulse animation
       setIsTextPulsing(true);
       
-      // Reset text pulse after 300ms
       setTimeout(() => {
         setIsTextPulsing(false);
       }, 300);
@@ -49,9 +50,6 @@ export const ContentSection = () => {
 
   const handleTagClick = (tag: string) => {
     if (tag !== activeTag) {
-      const currentIndex = tags.indexOf(activeTag);
-      const newIndex = tags.indexOf(tag);
-      
       setIsManualSelection(true);
       setSlidePosition(-100);
       
@@ -65,10 +63,15 @@ export const ContentSection = () => {
         }, 300);
       }, 500);
 
-      // Reset manual selection after 15 seconds
+      // Reset manual selection after all videos have played
+      const totalDuration = slideContent[tag].videos.reduce(
+        (acc, video) => acc + video.duration,
+        0
+      );
+      
       setTimeout(() => {
         setIsManualSelection(false);
-      }, 15000);
+      }, totalDuration * 1000);
     }
   };
 
@@ -94,7 +97,7 @@ export const ContentSection = () => {
             style={{ transform: `translateX(${slidePosition}%)` }}
           >
             <SlideContent 
-              image={slideContent[activeTag].image}
+              videos={slideContent[activeTag].videos}
               text={slideContent[activeTag].text}
               isTextPulsing={isTextPulsing}
             />

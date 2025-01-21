@@ -8,33 +8,65 @@ export const tags = [
   "Exploration",
 ];
 
-export const slideContent = {
+interface SlideVideo {
+  url: string;
+  duration: number;
+}
+
+interface SlideContent {
+  videos: SlideVideo[];
+  text: string;
+}
+
+export const slideContent: Record<string, SlideContent> = {
   "Socializing": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+    videos: [
+      { url: "/fire-is-burning.mp4", duration: 5 },
+      { url: "/Professional_Mode_16x9_Generated_Video.mp4", duration: 5 }
+    ],
     text: "Relax, enjoy local food and hang around the lounge... music and good vibes on us"
   },
   "Cooking": {
-    image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
+    videos: [
+      { url: "/the-woman-is-cooking.mp4", duration: 5 },
+      { url: "/Professional_Mode_16x9_the_woman_is_choosing_what_to_pi.mp4", duration: 5 },
+      { url: "/Professional_Mode_16x9_the_woman_is_placing_the_pillows.mp4", duration: 5 }
+    ],
     text: "Cook your favorite meals in our fully equipped shared kitchen spaces"
   },
   "Technology": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+    videos: [
+      { url: "/Professional_Mode_16x9_the_woman_is_approaching_with_th.mp4", duration: 5 },
+      { url: "/Professional_Mode_16x9_the_woman_scrolls_the_screen_and.mp4", duration: 5 },
+      { url: "/Professional_Mode_16x9_Generated_Video (2).mp4", duration: 5 },
+      { url: "/Professional_Mode_the_popup_is_floating_mid_air_an.mp4", duration: 5 }
+    ],
     text: "Stay connected with high-speed WiFi and smart home features throughout"
   },
   "Feeling at Home": {
-    image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
+    videos: [
+      { url: "/Professional_Mode_16x9_the_woman_is_cooking.mp4", duration: 5 }
+    ],
     text: "Experience the comfort of home with our thoughtfully designed living spaces"
   },
   "Wellness": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+    videos: [
+      { url: "/Professional_Mode_16x9_Generated_Video (3).mp4", duration: 5 }
+    ],
     text: "Maintain your fitness routine in our 24/7 wellness center"
   },
   "Bed & Bath": {
-    image: "/lovable-uploads/d5f82026-7671-4842-8dff-35fd2dec6b34.png",
+    videos: [
+      { url: "/Professional_Mode_16x9_panoramic_view_of_the_bedroom.mp4", duration: 5 },
+      { url: "/Professional_Mode_16x9_panoramic_view_of_the_bathroom.mp4", duration: 5 }
+    ],
     text: "Premium bedding and luxurious bath amenities for ultimate comfort"
   },
   "Exploration": {
-    image: "/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png",
+    videos: [
+      { url: "/Professional_Mode_a_guy_running_in_the_desert.mp4", duration: 5 },
+      { url: "/Professional_Mode_a_woman_is_joinign_a_forest.mp4", duration: 5 }
+    ],
     text: "Discover local attractions with our curated city guides"
   }
 };

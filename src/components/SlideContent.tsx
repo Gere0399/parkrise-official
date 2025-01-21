@@ -1,17 +1,65 @@
+import { useEffect, useRef, useState } from 'react';
+
+interface SlideVideo {
+  url: string;
+  duration: number;
+}
+
 interface SlideContentProps {
-  image: string;
+  videos: SlideVideo[];
   text: string;
   isTextPulsing: boolean;
 }
 
-export const SlideContent = ({ image, text, isTextPulsing }: SlideContentProps) => {
+export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps) => {
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && videoRef.current) {
+            videoRef.current.play().catch(console.error);
+          } else if (videoRef.current) {
+            videoRef.current.pause();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observerRef.current.observe(containerRef.current);
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    setCurrentVideoIndex(0);
+  }, [videos]);
+
+  const handleVideoEnd = () => {
+    setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+  };
+
   return (
-    <div className="grid grid-cols-2 gap-8">
+    <div className="grid grid-cols-2 gap-8" ref={containerRef}>
       <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-        <img
-          src={image}
-          alt="Experience"
+        <video
+          ref={videoRef}
+          src={videos[currentVideoIndex].url}
           className="w-full h-[400px] object-cover"
+          muted
+          playsInline
+          onEnded={handleVideoEnd}
         />
       </div>
       <div className="flex items-center">

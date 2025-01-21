@@ -9,11 +9,14 @@ const Index = () => {
   return (
     <div className="min-h-screen font-montserrat">
       <div className="relative h-screen">
-        {/* Background Image with Overlay */}
+        {/* Background Video with Overlay */}
         <div className="absolute inset-0">
-          <img
-            src="/lovable-uploads/a6fe6c8e-8b3a-4ac5-9834-8ee868d8cc5d.png"
-            alt="Background"
+          <video
+            src="/0121.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/90" />
