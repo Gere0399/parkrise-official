@@ -4,6 +4,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { ContentSection } from "@/components/ContentSection";
 import CommunitySection from "@/components/CommunitySection";
 import { PerksSection } from "@/components/PerksSection";
+import { Footer } from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
@@ -57,6 +58,7 @@ const Index = () => {
       <ContentSection />
       <CommunitySection />
       <PerksSection />
+      <Footer />
     </div>
   );
 };
