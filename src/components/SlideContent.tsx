@@ -14,6 +14,7 @@ interface SlideContentProps {
 
 export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -48,20 +49,32 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
 
   useEffect(() => {
     setCurrentVideoIndex(0);
+    setIsVideoLoading(true);
   }, [videos]);
 
   const handleVideoEnd = () => {
     setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+    setIsVideoLoading(true);
   };
 
   const handleVideoError = () => {
     console.error('Error loading video:', videos[currentVideoIndex].url);
     toast.error('Error loading video. Please try again.');
+    setIsVideoLoading(false);
+  };
+
+  const handleVideoLoad = () => {
+    setIsVideoLoading(false);
   };
 
   return (
     <div className="grid grid-cols-2 gap-8" ref={containerRef}>
-      <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+      <div className="bg-white rounded-2xl overflow-hidden shadow-xl relative">
+        {isVideoLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-navy"></div>
+          </div>
+        )}
         <video
           ref={videoRef}
           src={videos[currentVideoIndex].url}
@@ -70,6 +83,7 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
           playsInline
           onEnded={handleVideoEnd}
           onError={handleVideoError}
+          onLoadedData={handleVideoLoad}
         />
       </div>
       <div className="flex items-center">

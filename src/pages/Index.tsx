@@ -18,6 +18,9 @@ const Index = () => {
             loop
             playsInline
             className="w-full h-full object-cover"
+            onError={(e) => {
+              console.error("Error playing header video:", e);
+            }}
           />
           <div className="absolute inset-0 bg-black/90" />
         </div>
