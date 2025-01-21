@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowDown, ArrowUp } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const perks = [
   { id: 1, name: "Outdoor Space", video: "output.mp4" },
@@ -10,6 +11,7 @@ const perks = [
 ];
 
 export const PerksSection = () => {
+  const navigate = useNavigate();
   const [selectedPerk, setSelectedPerk] = useState(perks[0].name);
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -88,6 +90,10 @@ export const PerksSection = () => {
 
   const selectedVideo = perks.find(perk => perk.name === selectedPerk)?.video || perks[0].video;
 
+  const handleNavigateToDestinations = () => {
+    navigate('/destinations');
+  };
+
   return (
     <div className="bg-navy">
       <div className="min-h-screen py-20">
@@ -154,9 +160,9 @@ export const PerksSection = () => {
           </div>
 
           {/* Arrows and Text Section */}
-          <div className="flex flex-col items-center mt-16 space-y-4">
+          <div className="flex flex-col items-center mt-16 space-y-4 cursor-pointer" onClick={handleNavigateToDestinations}>
             <ArrowDown className="w-8 h-8 text-white animate-bounce" />
-            <p className="text-white text-lg font-medium">Discover More</p>
+            <p className="text-white text-lg font-medium">See our spaces</p>
             <ArrowUp className="w-8 h-8 text-white animate-bounce-delayed" />
           </div>
         </div>
