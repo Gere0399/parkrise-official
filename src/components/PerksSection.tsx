@@ -12,36 +12,25 @@ const perks = [
 
 export const PerksSection = () => {
   const [selectedPerk, setSelectedPerk] = useState("Food & Beverages");
-  const [slidePosition, setSlidePosition] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const autoPlayRef = useRef<NodeJS.Timeout>();
 
   const getVideoUrl = (fileName: string): string => {
     const { data } = supabase.storage
       .from('videos-landing')
       .getPublicUrl(fileName);
-    console.log('Video URL for', fileName, ':', data?.publicUrl);
+    console.log('Video URL for', fileName, ':', data?.publicUrl); // Debug log
     return data?.publicUrl || '';
   };
 
-  // Auto-slide functionality
+  // Preload all videos
   useEffect(() => {
-    const startAutoPlay = () => {
-      autoPlayRef.current = setInterval(() => {
-        const currentIndex = perks.findIndex(perk => perk.name === selectedPerk);
-        const nextIndex = (currentIndex + 1) % perks.length;
-        handlePerkChange(perks[nextIndex].name);
-      }, 5000); // 5 seconds interval
-    };
-
-    startAutoPlay();
-
-    return () => {
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current);
-      }
-    };
-  }, [selectedPerk]);
+    perks.forEach(perk => {
+      const video = new Audio();
+      video.src = getVideoUrl(perk.video);
+      video.preload = "auto";
+      console.log('Preloading video:', perk.video); // Debug log
+    });
+  }, []);
 
   // Handle video change when perk changes
   useEffect(() => {
@@ -53,22 +42,6 @@ export const PerksSection = () => {
     }
   }, [selectedPerk]);
 
-  const handlePerkChange = (perkName: string) => {
-    if (perkName !== selectedPerk) {
-      setSlidePosition(-100);
-      
-      setTimeout(() => {
-        setSelectedPerk(perkName);
-        setSlidePosition(0);
-      }, 500);
-
-      // Reset autoplay timer
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current);
-      }
-    }
-  };
-
   const selectedVideo = perks.find(perk => perk.name === selectedPerk)?.video || perks[0].video;
 
   return (
@@ -76,60 +49,49 @@ export const PerksSection = () => {
       {/* Main content section */}
       <div className="min-h-screen py-20">
         <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-          <div className="space-y-12 mb-16">
-            <h2 className="text-3xl md:text-4xl text-secondary font-medium text-center leading-tight tracking-wide">
-              Explore for yourself what makes<br />Parkrise perfect
-            </h2>
-
-            <p className="text-white text-2xl font-light leading-relaxed mb-8">
-              This is your space, and our neighborhood is about to be yours. Check out some of 
-              the Parkrise perks
-            </p>
-          </div>
+          <h2 className="text-3xl md:text-4xl text-secondary font-medium text-center mb-24 leading-tight tracking-wide">
+            Explore for yourself what makes<br />Parkrise perfect
+          </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div className="relative overflow-hidden">
-              <div 
-                className="transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(${slidePosition}%)` }}
-              >
-                <div className="text-white text-sm mb-4 font-light tracking-wider text-center w-full">
-                  Perk: <span className="border-b border-white/30 ml-2 pb-0.5">{selectedPerk}</span>
-                </div>
-                <video
-                  ref={videoRef}
-                  src={getVideoUrl(selectedVideo)}
-                  className="w-full max-w-[650px] rounded-lg"
-                  muted
-                  playsInline
-                  loop
-                  autoPlay
-                />
+            <div className="relative flex flex-col items-center">
+              <div className="text-white text-sm mb-4 font-light tracking-wider text-center w-full">
+                Perk: <span className="border-b border-white/30 ml-2 pb-0.5">{selectedPerk}</span>
               </div>
+              <video
+                ref={videoRef}
+                src={getVideoUrl(selectedVideo)}
+                className="w-full max-w-[650px] rounded-lg"
+                muted
+                playsInline
+                loop
+                autoPlay
+              />
             </div>
 
-            <div className="space-y-8">              
-              <div className="space-y-4">
+            <div className="space-y-12 lg:pt-16">
+              <p className="text-white text-2xl font-light leading-relaxed">
+                This is your space, and our neighborhood is about to be yours. Check out some of 
+                the Parkrise perks
+              </p>
+              
+              <div className="space-y-6">
                 {perks.map((perk) => (
                   <div
                     key={perk.id}
                     className="flex items-center space-x-4 text-white cursor-pointer group"
-                    onClick={() => handlePerkChange(perk.name)}
+                    onClick={() => setSelectedPerk(perk.name)}
                   >
-                    <div className={`w-6 h-6 rounded-full transition-all duration-300 flex items-center justify-center border-2 ${
+                    <div className={`w-5 h-5 rounded-full transition-all duration-200 flex items-center justify-center ${
                       selectedPerk === perk.name 
-                        ? "border-secondary bg-secondary/20" 
-                        : "border-white/50 hover:border-white"
+                        ? "bg-transparent border-2 border-white" 
+                        : "border-2 border-white/50"
                     }`}>
                       {selectedPerk === perk.name && (
-                        <div className="w-3 h-3 bg-secondary rounded-full animate-pulse" />
+                        <div className="w-2.5 h-2.5 bg-white rounded-full" />
                       )}
                     </div>
-                    <span className={`text-lg font-light tracking-wide transition-all duration-300 ${
-                      selectedPerk === perk.name
-                        ? "text-secondary transform translate-x-2"
-                        : "group-hover:text-secondary/80"
-                    }`}>
+                    <span className="text-base font-light tracking-wide group-hover:text-secondary transition-colors">
                       {perk.name}
                     </span>
                   </div>
