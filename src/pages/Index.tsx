@@ -4,15 +4,21 @@ import { SearchBar } from "@/components/SearchBar";
 import { ContentSection } from "@/components/ContentSection";
 import CommunitySection from "@/components/CommunitySection";
 import { PerksSection } from "@/components/PerksSection";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
+  const headerVideoUrl = supabase.storage
+    .from('videos-landing')
+    .getPublicUrl('0121.mp4')
+    .data.publicUrl;
+
   return (
     <div className="min-h-screen font-montserrat">
       <div className="relative h-screen">
         {/* Background Video with Overlay */}
         <div className="absolute inset-0">
           <video
-            src="/0121.mp4"
+            src={headerVideoUrl}
             autoPlay
             muted
             loop
