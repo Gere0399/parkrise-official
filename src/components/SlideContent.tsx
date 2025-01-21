@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
 
 interface SlideVideo {
   url: string;
@@ -24,7 +25,10 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && videoRef.current) {
-            videoRef.current.play().catch(console.error);
+            videoRef.current.play().catch((error) => {
+              console.error('Error playing video:', error);
+              toast.error('Error playing video. Please try again.');
+            });
           } else if (videoRef.current) {
             videoRef.current.pause();
           }
@@ -50,6 +54,11 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
     setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
   };
 
+  const handleVideoError = () => {
+    console.error('Error loading video:', videos[currentVideoIndex].url);
+    toast.error('Error loading video. Please try again.');
+  };
+
   return (
     <div className="grid grid-cols-2 gap-8" ref={containerRef}>
       <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
@@ -60,6 +69,7 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
           muted
           playsInline
           onEnded={handleVideoEnd}
+          onError={handleVideoError}
         />
       </div>
       <div className="flex items-center">
