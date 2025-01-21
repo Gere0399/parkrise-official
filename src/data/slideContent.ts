@@ -1,6 +1,6 @@
 export const tags = [
   "Socializing",
-  "Cooking",
+  "Cooking", 
   "Technology",
   "Feeling at Home",
   "Wellness",
