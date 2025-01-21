@@ -46,7 +46,7 @@ export const SearchBar = () => {
     <div className="flex items-center justify-between bg-white rounded-full h-12 w-full max-w-5xl">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
         <PopoverTrigger asChild>
-          <div className="flex items-center pl-6 h-full cursor-pointer">
+          <div className="flex items-center pl-4 h-full cursor-pointer">
             <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
             <input
               type="text"
@@ -80,7 +80,7 @@ export const SearchBar = () => {
         </PopoverContent>
       </Popover>
 
-      <div className="px-1 h-full flex items-center">
+      <div className="flex items-center h-full -ml-2">
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -130,13 +130,13 @@ export const SearchBar = () => {
         </Popover>
       </div>
 
-      <div className="h-full flex items-center">
+      <div className="h-full flex items-center -ml-2">
         <Select value={`${rooms}-${guests}`} onValueChange={(val) => {
           const [r, g] = val.split('-');
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[160px] text-gray-900 pr-2">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-gray-900 px-2">
             <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px] overflow-hidden">
@@ -179,10 +179,10 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <div className="h-full flex items-center pl-1">
+      <div className="h-full flex items-center -ml-2">
         <Select value={specialRate} onValueChange={setSpecialRate}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[120px] text-gray-900">
-            <SelectValue placeholder="Special rates" />
+          <SelectTrigger className="h-full border-0 bg-transparent w-[130px] text-gray-900 px-2">
+            <SelectValue placeholder="Special rates" className="truncate-none" />
           </SelectTrigger>
           <SelectContent className="bg-white overflow-hidden">
             <SelectItem value="group" className="cursor-pointer">Group</SelectItem>
