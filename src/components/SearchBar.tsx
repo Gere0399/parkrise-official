@@ -46,7 +46,7 @@ export const SearchBar = () => {
     <div className="flex items-center justify-between bg-white rounded-full h-12 w-full max-w-5xl">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
         <PopoverTrigger asChild>
-          <div className="flex items-center pl-6 h-full cursor-pointer">
+          <div className="flex items-center pl-4 h-full cursor-pointer">
             <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
             <input
               type="text"
@@ -80,14 +80,14 @@ export const SearchBar = () => {
         </PopoverContent>
       </Popover>
 
-      <div className="h-full flex items-center">
+      <div className="h-full flex items-center -ml-2">
         <Popover>
           <PopoverTrigger asChild>
             <Button
               variant="ghost"
-              className="h-full border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-2"
+              className="h-full border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-1"
             >
-              <CalendarIcon className="mr-2 h-4 w-4" />
+              <CalendarIcon className="mr-1 h-4 w-4" />
               {arrival ? (
                 format(arrival, "MMM dd, yyyy")
               ) : (
@@ -109,9 +109,9 @@ export const SearchBar = () => {
           <PopoverTrigger asChild>
             <Button
               variant="ghost"
-              className="h-full border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-2"
+              className="h-full border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-1"
             >
-              <CalendarIcon className="mr-2 h-4 w-4" />
+              <CalendarIcon className="mr-1 h-4 w-4" />
               {duration ? (
                 format(duration, "MMM dd, yyyy")
               ) : (
@@ -130,13 +130,13 @@ export const SearchBar = () => {
         </Popover>
       </div>
 
-      <div className="h-full flex items-center -ml-2">
+      <div className="h-full flex items-center -ml-3">
         <Select value={`${rooms}-${guests}`} onValueChange={(val) => {
           const [r, g] = val.split('-');
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[150px] text-gray-900 pr-1">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-gray-900">
             <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px] overflow-hidden">
@@ -179,10 +179,10 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <div className="h-full flex items-center -ml-1">
+      <div className="h-full flex items-center -ml-2">
         <Select value={specialRate} onValueChange={setSpecialRate}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[110px] text-gray-900">
-            <SelectValue placeholder="Special rates" />
+          <SelectTrigger className="h-full border-0 bg-transparent w-[120px] text-gray-900">
+            <SelectValue placeholder="Special rates" className="truncate" />
           </SelectTrigger>
           <SelectContent className="bg-white overflow-hidden">
             <SelectItem value="group" className="cursor-pointer">Group</SelectItem>
