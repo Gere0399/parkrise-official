@@ -53,19 +53,44 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
   }, [videos]);
 
   const handleVideoEnd = () => {
-    setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
-    setIsVideoLoading(true);
+    if (videos && videos.length > 0) {
+      setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+      setIsVideoLoading(true);
+    }
   };
 
   const handleVideoError = () => {
-    console.error('Error loading video:', videos[currentVideoIndex].url);
-    toast.error('Error loading video. Please try again.');
+    const currentVideo = videos[currentVideoIndex];
+    if (currentVideo) {
+      console.error('Error loading video:', currentVideo.url);
+      toast.error('Error loading video. Please try again.');
+    }
     setIsVideoLoading(false);
   };
 
   const handleVideoLoad = () => {
     setIsVideoLoading(false);
   };
+
+  // Early return if no videos are available
+  if (!videos || videos.length === 0) {
+    return (
+      <div className="grid grid-cols-2 gap-8">
+        <div className="bg-white rounded-2xl overflow-hidden shadow-xl relative">
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+            <p className="text-gray-500">No video available</p>
+          </div>
+        </div>
+        <div className="flex items-center">
+          <p className="text-3xl text-white leading-tight max-w-[80%]">
+            {text}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  const currentVideo = videos[currentVideoIndex];
 
   return (
     <div className="grid grid-cols-2 gap-8" ref={containerRef}>
@@ -75,16 +100,18 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-navy"></div>
           </div>
         )}
-        <video
-          ref={videoRef}
-          src={videos[currentVideoIndex].url}
-          className="w-full h-[400px] object-cover"
-          muted
-          playsInline
-          onEnded={handleVideoEnd}
-          onError={handleVideoError}
-          onLoadedData={handleVideoLoad}
-        />
+        {currentVideo && (
+          <video
+            ref={videoRef}
+            src={currentVideo.url}
+            className="w-full h-[400px] object-cover"
+            muted
+            playsInline
+            onEnded={handleVideoEnd}
+            onError={handleVideoError}
+            onLoadedData={handleVideoLoad}
+          />
+        )}
       </div>
       <div className="flex items-center">
         <p className={`text-3xl text-white leading-tight max-w-[80%] transition-all duration-300 ${

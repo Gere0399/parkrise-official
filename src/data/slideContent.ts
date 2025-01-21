@@ -21,11 +21,21 @@ interface SlideContent {
 }
 
 const getVideoUrl = (fileName: string) => {
-  const { data } = supabase.storage
-    .from('videos-landing')
-    .getPublicUrl(fileName);
-  
-  return data.publicUrl;
+  try {
+    const { data, error } = supabase.storage
+      .from('videos-landing')
+      .getPublicUrl(fileName);
+    
+    if (error) {
+      console.error('Error getting video URL:', error);
+      return '';
+    }
+    
+    return data.publicUrl;
+  } catch (error) {
+    console.error('Error getting video URL:', error);
+    return '';
+  }
 };
 
 export const slideContent: Record<string, SlideContent> = {
