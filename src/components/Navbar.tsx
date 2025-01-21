@@ -51,16 +51,16 @@ export const Navbar = () => {
         {isScrolled && (
           <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
             <PopoverTrigger asChild>
-              <div className="flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full w-64 cursor-pointer">
-                <MapPin className="w-3 h-3 text-white/70 shrink-0" />
+              <div className="flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full w-64 cursor-pointer border border-white">
+                <MapPin className="w-3 h-3 text-white shrink-0" />
                 <input
                   type="text"
                   placeholder="Search location..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-transparent border-none focus:outline-none text-white text-xs px-2 w-full font-montserrat truncate"
+                  className="bg-transparent border-none focus:outline-none text-white placeholder-white text-xs px-2 w-full font-montserrat truncate"
                 />
-                <ChevronDown className="w-3 h-3 text-white/70" />
+                <ChevronDown className="w-3 h-3 text-white" />
               </div>
             </PopoverTrigger>
             <PopoverContent 
