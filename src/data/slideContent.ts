@@ -41,8 +41,8 @@ const getVideoUrl = (fileName: string): string => {
 export const slideContent: Record<string, SlideContent> = {
   "Socializing": {
     videos: [
-      { url: getVideoUrl('socializing-1.mp4'), duration: 5 },
-      { url: getVideoUrl('socializing-2.mp4'), duration: 5 }
+      { url: getVideoUrl('Professional_Mode_16x9_the_fire_is_burning_and_the_ambi.mp4'), duration: 5 },
+      { url: getVideoUrl('Professional_Mode_16x9_Generated_Video (1).mp4'), duration: 5 }
     ],
     text: "Relax, enjoy local food and hang around the lounge... music and good vibes on us"
   },
