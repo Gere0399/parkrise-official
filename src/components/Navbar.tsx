@@ -104,8 +104,8 @@ export const Navbar = ({ showSearch = true }) => {
               Destinations
             </Button>
           </Link>
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Our brand</Button>
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">For businesses</Button>
+          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Our Brand</Button>
+          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">For Business</Button>
           <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Franchise</Button>
         </div>
       </div>
