@@ -41,16 +41,16 @@ const getVideoUrl = (fileName: string): string => {
 export const slideContent: Record<string, SlideContent> = {
   "Socializing": {
     videos: [
-      { url: getVideoUrl('fire-is-burning.mp4'), duration: 5 },
-      { url: getVideoUrl('Professional_Mode_16x9_Generated_Video.mp4'), duration: 5 }
+      { url: getVideoUrl('socializing-1.mp4'), duration: 5 },
+      { url: getVideoUrl('socializing-2.mp4'), duration: 5 }
     ],
     text: "Relax, enjoy local food and hang around the lounge... music and good vibes on us"
   },
   "Cooking": {
     videos: [
-      { url: getVideoUrl('the-woman-is-cooking.mp4'), duration: 5 },
-      { url: getVideoUrl('Professional_Mode_16x9_the_woman_is_choosing_what_to_pi.mp4'), duration: 5 },
-      { url: getVideoUrl('Professional_Mode_16x9_the_woman_is_placing_the_pillows.mp4'), duration: 5 }
+      { url: getVideoUrl('cooking-1.mp4'), duration: 5 },
+      { url: getVideoUrl('cooking-2.mp4'), duration: 5 },
+      { url: getVideoUrl('cooking-3.mp4'), duration: 5 }
     ],
     text: "Cook your favorite meals in our fully equipped shared kitchen spaces"
   },
