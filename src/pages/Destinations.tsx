@@ -3,6 +3,7 @@ import { PropertyCard } from "@/components/PropertyCard";
 import { Map } from "@/components/Map";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { SearchBar } from "@/components/SearchBar";
 
 export type Property = {
   id: string;
@@ -43,10 +44,28 @@ const Destinations = () => {
     <div className="min-h-screen bg-white">
       <Navbar showSearch={false} />
       <div className="pt-24 px-8 max-w-[1400px] mx-auto">
+        <div className="mb-8">
+          <SearchBar />
+        </div>
+        <div className="flex gap-2 mb-6">
+          <Button
+            variant="ghost"
+            onClick={() => setSortBy("highest")}
+            className={`text-sm ${sortBy === "highest" ? "text-[#00B2B2]" : "text-gray-600"}`}
+          >
+            Highest Price
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => setSortBy("lowest")}
+            className={`text-sm ${sortBy === "lowest" ? "text-[#00B2B2]" : "text-gray-600"}`}
+          >
+            Lowest Price
+          </Button>
+        </div>
         <div className="flex gap-6">
           {/* Left side - Property listings */}
           <div className="w-2/3">
-            <h1 className="text-3xl font-semibold mb-6">Featured Destinations</h1>
             <div className="space-y-6">
               {SAMPLE_PROPERTIES
                 .sort((a, b) => 
@@ -60,13 +79,7 @@ const Destinations = () => {
           
           {/* Right side - Map */}
           <div className="w-1/3 sticky top-24 h-[calc(100vh-6rem)]">
-            <div className="w-full h-full rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="/lovable-uploads/892ce5e3-ffe0-420b-a9d5-5207bdf86152.png"
-                alt="3D Map"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <Map properties={SAMPLE_PROPERTIES} selectedLocation={selectedLocation} />
           </div>
         </div>
       </div>
