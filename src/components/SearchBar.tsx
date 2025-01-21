@@ -35,10 +35,10 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between bg-white rounded-full h-14 w-full max-w-4xl">
+    <div className="flex items-center justify-between bg-white rounded-full h-12 w-full max-w-5xl">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
         <PopoverTrigger asChild>
-          <div className="flex items-center pl-2 h-full cursor-pointer">
+          <div className="flex items-center pl-6 h-full cursor-pointer">
             <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
             <input
               type="text"

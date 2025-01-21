@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const perks = [
   { id: 1, name: "Outdoor Space", video: "output.mp4" },
@@ -91,7 +92,7 @@ export const PerksSection = () => {
     <div className="bg-navy">
       <div className="min-h-screen py-20">
         <div className="max-w-[1400px] mx-auto px-8 md:px-16">
-          {/* Title Section - Now at the top and centered */}
+          {/* Title Section */}
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl text-secondary font-medium leading-tight tracking-wide mb-6">
               Explore for yourself what makes Parkrise perfect
@@ -99,7 +100,7 @@ export const PerksSection = () => {
           </div>
 
           <div className="flex flex-col md:flex-row items-start gap-12 justify-center">
-            {/* Video Section - Slightly smaller and centered */}
+            {/* Video Section */}
             <div className="w-full md:w-1/2">
               <div className="relative rounded-lg overflow-hidden shadow-xl transition-all duration-500 transform">
                 <video
@@ -111,6 +112,13 @@ export const PerksSection = () => {
                   loop
                   autoPlay
                 />
+                <div className="absolute bottom-6 left-6 flex items-center gap-3">
+                  <span className="text-white text-lg font-medium">See our spaces</span>
+                  <div className="flex items-center gap-2">
+                    <ArrowLeft className="w-5 h-5 text-white" />
+                    <ArrowRight className="w-5 h-5 text-white" />
+                  </div>
+                </div>
               </div>
             </div>
 
