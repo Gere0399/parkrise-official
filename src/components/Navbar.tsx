@@ -2,6 +2,7 @@ import { MapPin, ChevronDown, Check } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState, useEffect } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Link, useLocation } from "react-router-dom";
 
 const SAMPLE_LOCATIONS = [
   "New York, NY",
@@ -16,11 +17,12 @@ const SAMPLE_LOCATIONS = [
   "San Francisco, CA"
 ];
 
-export const Navbar = () => {
+export const Navbar = ({ showSearch = true }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isNotAtTop, setIsNotAtTop] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,14 +43,16 @@ export const Navbar = () => {
       
       <div className="relative max-w-[1400px] mx-auto flex items-center justify-between px-8 py-8">
         <div className="flex items-center">
-          <img 
-            src="/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png" 
-            alt="Parkrise Logo" 
-            className="h-6 w-auto"
-          />
+          <Link to="/">
+            <img 
+              src="/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png" 
+              alt="Parkrise Logo" 
+              className="h-6 w-auto"
+            />
+          </Link>
         </div>
 
-        {isScrolled && (
+        {showSearch && isScrolled && (
           <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
             <PopoverTrigger asChild>
               <div className="flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full w-64 cursor-pointer border border-white">
@@ -90,8 +94,16 @@ export const Navbar = () => {
         )}
 
         <div className="flex items-center space-x-2 mr-20">
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Home</Button>
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Destinations</Button>
+          <Link to="/">
+            <Button variant="ghost" className={`text-white hover:text-[#00B2B2] text-xs font-montserrat px-2 ${location.pathname === '/' ? 'text-[#00B2B2]' : ''}`}>
+              Home
+            </Button>
+          </Link>
+          <Link to="/destinations">
+            <Button variant="ghost" className={`text-white hover:text-[#00B2B2] text-xs font-montserrat px-2 ${location.pathname === '/destinations' ? 'text-[#00B2B2]' : ''}`}>
+              Destinations
+            </Button>
+          </Link>
           <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Our brand</Button>
           <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">For businesses</Button>
           <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Franchise</Button>

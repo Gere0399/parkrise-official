@@ -1,4 +1,4 @@
-import { SearchBar } from "@/components/SearchBar";
+import { Navbar } from "@/components/Navbar";
 import { PropertyCard } from "@/components/PropertyCard";
 import { Map } from "@/components/Map";
 import { useState } from "react";
@@ -41,42 +41,33 @@ const Destinations = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-        <div className="max-w-[1400px] mx-auto px-8 py-4">
-          <SearchBar />
-          <div className="flex gap-4 mt-4">
-            <Button
-              variant={sortBy === "highest" ? "default" : "outline"}
-              onClick={() => setSortBy("highest")}
-              className="text-sm"
-            >
-              Highest Price
-            </Button>
-            <Button
-              variant={sortBy === "lowest" ? "default" : "outline"}
-              onClick={() => setSortBy("lowest")}
-              className="text-sm"
-            >
-              Lowest Price
-            </Button>
+      <Navbar showSearch={false} />
+      <div className="pt-24 px-8 max-w-[1400px] mx-auto">
+        <div className="flex gap-6">
+          {/* Left side - Property listings */}
+          <div className="w-2/3">
+            <h1 className="text-3xl font-semibold mb-6">Featured Destinations</h1>
+            <div className="space-y-6">
+              {SAMPLE_PROPERTIES
+                .sort((a, b) => 
+                  sortBy === "highest" ? b.price - a.price : a.price - b.price
+                )
+                .map((property) => (
+                  <PropertyCard key={property.id} property={property} />
+                ))}
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div className="flex max-w-[1400px] mx-auto px-8 pt-32">
-        <div className="w-3/5 pr-6">
-          <div className="space-y-6">
-            {SAMPLE_PROPERTIES
-              .sort((a, b) => 
-                sortBy === "highest" ? b.price - a.price : a.price - b.price
-              )
-              .map((property) => (
-                <PropertyCard key={property.id} property={property} />
-              ))}
+          
+          {/* Right side - Map */}
+          <div className="w-1/3 sticky top-24 h-[calc(100vh-6rem)]">
+            <div className="w-full h-full rounded-lg overflow-hidden shadow-lg">
+              <img 
+                src="/lovable-uploads/892ce5e3-ffe0-420b-a9d5-5207bdf86152.png"
+                alt="3D Map"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
-        </div>
-        <div className="w-2/5 fixed right-8 top-32 bottom-8">
-          <Map properties={SAMPLE_PROPERTIES} selectedLocation={selectedLocation} />
         </div>
       </div>
     </div>
