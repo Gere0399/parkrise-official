@@ -94,12 +94,12 @@ export const PerksSection = () => {
         <div className="max-w-[1400px] mx-auto px-8 md:px-16">
           {/* Title Section */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl text-secondary font-medium leading-tight tracking-wide mb-6">
-              Explore for yourself what makes Parkrise perfect
+            <h2 className="text-3xl md:text-4xl text-secondary font-medium leading-tight tracking-wide mb-6 max-w-2xl mx-auto">
+              Explore for yourself what makes Parkrise the perfect place to call home
             </h2>
           </div>
 
-          <div className="flex flex-col md:flex-row items-start gap-12 justify-center">
+          <div className="flex flex-col md:flex-row items-start gap-12 justify-between">
             {/* Video Section */}
             <div className="w-full md:w-1/2">
               <div className="relative rounded-lg overflow-hidden shadow-xl transition-all duration-500 transform">
@@ -116,8 +116,8 @@ export const PerksSection = () => {
             </div>
 
             {/* Content Section */}
-            <div className="w-full md:w-1/3 space-y-8">
-              <div className="space-y-6">
+            <div className="w-full md:w-1/3 flex flex-col items-center text-center">
+              <div className="space-y-6 mb-8">
                 <p className="text-white text-xl font-light leading-relaxed">
                   This is your space, and our neighborhood is about to be yours. Check out some of 
                   the Parkrise perks
