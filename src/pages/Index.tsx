@@ -12,7 +12,7 @@ const Index = () => {
         {/* Background Video with Overlay */}
         <div className="absolute inset-0">
           <video
-            src="/videos/0121.mp4"
+            src="/0121.mp4"
             autoPlay
             muted
             loop
