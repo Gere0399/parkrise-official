@@ -136,7 +136,7 @@ export const SearchBar = () => {
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-[#222222] px-2">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-[#403E43] px-2">
             <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px] overflow-hidden">
@@ -181,8 +181,8 @@ export const SearchBar = () => {
 
       <div className="h-full flex items-center -ml-2">
         <Select value={specialRate} onValueChange={setSpecialRate}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[130px] text-[#222222] px-2">
-            <SelectValue placeholder="Special rates" className="text-[#403E43]" />
+          <SelectTrigger className="h-full border-0 bg-transparent w-[130px] text-[#403E43] px-2">
+            <SelectValue placeholder="Special rates" />
           </SelectTrigger>
           <SelectContent className="bg-white overflow-hidden">
             <SelectItem value="group" className="cursor-pointer">Group</SelectItem>

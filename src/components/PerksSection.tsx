@@ -162,7 +162,7 @@ export const PerksSection = () => {
           {/* Arrows and Text Section */}
           <div className="flex flex-col items-center mt-16 space-y-4 cursor-pointer" onClick={handleNavigateToDestinations}>
             <ArrowDown className="w-8 h-8 text-white animate-bounce" />
-            <p className="text-white text-lg font-medium">See our spaces</p>
+            <p className="text-white text-lg font-medium hover:text-[#F97316] transition-colors">See our spaces</p>
             <ArrowUp className="w-8 h-8 text-white animate-bounce-delayed" />
           </div>
         </div>
