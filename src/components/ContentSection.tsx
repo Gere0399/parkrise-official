@@ -16,17 +16,20 @@ export const ContentSection = () => {
     if (!isManualSelection) {
       // Calculate total duration of all videos for the current tag
       const totalDuration = slideContent[activeTag].videos.reduce(
-        (acc, video) => acc + video.duration,
+        (acc, video) => acc + (video.duration || 5),
         0
       );
 
-      autoChangeTimer = setInterval(() => {
+      // Add a small buffer time for transitions (500ms)
+      const totalDurationWithBuffer = totalDuration + 0.5;
+
+      autoChangeTimer = setTimeout(() => {
         handleSlideChange();
-      }, totalDuration * 1000); // Convert to milliseconds
+      }, totalDurationWithBuffer * 1000); // Convert to milliseconds
     }
 
     return () => {
-      if (autoChangeTimer) clearInterval(autoChangeTimer);
+      if (autoChangeTimer) clearTimeout(autoChangeTimer);
       if (textPulseTimer) clearTimeout(textPulseTimer);
     };
   }, [activeTag, isManualSelection]);
@@ -65,13 +68,16 @@ export const ContentSection = () => {
 
       // Reset manual selection after all videos have played
       const totalDuration = slideContent[tag].videos.reduce(
-        (acc, video) => acc + video.duration,
+        (acc, video) => acc + (video.duration || 5),
         0
       );
       
+      // Add buffer time for transitions
+      const totalDurationWithBuffer = totalDuration + 0.5;
+      
       setTimeout(() => {
         setIsManualSelection(false);
-      }, totalDuration * 1000);
+      }, totalDurationWithBuffer * 1000);
     }
   };
 

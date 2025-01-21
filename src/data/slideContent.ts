@@ -20,14 +20,14 @@ interface SlideContent {
   text: string;
 }
 
-const getVideoUrl = (fileName: string) => {
+const getVideoUrl = (fileName: string): string => {
   try {
-    const { data, error } = supabase.storage
+    const { data } = supabase.storage
       .from('videos-landing')
       .getPublicUrl(fileName);
     
-    if (error) {
-      console.error('Error getting video URL:', error);
+    if (!data) {
+      console.error('Error getting video URL: No data returned');
       return '';
     }
     

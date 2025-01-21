@@ -28,7 +28,10 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
           if (entry.isIntersecting && videoRef.current) {
             videoRef.current.play().catch((error) => {
               console.error('Error playing video:', error);
-              toast.error('Error playing video. Please try again.');
+              // Only show toast for actual playback errors, not for interruptions
+              if (error.name !== 'AbortError') {
+                toast.error('Error playing video. Please try again.');
+              }
             });
           } else if (videoRef.current) {
             videoRef.current.pause();
