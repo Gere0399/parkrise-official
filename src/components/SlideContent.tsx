@@ -19,12 +19,18 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
   const observerRef = useRef<IntersectionObserver | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Reset video index when videos array changes
+  // Reset video index and loading state when videos array changes
   useEffect(() => {
     setCurrentVideoIndex(0);
     setIsVideoLoading(true);
     if (videoRef.current) {
-      videoRef.current.load(); // Force reload when videos change
+      videoRef.current.load();
+      // Attempt to play the first video after loading
+      videoRef.current.play().catch((error) => {
+        if (error.name !== 'AbortError') {
+          console.error('Error playing initial video:', error);
+        }
+      });
     }
   }, [videos]);
 
@@ -37,9 +43,8 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
         entries.forEach((entry) => {
           if (entry.isIntersecting && videoRef.current) {
             videoRef.current.play().catch((error) => {
-              console.error('Error playing video:', error);
-              // Only show toast for actual playback errors, not for interruptions
               if (error.name !== 'AbortError') {
+                console.error('Error playing video:', error);
                 toast.error('Error playing video. Please try again.');
               }
             });
@@ -65,6 +70,10 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
     if (currentVideoIndex < videos.length - 1) {
       setCurrentVideoIndex(prev => prev + 1);
       setIsVideoLoading(true);
+      // Ensure the next video starts loading immediately
+      if (videoRef.current) {
+        videoRef.current.load();
+      }
     }
   };
 
