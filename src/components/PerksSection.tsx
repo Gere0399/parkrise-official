@@ -1,16 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 const perks = [
-  { id: 1, name: "Outdoor Space" },
-  { id: 2, name: "Premium Fitness" },
-  { id: 3, name: "Food & Beverages" },
-  { id: 4, name: "Living Plants & Natural Materials" },
+  { id: 1, name: "Outdoor Space", video: "output.mp4" },
+  { id: 2, name: "Premium Fitness", video: "Professional_Mode_Generated_Video.mp4" },
+  { id: 3, name: "Food & Beverages", video: "Professional_Mode_the_girl_is_walking_gracefoully_.mp4" },
+  { id: 4, name: "Living Plants & Natural Materials", video: "Professional_Mode_the_girl_is_turning_around_slowl.mp4" },
 ];
 
 export const PerksSection = () => {
   const [selectedPerk, setSelectedPerk] = useState("Food & Beverages");
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const getVideoUrl = (fileName: string): string => {
+    const { data } = supabase.storage
+      .from('videos-landing')
+      .getPublicUrl(`public/${fileName}`);
+    return data?.publicUrl || '';
+  };
+
+  // Preload all videos
+  useEffect(() => {
+    perks.forEach(perk => {
+      const video = new Audio();
+      video.src = getVideoUrl(perk.video);
+      video.preload = "auto";
+    });
+  }, []);
+
+  // Handle video change when perk changes
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play().catch(console.error);
+    }
+  }, [selectedPerk]);
+
+  const selectedVideo = perks.find(perk => perk.name === selectedPerk)?.video || perks[0].video;
 
   return (
     <div className="bg-navy">
@@ -26,10 +54,14 @@ export const PerksSection = () => {
               <div className="text-white text-sm mb-4 font-light tracking-wider text-center w-full">
                 Perk: <span className="border-b border-white/30 ml-2 pb-0.5">{selectedPerk}</span>
               </div>
-              <img
-                src="/lovable-uploads/5fe1c5dc-e65f-4ff0-b85e-aa3501d0132a.png"
-                alt="Parkrise Space"
-                className="w-full max-w-[650px]"
+              <video
+                ref={videoRef}
+                src={getVideoUrl(selectedVideo)}
+                className="w-full max-w-[650px] rounded-lg"
+                muted
+                playsInline
+                loop
+                autoPlay
               />
             </div>
 

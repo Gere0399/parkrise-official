@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { supabase } from "@/integrations/supabase/client";
 
 const CommunitySection = () => {
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            video.play().catch(console.error);
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    videoRefs.current.forEach((video) => {
+      if (video) observer.observe(video);
+    });
+
+    return () => {
+      videoRefs.current.forEach((video) => {
+        if (video) observer.unobserve(video);
+      });
+    };
+  }, []);
+
+  const getVideoUrl = (fileName: string): string => {
+    const { data } = supabase.storage
+      .from('videos-landing')
+      .getPublicUrl(`public/${fileName}`);
+    return data?.publicUrl || '';
+  };
+
   return (
     <div className="bg-[#F8F9FA] py-20">
       <div className="container mx-auto px-6 max-w-6xl">
@@ -16,10 +52,13 @@ const CommunitySection = () => {
               <div className="flex flex-col md:flex-row md:items-center md:space-x-8">
                 <div className="w-full md:w-1/3 mb-6 md:mb-0">
                   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 -rotate-2">
-                    <img
-                      src="/lovable-uploads/bf46281c-e655-4a66-b172-fac8e6646f87.png"
-                      alt="Personalized Space"
-                      className="w-full object-contain"
+                    <video
+                      ref={el => videoRefs.current[0] = el}
+                      src={getVideoUrl('Professional_Mode_the_guy_sly_down_and_the_tv_star.mp4')}
+                      className="w-full h-48 object-cover rounded"
+                      muted
+                      playsInline
+                      loop
                     />
                   </div>
                 </div>
@@ -38,10 +77,13 @@ const CommunitySection = () => {
               <div className="flex flex-col md:flex-row md:items-center md:space-x-8">
                 <div className="w-full md:w-1/3 mb-6 md:mb-0">
                   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 rotate-2">
-                    <img
-                      src="/lovable-uploads/5fdb10c4-bece-475b-a595-c875e30e9961.png"
-                      alt="Wellness Activities"
-                      className="w-full object-contain"
+                    <video
+                      ref={el => videoRefs.current[1] = el}
+                      src={getVideoUrl('Professional_Mode_the_girl_is_watching_outside_tho.mp4')}
+                      className="w-full h-48 object-cover rounded"
+                      muted
+                      playsInline
+                      loop
                     />
                   </div>
                 </div>
@@ -61,10 +103,13 @@ const CommunitySection = () => {
               <div className="flex flex-col md:flex-row md:items-center md:space-x-8">
                 <div className="w-full md:w-1/3 mb-6 md:mb-0">
                   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 -rotate-1">
-                    <img
-                      src="/lovable-uploads/adefe335-6086-47b1-8a67-f2081617da94.png"
-                      alt="Culinary Experience"
-                      className="w-full object-contain"
+                    <video
+                      ref={el => videoRefs.current[2] = el}
+                      src={getVideoUrl('Professional_Mode_16x9_Generated_Video (1).mp4')}
+                      className="w-full h-48 object-cover rounded"
+                      muted
+                      playsInline
+                      loop
                     />
                   </div>
                 </div>
