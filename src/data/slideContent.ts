@@ -49,8 +49,7 @@ export const slideContent: Record<string, SlideContent> = {
   "Cooking": {
     videos: [
       { url: getVideoUrl('Professional_Mode_16x9_the_woman_is_cooking.mp4'), duration: 5 },
-      { url: getVideoUrl('Professional_Mode_16x9_the_woman_is_choosing_what_to_pi.mp4'), duration: 5 },
-      { url: getVideoUrl('Professional_Mode_16x9_the_woman_is_placing_the_pillows.mp4'), duration: 5 }
+      { url: getVideoUrl('Professional_Mode_16x9_the_woman_is_choosing_what_to_pi.mp4'), duration: 5 }
     ],
     text: "Cook your favorite meals in our fully equipped shared kitchen spaces"
   },
@@ -65,7 +64,7 @@ export const slideContent: Record<string, SlideContent> = {
   },
   "Feeling at Home": {
     videos: [
-      { url: getVideoUrl('Professional_Mode_16x9_the_woman_is_cooking.mp4'), duration: 5 }
+      { url: getVideoUrl('Professional_Mode_16x9_the_woman_is_placing_the_pillows.mp4'), duration: 5 }
     ],
     text: "Experience the comfort of home with our thoughtfully designed living spaces"
   },

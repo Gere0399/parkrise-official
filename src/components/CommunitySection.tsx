@@ -106,7 +106,7 @@ const CommunitySection = () => {
                   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 -rotate-1">
                     <video
                       ref={el => videoRefs.current[2] = el}
-                      src={getVideoUrl('Professional_Mode_16x9_Generated_Video (1).mp4')}
+                      src={getVideoUrl('Professional_Mode_people_having_fun_and_eating (1).mp4')}
                       className="w-full h-48 object-cover rounded"
                       muted
                       playsInline
