@@ -5,6 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { format } from "date-fns";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SAMPLE_LOCATIONS = [
   "New York, NY",
@@ -27,11 +28,18 @@ export const SearchBar = () => {
   const [location, setLocation] = useState("");
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [specialRate, setSpecialRate] = useState("");
+  const navigate = useNavigate();
   
   const getRoomGuestLabel = (rooms: string, guests: string) => {
     const roomText = `${rooms} ${Number(rooms) === 1 ? 'room' : 'rooms'}`;
     const guestText = `${guests} ${Number(guests) === 1 ? 'guest' : 'guests'}`;
     return `${roomText}, ${guestText}`;
+  };
+
+  const handleLocationSelect = (loc: string) => {
+    setLocation(loc);
+    setIsLocationOpen(false);
+    navigate('/destinations');
   };
 
   return (
@@ -62,10 +70,7 @@ export const SearchBar = () => {
               <div
                 key={loc}
                 className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
-                onClick={() => {
-                  setLocation(loc);
-                  setIsLocationOpen(false);
-                }}
+                onClick={() => handleLocationSelect(loc)}
               >
                 <span>{loc}</span>
                 {location === loc && <Check className="h-4 w-4 text-green-500 ml-1" />}
@@ -75,7 +80,7 @@ export const SearchBar = () => {
         </PopoverContent>
       </Popover>
 
-      <div className="px-2 h-full flex items-center">
+      <div className="px-1 h-full flex items-center">
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -125,13 +130,13 @@ export const SearchBar = () => {
         </Popover>
       </div>
 
-      <div className="px-2 h-full flex items-center">
+      <div className="h-full flex items-center">
         <Select value={`${rooms}-${guests}`} onValueChange={(val) => {
           const [r, g] = val.split('-');
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[180px] text-gray-900">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[160px] text-gray-900 pr-2">
             <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px] overflow-hidden">
@@ -174,9 +179,9 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <div className="px-2 h-full flex items-center">
+      <div className="h-full flex items-center pl-1">
         <Select value={specialRate} onValueChange={setSpecialRate}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-gray-900">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[120px] text-gray-900">
             <SelectValue placeholder="Special rates" />
           </SelectTrigger>
           <SelectContent className="bg-white overflow-hidden">
@@ -190,7 +195,10 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <Button className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mr-1">
+      <Button 
+        className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mr-1"
+        onClick={() => navigate('/destinations')}
+      >
         Let's GO!
       </Button>
     </div>
