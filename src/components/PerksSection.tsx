@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 
 const perks = [
   { id: 1, name: "Outdoor Space", video: "output.mp4" },
@@ -112,13 +112,6 @@ export const PerksSection = () => {
                   loop
                   autoPlay
                 />
-                <div className="absolute bottom-6 left-6 flex items-center gap-3">
-                  <span className="text-white text-lg font-medium">See our spaces</span>
-                  <div className="flex items-center gap-2">
-                    <ArrowLeft className="w-5 h-5 text-white" />
-                    <ArrowRight className="w-5 h-5 text-white" />
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -158,6 +151,13 @@ export const PerksSection = () => {
                 ))}
               </div>
             </div>
+          </div>
+
+          {/* Arrows and Text Section */}
+          <div className="flex flex-col items-center mt-16 space-y-4">
+            <ArrowDown className="w-8 h-8 text-white animate-bounce" />
+            <p className="text-white text-lg font-medium">Discover More</p>
+            <ArrowUp className="w-8 h-8 text-white animate-bounce-delayed" />
           </div>
         </div>
       </div>
