@@ -18,6 +18,7 @@ export const PerksSection = () => {
     const { data } = supabase.storage
       .from('videos-landing')
       .getPublicUrl(`public/${fileName}`);
+    console.log('Video URL for', fileName, ':', data?.publicUrl); // Debug log
     return data?.publicUrl || '';
   };
 
@@ -27,6 +28,7 @@ export const PerksSection = () => {
       const video = new Audio();
       video.src = getVideoUrl(perk.video);
       video.preload = "auto";
+      console.log('Preloading video:', perk.video); // Debug log
     });
   }, []);
 
@@ -34,7 +36,9 @@ export const PerksSection = () => {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.load();
-      videoRef.current.play().catch(console.error);
+      videoRef.current.play().catch(error => {
+        console.error('Error playing video:', error);
+      });
     }
   }, [selectedPerk]);
 
