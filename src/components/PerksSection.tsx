@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { cn } from "@/lib/utils";
 
 const perks = [
   { id: 1, name: "Outdoor Space", video: "output.mp4" },
@@ -12,33 +13,34 @@ const perks = [
 
 export const PerksSection = () => {
   const [selectedPerk, setSelectedPerk] = useState("Food & Beverages");
+  const [isChanging, setIsChanging] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const getVideoUrl = (fileName: string): string => {
     const { data } = supabase.storage
       .from('videos-landing')
       .getPublicUrl(fileName);
-    console.log('Video URL for', fileName, ':', data?.publicUrl); // Debug log
     return data?.publicUrl || '';
   };
 
-  // Preload all videos
   useEffect(() => {
     perks.forEach(perk => {
       const video = new Audio();
       video.src = getVideoUrl(perk.video);
       video.preload = "auto";
-      console.log('Preloading video:', perk.video); // Debug log
     });
   }, []);
 
-  // Handle video change when perk changes
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play().catch(error => {
-        console.error('Error playing video:', error);
-      });
+      setIsChanging(true);
+      setTimeout(() => {
+        videoRef.current?.load();
+        videoRef.current?.play().catch(error => {
+          console.error('Error playing video:', error);
+        });
+        setIsChanging(false);
+      }, 300);
     }
   }, [selectedPerk]);
 
@@ -46,10 +48,9 @@ export const PerksSection = () => {
 
   return (
     <div className="bg-navy">
-      {/* Main content section */}
       <div className="min-h-screen py-20">
         <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-          <h2 className="text-3xl md:text-4xl text-secondary font-medium text-center mb-24 leading-tight tracking-wide">
+          <h2 className="text-3xl md:text-4xl text-secondary font-medium text-center mb-16 leading-tight tracking-wide">
             Explore for yourself what makes<br />Parkrise perfect
           </h2>
 
@@ -58,43 +59,57 @@ export const PerksSection = () => {
               <div className="text-white text-sm mb-4 font-light tracking-wider text-center w-full">
                 Perk: <span className="border-b border-white/30 ml-2 pb-0.5">{selectedPerk}</span>
               </div>
-              <video
-                ref={videoRef}
-                src={getVideoUrl(selectedVideo)}
-                className="w-full max-w-[650px] rounded-lg"
-                muted
-                playsInline
-                loop
-                autoPlay
-              />
+              <div className={cn(
+                "w-full transition-opacity duration-300",
+                isChanging ? "opacity-0" : "opacity-100"
+              )}>
+                <video
+                  ref={videoRef}
+                  src={getVideoUrl(selectedVideo)}
+                  className="w-full max-w-[650px] rounded-lg"
+                  muted
+                  playsInline
+                  loop
+                  autoPlay
+                />
+              </div>
             </div>
 
-            <div className="space-y-12 lg:pt-16">
-              <p className="text-white text-2xl font-light leading-relaxed">
+            <div className="space-y-8">
+              <p className="text-white text-2xl font-light leading-relaxed mb-8">
                 This is your space, and our neighborhood is about to be yours. Check out some of 
                 the Parkrise perks
               </p>
               
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {perks.map((perk) => (
-                  <div
+                  <button
                     key={perk.id}
-                    className="flex items-center space-x-4 text-white cursor-pointer group"
                     onClick={() => setSelectedPerk(perk.name)}
-                  >
-                    <div className={`w-5 h-5 rounded-full transition-all duration-200 flex items-center justify-center ${
+                    className={cn(
+                      "w-full group px-6 py-4 rounded-lg transition-all duration-300",
                       selectedPerk === perk.name 
-                        ? "bg-transparent border-2 border-white" 
-                        : "border-2 border-white/50"
-                    }`}>
-                      {selectedPerk === perk.name && (
-                        <div className="w-2.5 h-2.5 bg-white rounded-full" />
-                      )}
+                        ? "bg-secondary/10 border border-secondary" 
+                        : "border border-white/10 hover:border-white/30"
+                    )}
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className={cn(
+                        "w-3 h-3 rounded-full transition-all duration-200",
+                        selectedPerk === perk.name 
+                          ? "bg-secondary" 
+                          : "border-2 border-white/50"
+                      )} />
+                      <span className={cn(
+                        "text-lg font-light tracking-wide transition-colors",
+                        selectedPerk === perk.name 
+                          ? "text-secondary"
+                          : "text-white group-hover:text-secondary/80"
+                      )}>
+                        {perk.name}
+                      </span>
                     </div>
-                    <span className="text-base font-light tracking-wide group-hover:text-secondary transition-colors">
-                      {perk.name}
-                    </span>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
@@ -103,7 +118,9 @@ export const PerksSection = () => {
           <div className="flex flex-col items-center mt-24 text-white space-y-6">
             <Link to="/destinations" className="flex flex-col items-center space-y-4 group">
               <ArrowDown className="w-6 h-6 animate-bounce text-white" />
-              <span className="text-lg tracking-wider font-light group-hover:text-secondary transition-colors">See our Places</span>
+              <span className="text-lg tracking-wider font-light group-hover:text-secondary transition-colors">
+                See our Places
+              </span>
               <ArrowUp className="w-6 h-6 animate-bounce-delayed text-white" />
             </Link>
           </div>
