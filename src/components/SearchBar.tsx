@@ -80,7 +80,7 @@ export const SearchBar = () => {
         </PopoverContent>
       </Popover>
 
-      <div className="px-1 h-full flex items-center">
+      <div className="h-full flex items-center">
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -130,13 +130,13 @@ export const SearchBar = () => {
         </Popover>
       </div>
 
-      <div className="h-full flex items-center">
+      <div className="h-full flex items-center -ml-2">
         <Select value={`${rooms}-${guests}`} onValueChange={(val) => {
           const [r, g] = val.split('-');
           setRooms(r);
           setGuests(g);
         }}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[160px] text-gray-900 pr-2">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[150px] text-gray-900 pr-1">
             <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px] overflow-hidden">
@@ -179,9 +179,9 @@ export const SearchBar = () => {
         </Select>
       </div>
 
-      <div className="h-full flex items-center pl-1">
+      <div className="h-full flex items-center -ml-1">
         <Select value={specialRate} onValueChange={setSpecialRate}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[120px] text-gray-900">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[110px] text-gray-900">
             <SelectValue placeholder="Special rates" />
           </SelectTrigger>
           <SelectContent className="bg-white overflow-hidden">
