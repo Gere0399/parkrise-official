@@ -93,36 +93,54 @@ export const PerksSection = () => {
     <div className="bg-navy">
       <div className="min-h-screen py-20">
         <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-          <div className="space-y-12 mb-16">
-            <h2 className="text-3xl md:text-4xl text-secondary font-medium text-center leading-tight tracking-wide">
-              Explore for yourself what makes<br />Parkrise perfect
-            </h2>
+          <div className="flex flex-col md:flex-row items-start gap-12">
+            {/* Video Section */}
+            <div className="w-full md:w-2/3">
+              <div className="relative rounded-lg overflow-hidden shadow-xl transition-all duration-500 transform">
+                <video
+                  ref={videoRef}
+                  src={getVideoUrl(selectedVideo)}
+                  className="w-full h-[500px] object-cover"
+                  muted
+                  playsInline
+                  loop
+                  autoPlay
+                />
+              </div>
+            </div>
 
-            <p className="text-white text-2xl font-light leading-relaxed text-center max-w-2xl mx-auto">
-              This is your space, and our neighborhood is about to be yours. Check out some of 
-              the Parkrise perks
-            </p>
-            
-            <div className="flex justify-center">
-              <div className="space-y-4">
+            {/* Content Section */}
+            <div className="w-full md:w-1/3 space-y-8">
+              <div className="space-y-6">
+                <h2 className="text-3xl text-secondary font-medium leading-tight tracking-wide">
+                  Explore for yourself what makes Parkrise perfect
+                </h2>
+
+                <p className="text-white text-xl font-light leading-relaxed">
+                  This is your space, and our neighborhood is about to be yours. Check out some of 
+                  the Parkrise perks
+                </p>
+              </div>
+
+              <div className="space-y-3">
                 {perks.map((perk) => (
                   <div
                     key={perk.id}
-                    className="flex items-center space-x-4 text-white cursor-pointer group transition-all duration-300"
+                    className="flex items-center space-x-3 text-white cursor-pointer group transition-all duration-300"
                     onClick={() => handlePerkSelect(perk.name)}
                   >
-                    <div className={`w-6 h-6 rounded-full transition-all duration-300 flex items-center justify-center ${
+                    <div className={`w-4 h-4 rounded-full transition-all duration-300 flex items-center justify-center ${
                       selectedPerk === perk.name 
                         ? "bg-transparent border-2 border-white scale-110" 
-                        : "border-2 border-white/50 hover:border-white"
+                        : "border border-white/50 hover:border-white"
                     }`}>
                       {selectedPerk === perk.name && (
-                        <div className="w-3 h-3 bg-white rounded-full animate-fade-in" />
+                        <div className="w-2 h-2 bg-white rounded-full animate-fade-in" />
                       )}
                     </div>
-                    <span className={`text-lg font-light tracking-wide transition-all duration-300 ${
+                    <span className={`text-base font-light tracking-wide transition-all duration-300 ${
                       selectedPerk === perk.name
-                        ? "text-secondary translate-x-2"
+                        ? "text-secondary translate-x-1"
                         : "group-hover:text-secondary/80"
                     }`}>
                       {perk.name}
@@ -130,20 +148,6 @@ export const PerksSection = () => {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-
-          <div className="relative flex justify-center">
-            <div className="w-full max-w-[850px] rounded-lg overflow-hidden shadow-xl transition-all duration-500 transform">
-              <video
-                ref={videoRef}
-                src={getVideoUrl(selectedVideo)}
-                className="w-full h-[500px] object-cover"
-                muted
-                playsInline
-                loop
-                autoPlay
-              />
             </div>
           </div>
 
