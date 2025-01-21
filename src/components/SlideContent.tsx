@@ -19,6 +19,16 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
   const observerRef = useRef<IntersectionObserver | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Reset video index when videos array changes
+  useEffect(() => {
+    setCurrentVideoIndex(0);
+    setIsVideoLoading(true);
+    if (videoRef.current) {
+      videoRef.current.load(); // Force reload when videos change
+    }
+  }, [videos]);
+
+  // Handle video visibility and playback
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -50,14 +60,10 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
     };
   }, []);
 
-  useEffect(() => {
-    setCurrentVideoIndex(0);
-    setIsVideoLoading(true);
-  }, [videos]);
-
+  // Handle video end and transition to next video
   const handleVideoEnd = () => {
-    if (videos && videos.length > 0) {
-      setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+    if (currentVideoIndex < videos.length - 1) {
+      setCurrentVideoIndex(prev => prev + 1);
       setIsVideoLoading(true);
     }
   };
@@ -73,6 +79,13 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
 
   const handleVideoLoad = () => {
     setIsVideoLoading(false);
+    if (videoRef.current) {
+      videoRef.current.play().catch((error) => {
+        if (error.name !== 'AbortError') {
+          console.error('Error auto-playing video:', error);
+        }
+      });
+    }
   };
 
   // Early return if no videos are available
