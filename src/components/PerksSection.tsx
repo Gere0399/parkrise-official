@@ -5,21 +5,65 @@ import { supabase } from "@/integrations/supabase/client";
 
 const perks = [
   { id: 1, name: "Outdoor Space", video: "output.mp4" },
-  { id: 2, name: "Premium Fitness", video: "Professional_Mode_Generated_Video.mp4" },
+  { id: 2, name: "Premium Fitness", video: "Professional_Mode_Generated_Video (2).mp4" },
   { id: 3, name: "Food & Beverages", video: "Professional_Mode_the_girl_is_walking_gracefoully_.mp4" },
   { id: 4, name: "Living Plants & Natural Materials", video: "Professional_Mode_the_girl_is_turning_around_slowl.mp4" },
 ];
 
 export const PerksSection = () => {
-  const [selectedPerk, setSelectedPerk] = useState("Food & Beverages");
+  const [selectedPerk, setSelectedPerk] = useState(perks[0].name);
+  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const autoplayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const getVideoUrl = (fileName: string): string => {
     const { data } = supabase.storage
       .from('videos-landing')
       .getPublicUrl(fileName);
-    console.log('Video URL for', fileName, ':', data?.publicUrl); // Debug log
     return data?.publicUrl || '';
+  };
+
+  // Handle auto-sliding
+  useEffect(() => {
+    const startAutoplay = () => {
+      if (autoplayTimeoutRef.current) {
+        clearTimeout(autoplayTimeoutRef.current);
+      }
+      
+      autoplayTimeoutRef.current = setInterval(() => {
+        if (!isAutoplayPaused) {
+          const currentIndex = perks.findIndex(perk => perk.name === selectedPerk);
+          const nextIndex = (currentIndex + 1) % perks.length;
+          setSelectedPerk(perks[nextIndex].name);
+        }
+      }, 5000);
+    };
+
+    startAutoplay();
+
+    return () => {
+      if (autoplayTimeoutRef.current) {
+        clearTimeout(autoplayTimeoutRef.current);
+      }
+      if (pauseTimeoutRef.current) {
+        clearTimeout(pauseTimeoutRef.current);
+      }
+    };
+  }, [selectedPerk, isAutoplayPaused]);
+
+  // Handle manual selection
+  const handlePerkSelect = (perkName: string) => {
+    setSelectedPerk(perkName);
+    setIsAutoplayPaused(true);
+    
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current);
+    }
+    
+    pauseTimeoutRef.current = setTimeout(() => {
+      setIsAutoplayPaused(false);
+    }, 15000);
   };
 
   // Preload all videos
@@ -28,7 +72,6 @@ export const PerksSection = () => {
       const video = new Audio();
       video.src = getVideoUrl(perk.video);
       video.preload = "auto";
-      console.log('Preloading video:', perk.video); // Debug log
     });
   }, []);
 
@@ -37,7 +80,9 @@ export const PerksSection = () => {
     if (videoRef.current) {
       videoRef.current.load();
       videoRef.current.play().catch(error => {
-        console.error('Error playing video:', error);
+        if (error.name !== 'AbortError') {
+          console.error('Error playing video:', error);
+        }
       });
     }
   }, [selectedPerk]);
@@ -46,57 +91,59 @@ export const PerksSection = () => {
 
   return (
     <div className="bg-navy">
-      {/* Main content section */}
       <div className="min-h-screen py-20">
         <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-          <h2 className="text-3xl md:text-4xl text-secondary font-medium text-center mb-24 leading-tight tracking-wide">
-            Explore for yourself what makes<br />Parkrise perfect
-          </h2>
+          <div className="space-y-12 mb-16">
+            <h2 className="text-3xl md:text-4xl text-secondary font-medium text-center leading-tight tracking-wide">
+              Explore for yourself what makes<br />Parkrise perfect
+            </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div className="relative flex flex-col items-center">
-              <div className="text-white text-sm mb-4 font-light tracking-wider text-center w-full">
-                Perk: <span className="border-b border-white/30 ml-2 pb-0.5">{selectedPerk}</span>
-              </div>
-              <video
-                ref={videoRef}
-                src={getVideoUrl(selectedVideo)}
-                className="w-full max-w-[650px] rounded-lg"
-                muted
-                playsInline
-                loop
-                autoPlay
-              />
-            </div>
-
-            <div className="space-y-12 lg:pt-16">
-              <p className="text-white text-2xl font-light leading-relaxed">
-                This is your space, and our neighborhood is about to be yours. Check out some of 
-                the Parkrise perks
-              </p>
-              
-              <div className="space-y-6">
+            <p className="text-white text-2xl font-light leading-relaxed text-center max-w-2xl mx-auto">
+              This is your space, and our neighborhood is about to be yours. Check out some of 
+              the Parkrise perks
+            </p>
+            
+            <div className="flex justify-center">
+              <div className="space-y-4">
                 {perks.map((perk) => (
                   <div
                     key={perk.id}
-                    className="flex items-center space-x-4 text-white cursor-pointer group"
-                    onClick={() => setSelectedPerk(perk.name)}
+                    className="flex items-center space-x-4 text-white cursor-pointer group transition-all duration-300"
+                    onClick={() => handlePerkSelect(perk.name)}
                   >
-                    <div className={`w-5 h-5 rounded-full transition-all duration-200 flex items-center justify-center ${
+                    <div className={`w-6 h-6 rounded-full transition-all duration-300 flex items-center justify-center ${
                       selectedPerk === perk.name 
-                        ? "bg-transparent border-2 border-white" 
-                        : "border-2 border-white/50"
+                        ? "bg-transparent border-2 border-white scale-110" 
+                        : "border-2 border-white/50 hover:border-white"
                     }`}>
                       {selectedPerk === perk.name && (
-                        <div className="w-2.5 h-2.5 bg-white rounded-full" />
+                        <div className="w-3 h-3 bg-white rounded-full animate-fade-in" />
                       )}
                     </div>
-                    <span className="text-base font-light tracking-wide group-hover:text-secondary transition-colors">
+                    <span className={`text-lg font-light tracking-wide transition-all duration-300 ${
+                      selectedPerk === perk.name
+                        ? "text-secondary translate-x-2"
+                        : "group-hover:text-secondary/80"
+                    }`}>
                       {perk.name}
                     </span>
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+
+          <div className="relative flex justify-center">
+            <div className="w-full max-w-[850px] rounded-lg overflow-hidden shadow-xl transition-all duration-500 transform">
+              <video
+                ref={videoRef}
+                src={getVideoUrl(selectedVideo)}
+                className="w-full h-[500px] object-cover"
+                muted
+                playsInline
+                loop
+                autoPlay
+              />
             </div>
           </div>
 
