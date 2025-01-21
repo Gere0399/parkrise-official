@@ -10,9 +10,17 @@ interface SlideContentProps {
   videos: SlideVideo[];
   text: string;
   isTextPulsing: boolean;
+  onAllVideosEnded: () => void;
+  preloadedVideos: Record<string, boolean>;
 }
 
-export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps) => {
+export const SlideContent = ({ 
+  videos, 
+  text, 
+  isTextPulsing, 
+  onAllVideosEnded,
+  preloadedVideos 
+}: SlideContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isVideoLoading, setIsVideoLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -25,14 +33,15 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
     setIsVideoLoading(true);
     if (videoRef.current) {
       videoRef.current.load();
-      // Attempt to play the first video after loading
-      videoRef.current.play().catch((error) => {
-        if (error.name !== 'AbortError') {
-          console.error('Error playing initial video:', error);
-        }
-      });
+      if (preloadedVideos[videos[0]?.url]) {
+        videoRef.current.play().catch((error) => {
+          if (error.name !== 'AbortError') {
+            console.error('Error playing initial video:', error);
+          }
+        });
+      }
     }
-  }, [videos]);
+  }, [videos, preloadedVideos]);
 
   // Handle video visibility and playback
   useEffect(() => {
@@ -74,6 +83,9 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
       if (videoRef.current) {
         videoRef.current.load();
       }
+    } else {
+      // All videos have finished playing
+      onAllVideosEnded();
     }
   };
 
@@ -88,7 +100,7 @@ export const SlideContent = ({ videos, text, isTextPulsing }: SlideContentProps)
 
   const handleVideoLoad = () => {
     setIsVideoLoading(false);
-    if (videoRef.current) {
+    if (videoRef.current && preloadedVideos[videos[currentVideoIndex]?.url]) {
       videoRef.current.play().catch((error) => {
         if (error.name !== 'AbortError') {
           console.error('Error auto-playing video:', error);
