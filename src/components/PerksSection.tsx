@@ -17,7 +17,7 @@ export const PerksSection = () => {
   const getVideoUrl = (fileName: string): string => {
     const { data } = supabase.storage
       .from('videos-landing')
-      .getPublicUrl(`public/${fileName}`);
+      .getPublicUrl(fileName);
     console.log('Video URL for', fileName, ':', data?.publicUrl); // Debug log
     return data?.publicUrl || '';
   };
