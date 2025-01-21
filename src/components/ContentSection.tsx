@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { TagButtons } from "./TagButtons";
 import { SlideContent } from "./SlideContent";
 import { tags, slideContent } from "../data/slideContent";
-import { toast } from "sonner";
 
 export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
@@ -21,18 +20,12 @@ export const ContentSection = () => {
         const videos = slideContent[tag].videos;
         for (const video of videos) {
           try {
-            console.log(`Attempting to preload video: ${video.url}`);
             const response = await fetch(video.url);
             if (response.ok) {
-              console.log(`Successfully preloaded video: ${video.url}`);
               preloaded[video.url] = true;
-            } else {
-              console.error(`Failed to preload video: ${video.url}`, response.status);
-              toast.error(`Failed to load video for ${tag}`);
             }
           } catch (error) {
             console.error(`Error preloading video for ${tag}:`, error);
-            toast.error(`Error loading video for ${tag}`);
           }
         }
       }

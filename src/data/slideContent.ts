@@ -24,14 +24,13 @@ const getVideoUrl = (fileName: string): string => {
   try {
     const { data } = supabase.storage
       .from('videos-landing')
-      .getPublicUrl(`public/${fileName}`);
+      .getPublicUrl(fileName);
     
     if (!data) {
       console.error('Error getting video URL: No data returned');
       return '';
     }
     
-    console.log(`Generated URL for ${fileName}:`, data.publicUrl);
     return data.publicUrl;
   } catch (error) {
     console.error('Error getting video URL:', error);
@@ -39,14 +38,11 @@ const getVideoUrl = (fileName: string): string => {
   }
 };
 
-// Fallback video URL in case the main videos fail to load
-const fallbackVideoUrl = "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-
 export const slideContent: Record<string, SlideContent> = {
   "Socializing": {
     videos: [
-      { url: getVideoUrl('Professional_Mode_16x9_the_fire_is_burning_and_the_ambi.mp4') || fallbackVideoUrl, duration: 5 },
-      { url: getVideoUrl('Professional_Mode_16x9_Generated_Video (1).mp4') || fallbackVideoUrl, duration: 5 }
+      { url: getVideoUrl('Professional_Mode_16x9_the_fire_is_burning_and_the_ambi.mp4'), duration: 5 },
+      { url: getVideoUrl('Professional_Mode_16x9_Generated_Video (1).mp4'), duration: 5 }
     ],
     text: "Relax, enjoy local food and hang around the lounge... music and good vibes on us"
   },
