@@ -27,86 +27,99 @@ export const SlideContent = ({
   const [isVideoLoading, setIsVideoLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setCurrentVideoIndex(0);
     setIsVideoLoading(true);
+    
     if (videoRef.current) {
       videoRef.current.load();
+      
+      // Only attempt to play if the video is preloaded
       if (preloadedVideos[videos[0]?.url]) {
-        videoRef.current.play().catch((error) => {
-          if (error.name !== 'AbortError') {
-            console.error('Error playing initial video:', error);
-          }
-        });
+        const playPromise = videoRef.current.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            if (error.name !== 'AbortError') {
+              console.error('Error playing initial video:', error);
+            }
+          });
+        }
       }
     }
+
+    return () => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+    };
   }, [videos, preloadedVideos]);
 
-  // Handle video visibility and playback
   useEffect(() => {
-    if (!containerRef.current) return;
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5,
+    };
 
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && videoRef.current) {
-            videoRef.current.play().catch((error) => {
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && videoRef.current) {
+          const playPromise = videoRef.current.play();
+          
+          if (playPromise !== undefined) {
+            playPromise.catch((error) => {
               if (error.name !== 'AbortError') {
                 console.error('Error playing video:', error);
                 toast.error('Error playing video. Please try again.');
               }
             });
-          } else if (videoRef.current) {
-            videoRef.current.pause();
           }
-        });
-      },
-      { threshold: 0.5 }
-    );
+        } else if (videoRef.current) {
+          videoRef.current.pause();
+        }
+      });
+    };
 
-    observerRef.current.observe(containerRef.current);
+    const observer = new IntersectionObserver(handleIntersection, options);
+    
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
 
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
+      observer.disconnect();
     };
-  }, []);
+  }, [currentVideoIndex]);
 
-  // Handle video end and transition to next video
   const handleVideoEnd = () => {
     if (currentVideoIndex < videos.length - 1) {
       setCurrentVideoIndex(prev => prev + 1);
       setIsVideoLoading(true);
-      // Ensure the next video starts loading immediately
-      if (videoRef.current) {
-        videoRef.current.load();
-      }
     } else {
-      // All videos have finished playing
       onAllVideosEnded();
     }
   };
 
   const handleVideoError = () => {
-    const currentVideo = videos[currentVideoIndex];
-    if (currentVideo) {
-      console.error('Error loading video:', currentVideo.url);
-      toast.error('Error loading video. Please try again.');
-    }
+    console.error('Video error:', videos[currentVideoIndex]?.url);
+    toast.error('Error loading video. Please try again.');
     setIsVideoLoading(false);
   };
 
   const handleVideoLoad = () => {
     setIsVideoLoading(false);
     if (videoRef.current && preloadedVideos[videos[currentVideoIndex]?.url]) {
-      videoRef.current.play().catch((error) => {
-        if (error.name !== 'AbortError') {
-          console.error('Error auto-playing video:', error);
-        }
-      });
+      const playPromise = videoRef.current.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          if (error.name !== 'AbortError') {
+            console.error('Error auto-playing video:', error);
+          }
+        });
+      }
     }
   };
 
@@ -119,7 +132,9 @@ export const SlideContent = ({
           </div>
         </div>
         <div className={`flex items-center ${isMobile ? 'mt-4' : ''}`}>
-          <p className={`text-2xl md:text-3xl text-white leading-tight ${isMobile ? 'text-center w-full' : 'max-w-[80%]'} transition-all duration-300 ${
+          <p className={`text-2xl md:text-3xl text-white leading-tight ${
+            isMobile ? 'text-center w-full' : 'max-w-[80%]'
+          } transition-all duration-300 ${
             isTextPulsing ? 'scale-110' : 'scale-100'
           }`}>
             {text}
@@ -153,7 +168,9 @@ export const SlideContent = ({
         )}
       </div>
       <div className={`flex items-center ${isMobile ? 'mt-4' : ''}`}>
-        <p className={`text-2xl md:text-3xl text-white leading-tight ${isMobile ? 'text-center w-full' : 'max-w-[80%]'} transition-all duration-300 ${
+        <p className={`text-2xl md:text-3xl text-white leading-tight ${
+          isMobile ? 'text-center w-full' : 'max-w-[80%]'
+        } transition-all duration-300 ${
           isTextPulsing ? 'scale-110' : 'scale-100'
         }`}>
           {text}

@@ -13,7 +13,14 @@ const CommunitySection = () => {
         entries.forEach((entry) => {
           const video = entry.target as HTMLVideoElement;
           if (entry.isIntersecting) {
-            video.play().catch(console.error);
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch((error) => {
+                if (error.name !== 'AbortError') {
+                  console.error('Error playing video:', error);
+                }
+              });
+            }
           } else {
             video.pause();
           }
@@ -37,7 +44,10 @@ const CommunitySection = () => {
     );
 
     videoRefs.current.forEach((video) => {
-      if (video) videoObserver.observe(video);
+      if (video) {
+        video.load(); // Ensure video is loaded
+        videoObserver.observe(video);
+      }
     });
 
     cardRefs.current.forEach((card) => {
@@ -57,7 +67,10 @@ const CommunitySection = () => {
 
     return () => {
       videoRefs.current.forEach((video) => {
-        if (video) videoObserver.unobserve(video);
+        if (video) {
+          video.pause();
+          videoObserver.unobserve(video);
+        }
       });
       cardRefs.current.forEach((card) => {
         if (card) animationObserver.unobserve(card);
