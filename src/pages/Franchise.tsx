@@ -8,29 +8,32 @@ import { toast } from "sonner";
 
 const Franchise = () => {
   const [headerVideoUrl, setHeaderVideoUrl] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
   const isMobile = useIsMobile();
 
-  const getVideoUrl = async () => {
-    try {
-      const { data, error } = await supabase.storage
-        .from('videos-landing')
-        .createSignedUrl('Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4', 3600);
-
-      if (error) {
-        console.error('Error getting video URL:', error);
-        toast.error('Error loading video');
-        return;
-      }
-
-      setHeaderVideoUrl(data?.signedUrl || '');
-    } catch (error) {
-      console.error('Error getting video URL:', error);
-      toast.error('Error loading video');
-    }
-  };
-
   useEffect(() => {
-    getVideoUrl();
+    const loadVideo = async () => {
+      try {
+        const { data, error } = await supabase.storage
+          .from('videos-landing')
+          .createSignedUrl('Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4', 3600);
+
+        if (error) {
+          console.error('Error loading video:', error);
+          toast.error('Error loading video');
+          return;
+        }
+
+        setHeaderVideoUrl(data.signedUrl);
+      } catch (error) {
+        console.error('Error loading video:', error);
+        toast.error('Error loading video');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadVideo();
   }, []);
 
   const features = [
@@ -92,21 +95,27 @@ const Franchise = () => {
       {/* Video Background Section */}
       <div className="relative h-[calc(65vh-5rem)]">
         <div className="absolute inset-0">
-          {headerVideoUrl && (
-            <video
-              src={headerVideoUrl}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                console.error("Error playing header video:", e);
-                toast.error("Error playing video");
-              }}
-            />
+          {isLoading ? (
+            <div className="w-full h-full bg-gray-900 animate-pulse" />
+          ) : (
+            <>
+              {headerVideoUrl && (
+                <video
+                  src={headerVideoUrl}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    console.error("Error playing video:", e);
+                    toast.error("Error playing video");
+                  }}
+                />
+              )}
+              <div className="absolute inset-0 bg-black/40" />
+            </>
           )}
-          <div className="absolute inset-0 bg-black/40" />
         </div>
 
         {/* Centered Content over video */}

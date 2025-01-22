@@ -6,30 +6,62 @@ import CommunitySection from "@/components/CommunitySection";
 import { PerksSection } from "@/components/PerksSection";
 import { Footer } from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const Index = () => {
-  const headerVideoUrl = supabase.storage
-    .from('videos-landing')
-    .getPublicUrl('0121.mp4')
-    .data.publicUrl;
+  const [headerVideoUrl, setHeaderVideoUrl] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadHeaderVideo = async () => {
+      try {
+        const { data, error } = await supabase.storage
+          .from('videos-landing')
+          .createSignedUrl('0121.mp4', 3600);
+
+        if (error) {
+          console.error('Error loading header video:', error);
+          toast.error('Error loading header video');
+          return;
+        }
+
+        setHeaderVideoUrl(data.signedUrl);
+      } catch (error) {
+        console.error('Error loading header video:', error);
+        toast.error('Error loading header video');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadHeaderVideo();
+  }, []);
 
   return (
     <div className="min-h-screen font-montserrat">
       <div className="relative h-screen">
         {/* Background Video with Overlay */}
         <div className="absolute inset-0">
-          <video
-            src={headerVideoUrl}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              console.error("Error playing header video:", e);
-            }}
-          />
-          <div className="absolute inset-0 bg-black/90" />
+          {isLoading ? (
+            <div className="w-full h-full bg-gray-900 animate-pulse" />
+          ) : (
+            <>
+              <video
+                src={headerVideoUrl}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  console.error("Error playing header video:", e);
+                  toast.error("Error playing header video");
+                }}
+              />
+              <div className="absolute inset-0 bg-black/90" />
+            </>
+          )}
         </div>
 
         {/* Content */}
