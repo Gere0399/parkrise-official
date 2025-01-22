@@ -19,6 +19,7 @@ const SAMPLE_LOCATIONS = [
 
 export const Navbar = ({ showSearch = true, variant = "light" }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isNotAtTop, setIsNotAtTop] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const location = useLocation();
@@ -26,6 +27,8 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
   useEffect(() => {
     const handleScroll = () => {
       setIsNotAtTop(window.scrollY > 0);
+      const scrolled = window.scrollY > window.innerHeight * 0.8;
+      setIsScrolled(scrolled);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -35,7 +38,7 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
   const isDark = variant === "dark";
 
   return (
-    <nav className={`${isDark ? 'bg-[#F2F2F2] py-3' : 'fixed top-0 left-0 right-0'} z-50`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-[#F2F2F2] py-1' : ''}`}>
       {!isDark && isNotAtTop && (
         <div className="absolute inset-x-0 top-0 h-16 bg-black/20 backdrop-blur-sm transition-opacity duration-300" />
       )}
@@ -46,12 +49,12 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
             <img 
               src={isDark ? "/lovable-uploads/b64ac30e-4d72-4f40-94dc-da41b281490e.png" : "/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png"}
               alt="Parkrise Logo" 
-              className="h-8 w-auto"
+              className="h-6 w-auto"
             />
           </Link>
         </div>
 
-        {showSearch && (
+        {showSearch && isScrolled && (
           <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
             <PopoverTrigger asChild>
               <div className="flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full w-64 cursor-pointer border border-white">
