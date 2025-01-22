@@ -81,12 +81,11 @@ const Franchise = () => {
             effective strategies to help you and guests, the most from your place
           </p>
           <Button 
-            className="bg-transparent hover:bg-transparent text-white border-2 border-transparent font-medium px-8 py-2 rounded-full text-sm relative"
+            className="bg-transparent hover:bg-transparent text-white border-2 font-medium px-8 py-2 rounded-full text-sm relative"
             style={{
-              backgroundClip: 'padding-box',
-              border: '2px solid transparent',
-              backgroundImage: 'linear-gradient(to right, #FF9898, #FFE4E4)',
-              WebkitBackgroundClip: 'padding-box',
+              background: 'transparent',
+              border: '2px solid',
+              borderImage: 'linear-gradient(135deg, #004BA4 35%, #FF4400 100%) 1',
             }}
           >
             Schedule a call
@@ -103,12 +102,12 @@ const Franchise = () => {
               return (
                 <div 
                   key={index}
-                  className="bg-white rounded-xl p-3 hover:shadow-lg transition-all duration-300"
+                  className="bg-white rounded-xl p-4 hover:shadow-lg transition-all duration-300 h-[calc(50vh-6rem)]"
                 >
-                  <div className="w-8 h-8 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-2">
+                  <div className="w-8 h-8 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-3">
                     <Icon className="w-4 h-4 text-[#FF9898]" />
                   </div>
-                  <h3 className="text-xs font-semibold text-[#222222] mb-1 leading-tight">
+                  <h3 className="text-xs font-semibold text-[#222222] mb-2 leading-tight">
                     {feature.title}
                   </h3>
                   <p className="text-[10px] text-[#8E9196] leading-relaxed">
