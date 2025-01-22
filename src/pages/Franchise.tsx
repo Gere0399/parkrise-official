@@ -3,14 +3,35 @@ import { supabase } from "@/integrations/supabase/client";
 import { Building, DollarSign, BarChart3, Briefcase, Users, ChartBar, Award, Store } from "lucide-react";
 import { ScheduleCallDialog } from "@/components/ScheduleCallDialog";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const Franchise = () => {
-  const videoUrl = supabase.storage
-    .from('videos-landing')
-    .getPublicUrl('Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4')
-    .data.publicUrl;
-
+  const [headerVideoUrl, setHeaderVideoUrl] = useState<string>('');
   const isMobile = useIsMobile();
+
+  const getVideoUrl = async () => {
+    try {
+      const { data, error } = await supabase.storage
+        .from('videos-landing')
+        .createSignedUrl('Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4', 3600);
+
+      if (error) {
+        console.error('Error getting video URL:', error);
+        toast.error('Error loading video');
+        return;
+      }
+
+      setHeaderVideoUrl(data?.signedUrl || '');
+    } catch (error) {
+      console.error('Error getting video URL:', error);
+      toast.error('Error loading video');
+    }
+  };
+
+  useEffect(() => {
+    getVideoUrl();
+  }, []);
 
   const features = [
     {
@@ -71,14 +92,20 @@ const Franchise = () => {
       {/* Video Background Section */}
       <div className="relative h-[calc(65vh-5rem)]">
         <div className="absolute inset-0">
-          <video
-            src={videoUrl}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          />
+          {headerVideoUrl && (
+            <video
+              src={headerVideoUrl}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                console.error("Error playing header video:", e);
+                toast.error("Error playing video");
+              }}
+            />
+          )}
           <div className="absolute inset-0 bg-black/40" />
         </div>
 

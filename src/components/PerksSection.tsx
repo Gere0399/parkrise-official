@@ -21,11 +21,24 @@ export const PerksSection = () => {
   const autoplayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const getVideoUrl = (fileName: string): string => {
-    const { data } = supabase.storage
-      .from('videos-landing')
-      .getPublicUrl(fileName);
-    return data?.publicUrl || '';
+  const getVideoUrl = async (fileName: string): Promise<string> => {
+    try {
+      const { data, error } = await supabase.storage
+        .from('videos-landing')
+        .createSignedUrl(fileName, 3600); // 1 hour expiry
+
+      if (error) {
+        console.error('Error getting video URL:', error);
+        toast.error('Error loading video');
+        return '';
+      }
+
+      return data?.signedUrl || '';
+    } catch (error) {
+      console.error('Error getting video URL:', error);
+      toast.error('Error loading video');
+      return '';
+    }
   };
 
   // Handle auto-sliding
@@ -73,11 +86,15 @@ export const PerksSection = () => {
 
   // Update video URL when perk changes
   useEffect(() => {
-    const selectedVideo = perks.find(perk => perk.name === selectedPerk)?.video;
-    if (selectedVideo) {
-      const url = getVideoUrl(selectedVideo);
-      setVideoUrl(url);
-    }
+    const loadVideo = async () => {
+      const selectedVideo = perks.find(perk => perk.name === selectedPerk)?.video;
+      if (selectedVideo) {
+        const url = await getVideoUrl(selectedVideo);
+        setVideoUrl(url);
+      }
+    };
+
+    loadVideo();
   }, [selectedPerk]);
 
   // Handle video loading and playback

@@ -19,14 +19,20 @@ const CommunitySection = () => {
           'Professional_Mode_people_having_fun_and_eating (1).mp4'
         ];
         
-        const urls = videos.map(fileName => {
-          const { data } = supabase.storage
+        const urls = await Promise.all(videos.map(async (fileName) => {
+          const { data, error } = await supabase.storage
             .from('videos-landing')
-            .getPublicUrl(fileName);
-          return data?.publicUrl || '';
-        });
+            .createSignedUrl(fileName, 3600);
+
+          if (error) {
+            console.error('Error getting video URL:', error);
+            return '';
+          }
+
+          return data?.signedUrl || '';
+        }));
         
-        setVideoUrls(urls);
+        setVideoUrls(urls.filter(url => url !== ''));
         setIsLoading(false);
       } catch (error) {
         console.error('Error loading videos:', error);

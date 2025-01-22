@@ -3,6 +3,8 @@ import { TagButtons } from "./TagButtons";
 import { SlideContent } from "./SlideContent";
 import { tags, slideContent } from "../data/slideContent";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
@@ -21,9 +23,14 @@ export const ContentSection = () => {
         const videos = slideContent[tag].videos;
         for (const video of videos) {
           try {
-            const response = await fetch(video.url);
-            if (response.ok) {
+            const { data, error } = await supabase.storage
+              .from('videos-landing')
+              .createSignedUrl(video.url.split('/').pop() || '', 3600);
+
+            if (!error && data) {
               preloaded[video.url] = true;
+              // Update the video URL in slideContent
+              video.url = data.signedUrl;
             }
           } catch (error) {
             console.error(`Error preloading video for ${tag}:`, error);
