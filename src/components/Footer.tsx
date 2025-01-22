@@ -15,36 +15,43 @@ export const Footer = () => {
           />
         </div>
 
-        {/* Navigation Links */}
-        <div className="grid grid-cols-2 gap-y-4 mb-10">
-          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">Home</span>
-          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">Residents</span>
-          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">Our brand</span>
-          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">For Business</span>
+        {/* Navigation Links with divider lines */}
+        <div className="grid grid-cols-2 gap-6 mb-10">
+          <div className="flex flex-col space-y-4 border-r border-gray-300 pr-6">
+            <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer transition-colors">Home</span>
+            <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer transition-colors">Residents</span>
+          </div>
+          <div className="flex flex-col space-y-4">
+            <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer transition-colors">Our brand</span>
+            <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer transition-colors">For Business</span>
+          </div>
         </div>
 
-        {/* Social Links */}
-        <div className="flex justify-center gap-6 mb-10">
-          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">Facebook</span>
-          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">Instagram</span>
+        {/* Social Links with modern styling */}
+        <div className="flex justify-center gap-6 mb-10 border-t border-b border-gray-300 py-6">
+          <span className="text-sm font-medium text-[#222222] hover:text-secondary cursor-pointer transition-colors">Facebook</span>
+          <div className="h-6 w-px bg-gray-300"></div>
+          <span className="text-sm font-medium text-[#222222] hover:text-secondary cursor-pointer transition-colors">Instagram</span>
         </div>
 
-        {/* Contact & Copyright */}
+        {/* Contact & Copyright with enhanced styling */}
         <div className="text-center space-y-6 mb-10">
-          <p className="text-sm text-[#222222]">hello@parkrise.com</p>
-          <div className="flex justify-center items-center gap-3">
+          <p className="text-sm text-[#222222] bg-white/50 backdrop-blur-sm py-2 rounded-full">hello@parkrise.com</p>
+          <div className="flex justify-center items-center gap-3 bg-white/50 backdrop-blur-sm py-2 rounded-full">
             <span className="text-sm text-[#222222]">©Copyright</span>
+            <div className="h-4 w-px bg-gray-300"></div>
             <span className="text-sm text-[#222222]">Panama 2024</span>
           </div>
         </div>
 
-        {/* Tagline & Description */}
-        <div className="text-center space-y-6">
+        {/* Tagline & Description with card-like styling */}
+        <div className="text-center space-y-6 bg-white/70 backdrop-blur-sm p-6 rounded-2xl shadow-sm">
           <p className="text-sm text-[#222222] font-medium">Live. Stay. Belong.</p>
+          <div className="w-16 h-px bg-secondary mx-auto"></div>
           <p className="text-sm text-[#222222] leading-relaxed">
             Parkrise redefines flexible working by creating a standard that is ahead of its time. With high-end amenities and services.
           </p>
-          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer block">
+          <span className="text-sm text-secondary hover:text-secondary/80 cursor-pointer block transition-colors font-medium">
             Need help?
           </span>
         </div>
