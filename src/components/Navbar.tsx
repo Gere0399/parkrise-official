@@ -45,13 +45,13 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
         <div className="absolute inset-x-0 top-0 h-16 bg-black/20 backdrop-blur-sm transition-opacity duration-300" />
       )}
       
-      <div className="relative max-w-[1400px] mx-auto flex items-center justify-between px-8 py-6">
+      <div className="relative max-w-[1400px] mx-auto flex items-center justify-between px-4 md:px-8 py-6">
         <div className="flex items-center">
           <Link to="/">
             <img 
               src={isDark ? "/lovable-uploads/b64ac30e-4d72-4f40-94dc-da41b281490e.png" : "/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png"}
               alt="Parkrise Logo" 
-              className="h-8 w-auto"
+              className="h-8 w-auto md:h-8 h-5"
             />
           </Link>
         </div>
@@ -117,7 +117,9 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
           </Link>
         </div>
 
-        <MobileMenu />
+        <div className="md:hidden">
+          <MobileMenu />
+        </div>
       </div>
     </nav>
   );
