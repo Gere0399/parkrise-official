@@ -53,11 +53,11 @@ const Franchise = () => {
   ];
 
   return (
-    <div className="h-screen overflow-hidden bg-[#F2F2F2] font-montserrat">
+    <div className="min-h-screen bg-[#F2F2F2] font-montserrat">
       <Navbar showSearch={false} />
       
       {/* Video Background Section */}
-      <div className="relative h-[50vh]">
+      <div className="relative h-[50vh] mt-16">
         <div className="absolute inset-0">
           <video
             src={videoUrl}
@@ -71,7 +71,7 @@ const Franchise = () => {
         </div>
 
         {/* Centered Content over video */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 mt-12">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
             Empower your hospitality future
           </h1>
@@ -81,36 +81,47 @@ const Franchise = () => {
             effective strategies to help you and guests, the most from your place
           </p>
           <Button 
-            className="bg-transparent hover:bg-transparent text-white border-2 font-medium px-8 py-2 rounded-full text-sm relative"
+            className="bg-transparent hover:bg-transparent text-white rounded-[15px] px-12 py-5 relative border-0"
             style={{
               background: 'transparent',
-              border: '2px solid',
-              borderImage: 'linear-gradient(135deg, #004BA4 35%, #FF4400 100%) 1',
+              position: 'relative',
+              overflow: 'hidden',
             }}
           >
-            Schedule a call
+            <span className="relative z-10">Schedule a call</span>
+            <div 
+              className="absolute inset-0 rounded-[14px]" 
+              style={{
+                border: '2px solid transparent',
+                borderRadius: '14px',
+                background: 'linear-gradient(135deg, #004BA4 35%, #FF4400 100%) border-box',
+                WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
+                WebkitMaskComposite: 'destination-out',
+                maskComposite: 'exclude',
+              }}
+            />
           </Button>
         </div>
       </div>
 
       {/* Features Grid Section */}
-      <div className="bg-[#F2F2F2] py-6">
+      <div className="bg-[#F2F2F2] py-8">
         <div className="container mx-auto px-8">
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-4 gap-6">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
                 <div 
                   key={index}
-                  className="bg-white rounded-xl p-4 hover:shadow-lg transition-all duration-300 h-[calc(50vh-6rem)]"
+                  className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 h-[calc(40vh-2rem)]"
                 >
-                  <div className="w-8 h-8 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-3">
-                    <Icon className="w-4 h-4 text-[#FF9898]" />
+                  <div className="w-12 h-12 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-4">
+                    <Icon className="w-6 h-6 text-[#FF9898]" />
                   </div>
-                  <h3 className="text-xs font-semibold text-[#222222] mb-2 leading-tight">
+                  <h3 className="text-sm font-semibold text-[#222222] mb-3 leading-tight">
                     {feature.title}
                   </h3>
-                  <p className="text-[10px] text-[#8E9196] leading-relaxed">
+                  <p className="text-xs text-[#8E9196] leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
