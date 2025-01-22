@@ -55,6 +55,13 @@ const Franchise = () => {
     }
   ];
 
+  const handleOpenDialog = () => {
+    const dialogTrigger = document.querySelector('[role="dialog"]') as HTMLButtonElement | null;
+    if (dialogTrigger) {
+      dialogTrigger.click();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F2F2F2] font-montserrat">
       <div className="h-20 bg-[#F2F2F2]">
@@ -120,7 +127,7 @@ const Franchise = () => {
       {isMobile && (
         <div className="fixed bottom-6 left-0 right-0 flex justify-center px-4 z-50">
           <button 
-            onClick={() => document.querySelector('[role="dialog"]')?.click()}
+            onClick={handleOpenDialog}
             className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-[15px] px-12 py-5 font-montserrat text-sm transition-all duration-300"
           >
             Schedule a call
