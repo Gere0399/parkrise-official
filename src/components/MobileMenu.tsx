@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { ScheduleCallDialog } from "./ScheduleCallDialog";
 
 export const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,12 +44,6 @@ export const MobileMenu = () => {
                 {item.label}
               </Link>
             ))}
-            
-            {location.pathname === '/franchise' && (
-              <div className="mt-8">
-                <ScheduleCallDialog />
-              </div>
-            )}
           </div>
         </div>
       )}

@@ -33,14 +33,13 @@ export const ScheduleCallDialog = () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button 
-          className="bg-transparent hover:bg-transparent text-white rounded-[15px] px-12 py-5 relative border-0"
+          className="bg-white hover:bg-white text-[#333333] rounded-[15px] px-12 py-5 relative border-0"
           style={{
-            background: 'transparent',
             position: 'relative',
             overflow: 'hidden',
           }}
         >
-          <span className="relative z-10">Schedule a call</span>
+          <span className="relative z-10 font-montserrat">Schedule a call</span>
           <div 
             className="absolute inset-0 rounded-[14px]" 
             style={{
