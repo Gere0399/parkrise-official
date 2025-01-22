@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { format } from "date-fns";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const SAMPLE_LOCATIONS = [
   "New York, NY",
@@ -30,7 +30,7 @@ export const SearchBar = () => {
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [specialRate, setSpecialRate] = useState("");
   const navigate = useNavigate();
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
   
   const getRoomGuestLabel = (rooms: string, guests: string) => {
     const roomText = `${rooms} ${Number(rooms) === 1 ? 'room' : 'rooms'}`;

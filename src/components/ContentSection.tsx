@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { TagButtons } from "./TagButtons";
 import { SlideContent } from "./SlideContent";
 import { tags, slideContent } from "../data/slideContent";
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
@@ -11,7 +11,7 @@ export const ContentSection = () => {
   const [slidePosition, setSlidePosition] = useState(0);
   const [preloadedVideos, setPreloadedVideos] = useState<Record<string, boolean>>({});
   const videoEndedRef = useRef<boolean>(false);
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const preloadVideos = async () => {
