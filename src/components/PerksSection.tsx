@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const perks = [
   { id: 1, name: "Outdoor Space", video: "output.mp4" },
@@ -14,6 +15,8 @@ export const PerksSection = () => {
   const navigate = useNavigate();
   const [selectedPerk, setSelectedPerk] = useState(perks[0].name);
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
+  const [videoUrl, setVideoUrl] = useState<string>('');
   const videoRef = useRef<HTMLVideoElement>(null);
   const autoplayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -57,6 +60,7 @@ export const PerksSection = () => {
   const handlePerkSelect = (perkName: string) => {
     setSelectedPerk(perkName);
     setIsAutoplayPaused(true);
+    setIsVideoLoading(true);
     
     if (pauseTimeoutRef.current) {
       clearTimeout(pauseTimeoutRef.current);
@@ -67,28 +71,37 @@ export const PerksSection = () => {
     }, 15000);
   };
 
-  // Preload all videos
+  // Update video URL when perk changes
   useEffect(() => {
-    perks.forEach(perk => {
-      const video = new Audio();
-      video.src = getVideoUrl(perk.video);
-      video.preload = "auto";
-    });
-  }, []);
-
-  // Handle video change when perk changes
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play().catch(error => {
-        if (error.name !== 'AbortError') {
-          console.error('Error playing video:', error);
-        }
-      });
+    const selectedVideo = perks.find(perk => perk.name === selectedPerk)?.video;
+    if (selectedVideo) {
+      const url = getVideoUrl(selectedVideo);
+      setVideoUrl(url);
     }
   }, [selectedPerk]);
 
-  const selectedVideo = perks.find(perk => perk.name === selectedPerk)?.video || perks[0].video;
+  // Handle video loading and playback
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      
+      const handleCanPlay = () => {
+        setIsVideoLoading(false);
+        videoRef.current?.play().catch(error => {
+          if (error.name !== 'AbortError') {
+            console.error('Error playing video:', error);
+            toast.error('Error playing video. Please try again.');
+          }
+        });
+      };
+
+      videoRef.current.addEventListener('canplay', handleCanPlay);
+
+      return () => {
+        videoRef.current?.removeEventListener('canplay', handleCanPlay);
+      };
+    }
+  }, [videoUrl]);
 
   const handleNavigateToDestinations = () => {
     navigate('/destinations');
@@ -106,17 +119,22 @@ export const PerksSection = () => {
           </div>
 
           <div className="flex flex-col md:flex-row items-start gap-12 justify-center">
-            {/* Video Section - Updated height from h-[400px] to h-[350px] */}
+            {/* Video Section */}
             <div className="w-full md:w-1/2">
               <div className="relative rounded-lg overflow-hidden shadow-xl transition-all duration-500 transform">
+                {isVideoLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+                  </div>
+                )}
                 <video
                   ref={videoRef}
-                  src={getVideoUrl(selectedVideo)}
-                  className="w-full h-[350px] object-cover"
+                  src={videoUrl}
+                  className={`w-full h-[350px] object-cover ${isVideoLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
                   muted
                   playsInline
                   loop
-                  autoPlay
+                  preload="auto"
                 />
               </div>
             </div>

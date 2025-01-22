@@ -1,19 +1,58 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const CommunitySection = () => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const [videoUrls, setVideoUrls] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const loadVideos = async () => {
+      try {
+        const videos = [
+          'Professional_Mode_the_guy_sly_down_and_the_tv_star.mp4',
+          'Professional_Mode_the_girl_is_watching_outside_tho.mp4',
+          'Professional_Mode_people_having_fun_and_eating (1).mp4'
+        ];
+        
+        const urls = videos.map(fileName => {
+          const { data } = supabase.storage
+            .from('videos-landing')
+            .getPublicUrl(fileName);
+          return data?.publicUrl || '';
+        });
+        
+        setVideoUrls(urls);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error loading videos:', error);
+        toast.error('Error loading videos. Please refresh the page.');
+        setIsLoading(false);
+      }
+    };
+
+    loadVideos();
+  }, []);
+
+  useEffect(() => {
+    if (isLoading) return;
+
     const videoObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const video = entry.target as HTMLVideoElement;
           if (entry.isIntersecting) {
-            video.play().catch(console.error);
+            if (video.paused) {
+              video.play().catch((error) => {
+                if (error.name !== 'AbortError') {
+                  console.error('Error playing video:', error);
+                }
+              });
+            }
           } else {
             video.pause();
           }
@@ -37,7 +76,10 @@ const CommunitySection = () => {
     );
 
     videoRefs.current.forEach((video) => {
-      if (video) videoObserver.observe(video);
+      if (video) {
+        video.load(); // Ensure video is loaded before playing
+        videoObserver.observe(video);
+      }
     });
 
     cardRefs.current.forEach((card) => {
@@ -66,14 +108,24 @@ const CommunitySection = () => {
         if (text) animationObserver.unobserve(text);
       });
     };
-  }, []);
+  }, [isLoading]);
 
-  const getVideoUrl = (fileName: string): string => {
-    const { data } = supabase.storage
-      .from('videos-landing')
-      .getPublicUrl(fileName);
-    return data?.publicUrl || '';
-  };
+  if (isLoading) {
+    return (
+      <div className="bg-[#F8F9FA] py-20">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto mb-16"></div>
+            <div className="space-y-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-64 bg-gray-200 rounded"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#F8F9FA] py-20">
@@ -94,11 +146,12 @@ const CommunitySection = () => {
                   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 -rotate-2">
                     <video
                       ref={el => videoRefs.current[0] = el}
-                      src={getVideoUrl('Professional_Mode_the_guy_sly_down_and_the_tv_star.mp4')}
+                      src={videoUrls[0]}
                       className="w-full h-48 object-cover rounded"
                       muted
                       playsInline
                       loop
+                      preload="auto"
                     />
                   </div>
                 </div>
@@ -125,11 +178,12 @@ const CommunitySection = () => {
                   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 rotate-2">
                     <video
                       ref={el => videoRefs.current[1] = el}
-                      src={getVideoUrl('Professional_Mode_the_girl_is_watching_outside_tho.mp4')}
+                      src={videoUrls[1]}
                       className="w-full h-48 object-cover rounded"
                       muted
                       playsInline
                       loop
+                      preload="auto"
                     />
                   </div>
                 </div>
@@ -157,11 +211,12 @@ const CommunitySection = () => {
                   <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 -rotate-1">
                     <video
                       ref={el => videoRefs.current[2] = el}
-                      src={getVideoUrl('Professional_Mode_people_having_fun_and_eating (1).mp4')}
+                      src={videoUrls[2]}
                       className="w-full h-48 object-cover rounded"
                       muted
                       playsInline
                       loop
+                      preload="auto"
                     />
                   </div>
                 </div>
