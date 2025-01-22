@@ -54,7 +54,7 @@ const Franchise = () => {
 
   return (
     <div className="min-h-screen bg-[#F2F2F2] font-montserrat">
-      <div className="h-16 bg-[#F2F2F2]">
+      <div className="h-12 bg-[#F2F2F2]">
         <Navbar showSearch={false} variant="dark" />
       </div>
       
