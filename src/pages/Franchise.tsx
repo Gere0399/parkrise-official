@@ -105,7 +105,7 @@ const Franchise = () => {
               return (
                 <div 
                   key={index}
-                  className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 h-auto md:h-[calc(35vh-4rem)]"
+                  className="bg-white rounded-xl p-8 hover:shadow-lg transition-all duration-300 h-auto md:h-[calc(40vh-4rem)]"
                 >
                   <div className="w-12 h-12 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-[#FF9898]" />
@@ -128,7 +128,7 @@ const Franchise = () => {
         <div className="fixed bottom-6 left-0 right-0 flex justify-center px-4 z-50">
           <button 
             onClick={handleOpenDialog}
-            className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-[15px] px-12 py-5 font-montserrat text-sm transition-all duration-300"
+            className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-[#333333] font-montserrat rounded-[15px] px-12 py-5 text-sm transition-all duration-300"
           >
             Schedule a call
           </button>
