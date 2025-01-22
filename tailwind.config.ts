@@ -66,7 +66,14 @@ export default {
         "bounce-delayed": {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-25%)" },
-        }
+        },
+        "rotate-360": {
+          "0%": { transform: "rotate(0deg) scale(1)" },
+          "25%": { transform: "rotate(90deg) scale(1.1)" },
+          "50%": { transform: "rotate(180deg) scale(1)" },
+          "75%": { transform: "rotate(270deg) scale(1.1)" },
+          "100%": { transform: "rotate(360deg) scale(1)" },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out",
@@ -75,6 +82,7 @@ export default {
         scroll: "scroll 2s ease-in-out infinite",
         "slide-in": "slide-in 0.5s ease-out",
         "bounce-delayed": "bounce-delayed 1s infinite 0.5s",
+        "rotate-360": "rotate-360 1s ease-in-out",
       },
     },
   },

@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { useState, useEffect } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Link, useLocation } from "react-router-dom";
+import { MobileMenu } from "./MobileMenu";
 
 const SAMPLE_LOCATIONS = [
   "New York, NY",
@@ -96,7 +97,7 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
           </Popover>
         )}
 
-        <div className="flex items-center space-x-2 mr-20">
+        <div className="hidden md:flex items-center space-x-2 mr-20">
           <Link to="/">
             <Button variant="ghost" className={`${isDark ? 'text-navy hover:text-[#00B2B2]' : 'text-white hover:text-[#00B2B2]'} text-xs font-montserrat px-2 ${location.pathname === '/' ? 'text-[#00B2B2]' : ''}`}>
               Home
@@ -115,6 +116,8 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
             </Button>
           </Link>
         </div>
+
+        <MobileMenu />
       </div>
     </nav>
   );
