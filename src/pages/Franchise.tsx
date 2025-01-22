@@ -128,7 +128,7 @@ const Franchise = () => {
         <div className="fixed bottom-6 left-0 right-0 flex justify-center px-4 z-50">
           <button 
             onClick={handleOpenDialog}
-            className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-[#333333] font-montserrat rounded-[15px] px-12 py-5 text-sm transition-all duration-300"
+            className="relative bg-white/20 backdrop-blur-sm hover:bg-white/30 text-[#333333] font-montserrat rounded-[15px] px-12 py-5 text-sm transition-all duration-300 before:content-[''] before:absolute before:inset-0 before:p-[2px] before:rounded-[15px] before:bg-gradient-to-r before:from-primary before:to-secondary before:-z-10"
           >
             Schedule a call
           </button>
