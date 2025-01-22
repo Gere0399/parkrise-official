@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { ScheduleCallDialog } from "./ScheduleCallDialog";
 
 export const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +30,7 @@ export const MobileMenu = () => {
 
       {isOpen && (
         <div className="fixed inset-0 bg-white z-40">
-          <div className="flex flex-col items-center justify-center h-full space-y-8">
+          <div className="flex flex-col items-center justify-center h-full space-y-8 px-6">
             {menuItems.map((item) => (
               <Link
                 key={item.path}
@@ -39,11 +40,17 @@ export const MobileMenu = () => {
                   location.pathname === item.path
                     ? "text-[#00B2B2]"
                     : "text-gray-700 hover:text-[#00B2B2]"
-                }`}
+                } transition-colors duration-200`}
               >
                 {item.label}
               </Link>
             ))}
+            
+            {location.pathname === '/franchise' && (
+              <div className="mt-8">
+                <ScheduleCallDialog />
+              </div>
+            )}
           </div>
         </div>
       )}

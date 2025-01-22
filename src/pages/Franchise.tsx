@@ -126,28 +126,7 @@ const Franchise = () => {
       {/* Mobile CTA */}
       {isMobile && (
         <div className="fixed bottom-6 left-0 right-0 flex justify-center px-4 z-50">
-          <button 
-            onClick={handleOpenDialog}
-            className="relative bg-white text-[#333333] font-montserrat rounded-[15px] px-12 py-5 text-sm transition-all duration-300"
-            style={{
-              background: 'white',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <span className="relative z-10">Schedule a call</span>
-            <div 
-              className="absolute inset-0 rounded-[14px]" 
-              style={{
-                border: '2px solid transparent',
-                borderRadius: '14px',
-                background: 'linear-gradient(135deg, #004BA4 35%, #FF4400 100%) border-box',
-                WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
-                WebkitMaskComposite: 'destination-out',
-                maskComposite: 'exclude',
-              }}
-            />
-          </button>
+          <ScheduleCallDialog />
         </div>
       )}
     </div>
