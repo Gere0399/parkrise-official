@@ -12,6 +12,7 @@ interface SlideContentProps {
   isTextPulsing: boolean;
   onAllVideosEnded: () => void;
   preloadedVideos: Record<string, boolean>;
+  isMobile?: boolean;
 }
 
 export const SlideContent = ({ 
@@ -19,7 +20,8 @@ export const SlideContent = ({
   text, 
   isTextPulsing, 
   onAllVideosEnded,
-  preloadedVideos 
+  preloadedVideos,
+  isMobile = false
 }: SlideContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isVideoLoading, setIsVideoLoading] = useState(true);
@@ -27,7 +29,6 @@ export const SlideContent = ({
   const observerRef = useRef<IntersectionObserver | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Reset video index and loading state when videos array changes
   useEffect(() => {
     setCurrentVideoIndex(0);
     setIsVideoLoading(true);
@@ -109,28 +110,29 @@ export const SlideContent = ({
     }
   };
 
-  // Early return if no videos are available
   if (!videos || videos.length === 0) {
     return (
-      <div className="grid grid-cols-2 gap-8">
+      <>
         <div className="bg-white rounded-2xl overflow-hidden shadow-xl relative">
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
             <p className="text-gray-500">No video available</p>
           </div>
         </div>
-        <div className="flex items-center">
-          <p className="text-3xl text-white leading-tight max-w-[80%]">
+        <div className={`flex items-center ${isMobile ? 'mt-4' : ''}`}>
+          <p className={`text-2xl md:text-3xl text-white leading-tight ${isMobile ? 'text-center w-full' : 'max-w-[80%]'} transition-all duration-300 ${
+            isTextPulsing ? 'scale-110' : 'scale-100'
+          }`}>
             {text}
           </p>
         </div>
-      </div>
+      </>
     );
   }
 
   const currentVideo = videos[currentVideoIndex];
 
   return (
-    <div className="grid grid-cols-2 gap-8" ref={containerRef}>
+    <>
       <div className="bg-white rounded-2xl overflow-hidden shadow-xl relative">
         {isVideoLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
@@ -141,7 +143,7 @@ export const SlideContent = ({
           <video
             ref={videoRef}
             src={currentVideo.url}
-            className="w-full h-[400px] object-cover"
+            className={`w-full ${isMobile ? 'h-[300px]' : 'h-[400px]'} object-cover`}
             muted
             playsInline
             onEnded={handleVideoEnd}
@@ -150,13 +152,13 @@ export const SlideContent = ({
           />
         )}
       </div>
-      <div className="flex items-center">
-        <p className={`text-3xl text-white leading-tight max-w-[80%] transition-all duration-300 ${
+      <div className={`flex items-center ${isMobile ? 'mt-4' : ''}`}>
+        <p className={`text-2xl md:text-3xl text-white leading-tight ${isMobile ? 'text-center w-full' : 'max-w-[80%]'} transition-all duration-300 ${
           isTextPulsing ? 'scale-110' : 'scale-100'
         }`}>
           {text}
         </p>
       </div>
-    </div>
+    </>
   );
 };

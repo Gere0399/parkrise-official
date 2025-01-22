@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { TagButtons } from "./TagButtons";
 import { SlideContent } from "./SlideContent";
 import { tags, slideContent } from "../data/slideContent";
+import { useMobile } from "@/hooks/use-mobile";
 
 export const ContentSection = () => {
   const [activeTag, setActiveTag] = useState(tags[0]);
@@ -10,8 +11,8 @@ export const ContentSection = () => {
   const [slidePosition, setSlidePosition] = useState(0);
   const [preloadedVideos, setPreloadedVideos] = useState<Record<string, boolean>>({});
   const videoEndedRef = useRef<boolean>(false);
+  const isMobile = useMobile();
 
-  // Preload videos for all tags
   useEffect(() => {
     const preloadVideos = async () => {
       const preloaded: Record<string, boolean> = {};
@@ -120,10 +121,10 @@ export const ContentSection = () => {
   return (
     <div className="min-h-screen bg-navy py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-semibold text-secondary mb-2">
+        <h2 className="text-4xl md:text-4xl font-semibold text-secondary mb-2">
           Live here in a furnished apartment-style suite.
         </h2>
-        <p className="text-4xl font-semibold text-secondary mb-8">
+        <p className="text-4xl md:text-4xl font-semibold text-secondary mb-8">
           Or, stay for a quick trip.
         </p>
 
@@ -138,13 +139,16 @@ export const ContentSection = () => {
             className="transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(${slidePosition}%)` }}
           >
-            <SlideContent 
-              videos={slideContent[activeTag].videos}
-              text={slideContent[activeTag].text}
-              isTextPulsing={isTextPulsing}
-              onAllVideosEnded={handleAllVideosEnded}
-              preloadedVideos={preloadedVideos}
-            />
+            <div className={`grid ${isMobile ? 'grid-cols-1 gap-6' : 'grid-cols-2 gap-8'}`}>
+              <SlideContent 
+                videos={slideContent[activeTag].videos}
+                text={slideContent[activeTag].text}
+                isTextPulsing={isTextPulsing}
+                onAllVideosEnded={handleAllVideosEnded}
+                preloadedVideos={preloadedVideos}
+                isMobile={isMobile}
+              />
+            </div>
           </div>
         </div>
       </div>

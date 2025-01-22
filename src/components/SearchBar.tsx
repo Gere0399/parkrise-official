@@ -1,4 +1,4 @@
-import { Calendar as CalendarIcon, MapPin, Check, ChevronDown } from "lucide-react";
+import { Calendar as CalendarIcon, MapPin, Check, ChevronDown, Search } from "lucide-react";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { format } from "date-fns";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMobile } from "@/hooks/use-mobile";
 
 const SAMPLE_LOCATIONS = [
   "New York, NY",
@@ -29,6 +30,7 @@ export const SearchBar = () => {
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [specialRate, setSpecialRate] = useState("");
   const navigate = useNavigate();
+  const isMobile = useMobile();
   
   const getRoomGuestLabel = (rooms: string, guests: string) => {
     const roomText = `${rooms} ${Number(rooms) === 1 ? 'room' : 'rooms'}`;
@@ -39,9 +41,155 @@ export const SearchBar = () => {
   const handleLocationSelect = (loc: string) => {
     setLocation(loc);
     setIsLocationOpen(false);
-    navigate('/destinations');
   };
-  
+
+  if (isMobile) {
+    return (
+      <div className="flex flex-col gap-4 w-full bg-white/90 backdrop-blur-sm rounded-3xl p-4">
+        <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
+          <PopoverTrigger asChild>
+            <div className="flex items-center p-3 bg-white rounded-xl border cursor-pointer">
+              <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
+              <input
+                type="text"
+                placeholder="Search location..."
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="bg-transparent border-none focus:outline-none text-[#222222] w-full font-montserrat text-sm placeholder:text-[#222222] px-2"
+              />
+              <ChevronDown className="w-4 h-4 text-gray-400" />
+            </div>
+          </PopoverTrigger>
+          <PopoverContent className="w-[calc(100vw-3rem)] bg-white p-0" align="start">
+            <div className="py-2 max-h-[50vh] overflow-auto">
+              {SAMPLE_LOCATIONS.map((loc) => (
+                <div
+                  key={loc}
+                  className="px-4 py-3 hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
+                  onClick={() => handleLocationSelect(loc)}
+                >
+                  <span>{loc}</span>
+                  {location === loc && <Check className="h-4 w-4 text-green-500 ml-1" />}
+                </div>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+
+        <div className="flex gap-2">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className="flex-1 justify-start text-left font-normal">
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {arrival ? format(arrival, "MMM dd") : "Check in"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={arrival}
+                onSelect={setArrival}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className="flex-1 justify-start text-left font-normal">
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {duration ? format(duration, "MMM dd") : "Check out"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={duration}
+                onSelect={setDuration}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+
+        <Select value={`${rooms}-${guests}`} onValueChange={(val) => {
+          const [r, g] = val.split('-');
+          setRooms(r);
+          setGuests(g);
+        }}>
+          <SelectTrigger className="w-full">
+            <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
+          </SelectTrigger>
+          <SelectContent className="w-[280px]">
+            <div className="p-2">
+              <h3 className="font-medium mb-2">Rooms & Guests</h3>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm mb-2">Rooms</p>
+                  <div className="grid grid-cols-5 gap-2">
+                    {Array.from({length: 5}, (_, i) => i + 1).map((num) => (
+                      <div
+                        key={`room-${num}`}
+                        onClick={() => setRooms(num.toString())}
+                        className={`p-2 text-center rounded cursor-pointer ${
+                          num === Number(rooms) 
+                            ? 'bg-primary text-white' 
+                            : 'hover:bg-gray-100'
+                        }`}
+                      >
+                        {num}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm mb-2">Guests</p>
+                  <div className="grid grid-cols-5 gap-2">
+                    {Array.from({length: 5}, (_, i) => i + 1).map((num) => (
+                      <div
+                        key={`guest-${num}`}
+                        onClick={() => setGuests(num.toString())}
+                        className={`p-2 text-center rounded cursor-pointer ${
+                          num === Number(guests) 
+                            ? 'bg-primary text-white' 
+                            : 'hover:bg-gray-100'
+                        }`}
+                      >
+                        {num}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SelectContent>
+        </Select>
+
+        <Select value={specialRate} onValueChange={setSpecialRate}>
+          <SelectTrigger>
+            <SelectValue placeholder="Special rates" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="group">Group</SelectItem>
+            <SelectItem value="corporate">Corporate</SelectItem>
+            <SelectItem value="seasonal">Seasonal</SelectItem>
+            <SelectItem value="promotional">Promo</SelectItem>
+            <SelectItem value="membership">Member</SelectItem>
+            <SelectItem value="extended">Extended</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Button 
+          className="w-full bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white h-12 rounded-xl font-montserrat text-sm"
+          onClick={() => navigate('/destinations')}
+        >
+          <Search className="w-4 h-4 mr-2" />
+          Search
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center justify-between bg-white rounded-full h-12 w-full max-w-5xl">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
