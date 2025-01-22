@@ -54,8 +54,8 @@ const Franchise = () => {
   ];
 
   return (
-    <div className="min-h-screen font-montserrat">
-      <div className="relative h-screen">
+    <div className="min-h-screen font-montserrat bg-navy">
+      <div className="relative h-[70vh]">
         {/* Background Video with Overlay */}
         <div className="absolute inset-0">
           <video
@@ -66,22 +66,22 @@ const Franchise = () => {
             playsInline
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
         {/* Content */}
         <div className="relative z-10">
           <Navbar />
           
-          <div className="container mx-auto px-4 pt-20">
-            <div className="flex flex-col items-center justify-center mb-12">
+          <div className="container mx-auto px-4 pt-16">
+            <div className="flex flex-col items-center justify-center mb-8">
               <img 
                 src="/lovable-uploads/faa05e4a-c305-45cd-a254-f22cdcef605a.png" 
                 alt="Parkrise Logo" 
-                className="h-12 w-auto mb-8"
+                className="h-12 w-auto mb-6"
               />
-              <Tabs defaultValue="overview" className="w-full max-w-4xl">
-                <TabsList className="w-full h-12 bg-[#222222]/90 backdrop-blur-sm rounded-lg p-1 space-x-1">
+              <Tabs defaultValue="overview" className="w-full max-w-[1000px]">
+                <TabsList className="w-full h-10 bg-[#222222]/90 backdrop-blur-sm rounded-lg p-1 space-x-0.5">
                   {[
                     "Overview",
                     "Investment",
@@ -95,7 +95,7 @@ const Franchise = () => {
                     <TabsTrigger
                       key={tab}
                       value={tab.toLowerCase()}
-                      className="flex-1 h-10 text-sm font-montserrat font-medium text-white/70 data-[state=active]:text-white data-[state=active]:bg-white/10 rounded transition-all"
+                      className="flex-1 h-8 text-xs font-montserrat font-medium text-white/70 data-[state=active]:text-white data-[state=active]:bg-white/10 rounded transition-all"
                     >
                       {tab}
                     </TabsTrigger>
@@ -105,40 +105,42 @@ const Franchise = () => {
             </div>
 
             {/* Hero Section */}
-            <div className="text-center mb-12">
-              <h1 className="text-5xl font-bold text-white mb-4">
+            <div className="text-center mb-12 max-w-[800px] mx-auto">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
                 Empower your hospitality future
               </h1>
-              <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+              <p className="text-base text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed">
                 Explore the benefits of joining Parkrise Franchise Network.
                 Maximize your apartments with hotel/real estate investment with Parkrise
                 effective strategies to help you and guests, the most from your place
               </p>
-              <Button className="bg-white text-navy hover:bg-white/90 font-medium px-8 py-6">
+              <Button className="bg-white text-navy hover:bg-white/90 font-medium px-8 py-2 rounded-full text-sm">
                 Schedule a call
               </Button>
             </div>
-
-            {/* Features Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-              {features.map((feature, index) => (
-                <div 
-                  key={index}
-                  className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300"
-                >
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-white/70 text-sm">
-                    {feature.description}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
+        </div>
+      </div>
+
+      {/* Features Grid Section */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((feature, index) => (
+            <div 
+              key={index}
+              className="bg-white rounded-2xl p-6 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="w-12 h-12 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-4">
+                <feature.icon className="w-6 h-6 text-[#FF9898]" />
+              </div>
+              <h3 className="text-lg font-semibold text-navy mb-2 leading-tight">
+                {feature.title}
+              </h3>
+              <p className="text-navy/70 text-sm leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
