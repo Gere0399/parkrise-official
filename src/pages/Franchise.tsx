@@ -2,8 +2,12 @@ import { Navbar } from "@/components/Navbar";
 import { supabase } from "@/integrations/supabase/client";
 import { Building, DollarSign, BarChart3, Briefcase, Users, ChartBar, Award, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { ScheduleCallDialog } from "@/components/ScheduleCallDialog";
 
 const Franchise = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
   const videoUrl = supabase.storage
     .from('videos-landing')
     .getPublicUrl('Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4')
@@ -58,7 +62,6 @@ const Franchise = () => {
         <Navbar showSearch={false} variant="dark" />
       </div>
       
-      {/* Video Background Section */}
       <div className="relative h-[calc(65vh-4rem)]">
         <div className="absolute inset-0">
           <video
@@ -72,7 +75,6 @@ const Franchise = () => {
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        {/* Centered Content over video */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
             Empower your hospitality future
@@ -83,6 +85,7 @@ const Franchise = () => {
             effective strategies to help you and guests, the most from your place
           </p>
           <Button 
+            onClick={() => setIsDialogOpen(true)}
             className="bg-transparent hover:bg-transparent text-white rounded-[15px] px-12 py-5 relative border-0"
             style={{
               background: 'transparent',
@@ -106,7 +109,6 @@ const Franchise = () => {
         </div>
       </div>
 
-      {/* Features Grid Section */}
       <div className="bg-[#F2F2F2] py-8">
         <div className="container mx-auto px-8">
           <div className="grid grid-cols-4 gap-6">
@@ -132,6 +134,8 @@ const Franchise = () => {
           </div>
         </div>
       </div>
+
+      <ScheduleCallDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </div>
   );
 };
