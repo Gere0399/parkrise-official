@@ -2,12 +2,15 @@ import { Navbar } from "@/components/Navbar";
 import { supabase } from "@/integrations/supabase/client";
 import { Building, DollarSign, BarChart3, Briefcase, Users, ChartBar, Award, Store } from "lucide-react";
 import { ScheduleCallDialog } from "@/components/ScheduleCallDialog";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Franchise = () => {
   const videoUrl = supabase.storage
     .from('videos-landing')
     .getPublicUrl('Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4')
     .data.publicUrl;
+
+  const isMobile = useIsMobile();
 
   const features = [
     {
@@ -54,7 +57,7 @@ const Franchise = () => {
 
   return (
     <div className="min-h-screen bg-[#F2F2F2] font-montserrat">
-      <div className="h-12 bg-[#F2F2F2]">
+      <div className="h-16 bg-[#F2F2F2]">
         <Navbar showSearch={false} variant="dark" />
       </div>
       
@@ -88,14 +91,14 @@ const Franchise = () => {
 
       {/* Features Grid Section */}
       <div className="bg-[#F2F2F2] py-8">
-        <div className="container mx-auto px-8">
-          <div className="grid grid-cols-4 gap-6">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
                 <div 
                   key={index}
-                  className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 h-[calc(35vh-4rem)]"
+                  className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 h-auto md:h-[calc(35vh-4rem)]"
                 >
                   <div className="w-12 h-12 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-[#FF9898]" />
@@ -112,6 +115,13 @@ const Franchise = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile CTA */}
+      {isMobile && (
+        <div className="fixed bottom-6 left-0 right-0 flex justify-center px-4 z-50">
+          <ScheduleCallDialog />
+        </div>
+      )}
     </div>
   );
 };

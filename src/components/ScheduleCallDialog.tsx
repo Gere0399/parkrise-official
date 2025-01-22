@@ -2,6 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 
@@ -12,6 +13,7 @@ export const ScheduleCallDialog = () => {
     email: "",
     company: "",
     phone: "",
+    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -20,11 +22,10 @@ export const ScheduleCallDialog = () => {
       title: "Request submitted!",
       description: "We'll get back to you shortly to schedule the call.",
     });
-    // Reset form
-    setFormData({ name: "", email: "", company: "", phone: "" });
+    setFormData({ name: "", email: "", company: "", phone: "", message: "" });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -103,6 +104,21 @@ export const ScheduleCallDialog = () => {
               placeholder="+1 (555) 000-0000"
               required
             />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="message">Say more</Label>
+            <Textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Tell us more about your business and requirements..."
+              className="min-h-[100px] resize-none"
+              maxLength={300}
+            />
+            <div className="text-xs text-gray-500 text-right">
+              {formData.message.length}/300 characters
+            </div>
           </div>
           <Button type="submit" className="w-full">Submit Request</Button>
         </form>
