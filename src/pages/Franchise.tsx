@@ -3,38 +3,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { Building, DollarSign, BarChart3, Briefcase, Users, ChartBar, Award, Store } from "lucide-react";
 import { ScheduleCallDialog } from "@/components/ScheduleCallDialog";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 const Franchise = () => {
-  const [headerVideoUrl, setHeaderVideoUrl] = useState<string>('');
-  const [isLoading, setIsLoading] = useState(true);
+  const videoUrl = supabase.storage
+    .from('videos-landing')
+    .getPublicUrl('Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4')
+    .data.publicUrl;
+
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    const loadVideo = async () => {
-      try {
-        const { data, error } = await supabase.storage
-          .from('videos-landing')
-          .createSignedUrl('Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4', 3600);
-
-        if (error) {
-          console.error('Error loading video:', error);
-          toast.error('Error loading video');
-          return;
-        }
-
-        setHeaderVideoUrl(data.signedUrl);
-      } catch (error) {
-        console.error('Error loading video:', error);
-        toast.error('Error loading video');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadVideo();
-  }, []);
 
   const features = [
     {
@@ -95,27 +71,15 @@ const Franchise = () => {
       {/* Video Background Section */}
       <div className="relative h-[calc(65vh-5rem)]">
         <div className="absolute inset-0">
-          {isLoading ? (
-            <div className="w-full h-full bg-gray-900 animate-pulse" />
-          ) : (
-            <>
-              {headerVideoUrl && (
-                <video
-                  src={headerVideoUrl}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    console.error("Error playing video:", e);
-                    toast.error("Error playing video");
-                  }}
-                />
-              )}
-              <div className="absolute inset-0 bg-black/40" />
-            </>
-          )}
+          <video
+            src={videoUrl}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
         {/* Centered Content over video */}

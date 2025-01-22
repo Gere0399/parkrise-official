@@ -25,7 +25,6 @@ export const SlideContent = ({
 }: SlideContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isVideoLoading, setIsVideoLoading] = useState(true);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,8 +34,15 @@ export const SlideContent = ({
     setIsVideoLoading(true);
     if (videoRef.current) {
       videoRef.current.load();
+      if (preloadedVideos[videos[0]?.url]) {
+        videoRef.current.play().catch((error) => {
+          if (error.name !== 'AbortError') {
+            console.error('Error playing initial video:', error);
+          }
+        });
+      }
     }
-  }, [videos]);
+  }, [videos, preloadedVideos]);
 
   // Handle video visibility and playback
   useEffect(() => {
@@ -45,19 +51,15 @@ export const SlideContent = ({
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && videoRef.current && !isVideoLoading) {
-            if (!isVideoPlaying) {
-              videoRef.current.play().catch((error) => {
-                if (error.name !== 'AbortError') {
-                  console.error('Error playing video:', error);
-                  toast.error('Error playing video. Please try again.');
-                }
-              });
-              setIsVideoPlaying(true);
-            }
-          } else if (videoRef.current && isVideoPlaying) {
+          if (entry.isIntersecting && videoRef.current) {
+            videoRef.current.play().catch((error) => {
+              if (error.name !== 'AbortError') {
+                console.error('Error playing video:', error);
+                toast.error('Error playing video. Please try again.');
+              }
+            });
+          } else if (videoRef.current) {
             videoRef.current.pause();
-            setIsVideoPlaying(false);
           }
         });
       },
@@ -71,14 +73,19 @@ export const SlideContent = ({
         observerRef.current.disconnect();
       }
     };
-  }, [isVideoLoading, isVideoPlaying]);
+  }, []);
 
+  // Handle video end and transition to next video
   const handleVideoEnd = () => {
     if (currentVideoIndex < videos.length - 1) {
       setCurrentVideoIndex(prev => prev + 1);
       setIsVideoLoading(true);
-      setIsVideoPlaying(false);
+      // Ensure the next video starts loading immediately
+      if (videoRef.current) {
+        videoRef.current.load();
+      }
     } else {
+      // All videos have finished playing
       onAllVideosEnded();
     }
   };
@@ -94,6 +101,13 @@ export const SlideContent = ({
 
   const handleVideoLoad = () => {
     setIsVideoLoading(false);
+    if (videoRef.current && preloadedVideos[videos[currentVideoIndex]?.url]) {
+      videoRef.current.play().catch((error) => {
+        if (error.name !== 'AbortError') {
+          console.error('Error auto-playing video:', error);
+        }
+      });
+    }
   };
 
   if (!videos || videos.length === 0) {
@@ -119,7 +133,7 @@ export const SlideContent = ({
 
   return (
     <>
-      <div ref={containerRef} className="bg-white rounded-2xl overflow-hidden shadow-xl relative">
+      <div className="bg-white rounded-2xl overflow-hidden shadow-xl relative">
         {isVideoLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-navy"></div>
@@ -129,10 +143,9 @@ export const SlideContent = ({
           <video
             ref={videoRef}
             src={currentVideo.url}
-            className={`w-full ${isMobile ? 'h-[300px]' : 'h-[400px]'} object-cover ${isVideoLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+            className={`w-full ${isMobile ? 'h-[300px]' : 'h-[400px]'} object-cover`}
             muted
             playsInline
-            preload="auto"
             onEnded={handleVideoEnd}
             onError={handleVideoError}
             onLoadedData={handleVideoLoad}

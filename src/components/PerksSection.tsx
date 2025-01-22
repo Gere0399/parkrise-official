@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 
 const perks = [
   { id: 1, name: "Outdoor Space", video: "output.mp4" },
@@ -15,30 +14,15 @@ export const PerksSection = () => {
   const navigate = useNavigate();
   const [selectedPerk, setSelectedPerk] = useState(perks[0].name);
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
-  const [isVideoLoading, setIsVideoLoading] = useState(true);
-  const [videoUrl, setVideoUrl] = useState<string>('');
   const videoRef = useRef<HTMLVideoElement>(null);
   const autoplayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const getVideoUrl = async (fileName: string): Promise<string> => {
-    try {
-      const { data, error } = await supabase.storage
-        .from('videos-landing')
-        .createSignedUrl(fileName, 3600); // 1 hour expiry
-
-      if (error) {
-        console.error('Error getting video URL:', error);
-        toast.error('Error loading video');
-        return '';
-      }
-
-      return data?.signedUrl || '';
-    } catch (error) {
-      console.error('Error getting video URL:', error);
-      toast.error('Error loading video');
-      return '';
-    }
+  const getVideoUrl = (fileName: string): string => {
+    const { data } = supabase.storage
+      .from('videos-landing')
+      .getPublicUrl(fileName);
+    return data?.publicUrl || '';
   };
 
   // Handle auto-sliding
@@ -73,7 +57,6 @@ export const PerksSection = () => {
   const handlePerkSelect = (perkName: string) => {
     setSelectedPerk(perkName);
     setIsAutoplayPaused(true);
-    setIsVideoLoading(true);
     
     if (pauseTimeoutRef.current) {
       clearTimeout(pauseTimeoutRef.current);
@@ -84,41 +67,28 @@ export const PerksSection = () => {
     }, 15000);
   };
 
-  // Update video URL when perk changes
+  // Preload all videos
   useEffect(() => {
-    const loadVideo = async () => {
-      const selectedVideo = perks.find(perk => perk.name === selectedPerk)?.video;
-      if (selectedVideo) {
-        const url = await getVideoUrl(selectedVideo);
-        setVideoUrl(url);
-      }
-    };
+    perks.forEach(perk => {
+      const video = new Audio();
+      video.src = getVideoUrl(perk.video);
+      video.preload = "auto";
+    });
+  }, []);
 
-    loadVideo();
-  }, [selectedPerk]);
-
-  // Handle video loading and playback
+  // Handle video change when perk changes
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.load();
-      
-      const handleCanPlay = () => {
-        setIsVideoLoading(false);
-        videoRef.current?.play().catch(error => {
-          if (error.name !== 'AbortError') {
-            console.error('Error playing video:', error);
-            toast.error('Error playing video. Please try again.');
-          }
-        });
-      };
-
-      videoRef.current.addEventListener('canplay', handleCanPlay);
-
-      return () => {
-        videoRef.current?.removeEventListener('canplay', handleCanPlay);
-      };
+      videoRef.current.play().catch(error => {
+        if (error.name !== 'AbortError') {
+          console.error('Error playing video:', error);
+        }
+      });
     }
-  }, [videoUrl]);
+  }, [selectedPerk]);
+
+  const selectedVideo = perks.find(perk => perk.name === selectedPerk)?.video || perks[0].video;
 
   const handleNavigateToDestinations = () => {
     navigate('/destinations');
@@ -136,22 +106,17 @@ export const PerksSection = () => {
           </div>
 
           <div className="flex flex-col md:flex-row items-start gap-12 justify-center">
-            {/* Video Section */}
+            {/* Video Section - Updated height from h-[400px] to h-[350px] */}
             <div className="w-full md:w-1/2">
               <div className="relative rounded-lg overflow-hidden shadow-xl transition-all duration-500 transform">
-                {isVideoLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-                  </div>
-                )}
                 <video
                   ref={videoRef}
-                  src={videoUrl}
-                  className={`w-full h-[350px] object-cover ${isVideoLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+                  src={getVideoUrl(selectedVideo)}
+                  className="w-full h-[350px] object-cover"
                   muted
                   playsInline
                   loop
-                  preload="auto"
+                  autoPlay
                 />
               </div>
             </div>
