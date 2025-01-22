@@ -75,17 +75,17 @@ export const Navbar = ({ showSearch = true }) => {
               alignOffset={-10}
             >
               <div className="py-2">
-                {SAMPLE_LOCATIONS.map((location) => (
+                {SAMPLE_LOCATIONS.map((loc) => (
                   <div
-                    key={location}
+                    key={loc}
                     className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between"
                     onClick={() => {
-                      setSearchQuery(location);
+                      setSearchQuery(loc);
                       setIsLocationOpen(false);
                     }}
                   >
-                    <span>{location}</span>
-                    {searchQuery === location && <Check className="h-4 w-4 text-green-500" />}
+                    <span>{loc}</span>
+                    {searchQuery === loc && <Check className="h-4 w-4 text-green-500" />}
                   </div>
                 ))}
               </div>
@@ -106,7 +106,11 @@ export const Navbar = ({ showSearch = true }) => {
           </Link>
           <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Our Brand</Button>
           <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">For Business</Button>
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Franchise</Button>
+          <Link to="/franchise">
+            <Button variant="ghost" className={`text-white hover:text-[#00B2B2] text-xs font-montserrat px-2 ${location.pathname === '/franchise' ? 'text-[#00B2B2]' : ''}`}>
+              Franchise
+            </Button>
+          </Link>
         </div>
       </div>
     </nav>
