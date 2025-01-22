@@ -57,12 +57,12 @@ const Franchise = () => {
 
   return (
     <div className="min-h-screen bg-[#F2F2F2] font-montserrat">
-      <div className="h-16 bg-[#F2F2F2]">
+      <div className="h-20 bg-[#F2F2F2]">
         <Navbar showSearch={false} variant="dark" />
       </div>
       
       {/* Video Background Section */}
-      <div className="relative h-[calc(65vh-4rem)]">
+      <div className="relative h-[calc(65vh-5rem)]">
         <div className="absolute inset-0">
           <video
             src={videoUrl}
@@ -85,7 +85,7 @@ const Franchise = () => {
             Maximize your apartments with hotel/real estate investment with Parkrise
             effective strategies to help you and guests, the most from your place
           </p>
-          <ScheduleCallDialog />
+          {!isMobile && <ScheduleCallDialog />}
         </div>
       </div>
 
@@ -119,7 +119,12 @@ const Franchise = () => {
       {/* Mobile CTA */}
       {isMobile && (
         <div className="fixed bottom-6 left-0 right-0 flex justify-center px-4 z-50">
-          <ScheduleCallDialog />
+          <button 
+            onClick={() => document.querySelector('[role="dialog"]')?.click()}
+            className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-[15px] px-12 py-5 font-montserrat text-sm transition-all duration-300"
+          >
+            Schedule a call
+          </button>
         </div>
       )}
     </div>

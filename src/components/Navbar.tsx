@@ -39,12 +39,12 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
   const isFranchise = location.pathname === '/franchise';
 
   return (
-    <nav className={`${isDark ? 'bg-[#F2F2F2] py-4' : ''} ${!isFranchise ? 'fixed top-0 left-0 right-0' : ''} z-50`}>
+    <nav className={`${isDark ? 'bg-[#F2F2F2]' : ''} ${!isFranchise ? 'fixed top-0 left-0 right-0' : ''} z-50`}>
       {!isDark && isNotAtTop && (
         <div className="absolute inset-x-0 top-0 h-16 bg-black/20 backdrop-blur-sm transition-opacity duration-300" />
       )}
       
-      <div className="relative max-w-[1400px] mx-auto flex items-center justify-between px-8 py-3">
+      <div className="relative max-w-[1400px] mx-auto flex items-center justify-between px-8 py-6">
         <div className="flex items-center">
           <Link to="/">
             <img 
