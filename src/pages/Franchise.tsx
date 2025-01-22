@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { supabase } from "@/integrations/supabase/client";
 import { Building, DollarSign, BarChart3, Briefcase, Users, ChartBar, Award, Store } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ScheduleCallDialog } from "@/components/ScheduleCallDialog";
 
 const Franchise = () => {
   const videoUrl = supabase.storage
@@ -82,27 +82,7 @@ const Franchise = () => {
             Maximize your apartments with hotel/real estate investment with Parkrise
             effective strategies to help you and guests, the most from your place
           </p>
-          <Button 
-            className="bg-transparent hover:bg-transparent text-white rounded-[15px] px-12 py-5 relative border-0"
-            style={{
-              background: 'transparent',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <span className="relative z-10">Schedule a call</span>
-            <div 
-              className="absolute inset-0 rounded-[14px]" 
-              style={{
-                border: '2px solid transparent',
-                borderRadius: '14px',
-                background: 'linear-gradient(135deg, #004BA4 35%, #FF4400 100%) border-box',
-                WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
-                WebkitMaskComposite: 'destination-out',
-                maskComposite: 'exclude',
-              }}
-            />
-          </Button>
+          <ScheduleCallDialog />
         </div>
       </div>
 

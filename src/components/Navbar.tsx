@@ -36,9 +36,10 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
   }, []);
 
   const isDark = variant === "dark";
+  const isFranchise = location.pathname === '/franchise';
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-[#F2F2F2] py-1' : ''}`}>
+    <nav className={`${isDark ? 'bg-[#F2F2F2] py-2' : ''} ${!isFranchise ? 'fixed top-0 left-0 right-0' : ''} z-50`}>
       {!isDark && isNotAtTop && (
         <div className="absolute inset-x-0 top-0 h-16 bg-black/20 backdrop-blur-sm transition-opacity duration-300" />
       )}
@@ -49,7 +50,7 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
             <img 
               src={isDark ? "/lovable-uploads/b64ac30e-4d72-4f40-94dc-da41b281490e.png" : "/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png"}
               alt="Parkrise Logo" 
-              className="h-6 w-auto"
+              className="h-8 w-auto"
             />
           </Link>
         </div>
