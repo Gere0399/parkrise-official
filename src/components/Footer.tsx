@@ -5,46 +5,46 @@ export const Footer = () => {
 
   if (isMobile) {
     return (
-      <footer className="bg-[#F1F1F1] px-4 py-8">
+      <footer className="bg-[#F1F1F1] px-6 py-10">
         {/* Logo */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-10">
           <img 
             src="/lovable-uploads/892ce5e3-ffe0-420b-a9d5-5207bdf86152.png"
             alt="Parkrise Logo"
-            className="h-16"
+            className="h-12"
           />
         </div>
 
         {/* Navigation Links */}
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Home</span>
-          <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Residents</span>
-          <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Our brand</span>
-          <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">For Business</span>
+        <div className="grid grid-cols-2 gap-y-4 mb-10">
+          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">Home</span>
+          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">Residents</span>
+          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">Our brand</span>
+          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">For Business</span>
         </div>
 
         {/* Social Links */}
-        <div className="flex justify-center gap-4 mb-8">
-          <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Facebook</span>
-          <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer">Instagram</span>
+        <div className="flex justify-center gap-6 mb-10">
+          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">Facebook</span>
+          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer">Instagram</span>
         </div>
 
         {/* Contact & Copyright */}
-        <div className="text-center space-y-4">
-          <p className="text-[13px] text-[#222222] font-light">hello@parkrise.com</p>
-          <div className="flex justify-center items-center gap-2">
-            <span className="text-[13px] text-[#222222] font-light">©Copyright</span>
-            <span className="text-[13px] text-[#222222] font-light">Panama 2024</span>
+        <div className="text-center space-y-6 mb-10">
+          <p className="text-sm text-[#222222]">hello@parkrise.com</p>
+          <div className="flex justify-center items-center gap-3">
+            <span className="text-sm text-[#222222]">©Copyright</span>
+            <span className="text-sm text-[#222222]">Panama 2024</span>
           </div>
         </div>
 
         {/* Tagline & Description */}
-        <div className="text-center mt-8 space-y-4">
-          <p className="text-[13px] text-[#222222] font-light">Live. Stay. Belong.</p>
-          <p className="text-[13px] text-[#222222] font-light px-8">
+        <div className="text-center space-y-6">
+          <p className="text-sm text-[#222222] font-medium">Live. Stay. Belong.</p>
+          <p className="text-sm text-[#222222] leading-relaxed">
             Parkrise redefines flexible working by creating a standard that is ahead of its time. With high-end amenities and services.
           </p>
-          <span className="text-[13px] text-[#222222] font-light hover:text-secondary cursor-pointer block">
+          <span className="text-sm text-[#222222] hover:text-secondary cursor-pointer block">
             Need help?
           </span>
         </div>
