@@ -125,7 +125,7 @@ const Franchise = () => {
 
       {/* Mobile CTA */}
       {isMobile && (
-        <div className="fixed bottom-6 left-0 right-0 flex justify-center px-4 z-50">
+        <div className="fixed bottom-6 left-0 right-0 flex justify-center px-4 z-30">
           <ScheduleCallDialog />
         </div>
       )}
