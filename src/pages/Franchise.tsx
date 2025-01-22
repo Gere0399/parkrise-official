@@ -53,33 +53,11 @@ const Franchise = () => {
   ];
 
   return (
-    <div className="h-screen overflow-hidden font-montserrat">
-      <Navbar />
+    <div className="h-screen overflow-hidden bg-[#F2F2F2] font-montserrat">
+      <Navbar showSearch={false} />
       
-      {/* Title Section */}
-      <div className="pt-8 pb-4 text-center px-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-[#222222] mb-2">
-          Empower your hospitality future
-        </h1>
-        <p className="text-sm text-[#8E9196] mb-4 max-w-2xl mx-auto leading-relaxed">
-          Explore the benefits of joining Parkrise Franchise Network.
-          Maximize your apartments with hotel/real estate investment with Parkrise
-          effective strategies to help you and guests, the most from your place
-        </p>
-        <Button 
-          className="bg-transparent hover:bg-transparent text-black border-2 border-transparent bg-gradient-to-r from-[#FF9898] to-[#FFE4E4] bg-clip-text font-medium px-8 py-2 rounded-full text-sm relative"
-          style={{
-            backgroundClip: 'padding-box, text',
-            border: '2px solid transparent',
-            backgroundImage: 'linear-gradient(white, white), linear-gradient(to right, #FF9898, #FFE4E4)',
-          }}
-        >
-          Schedule a call
-        </Button>
-      </div>
-
       {/* Video Background Section */}
-      <div className="relative h-[30vh]">
+      <div className="relative h-[50vh]">
         <div className="absolute inset-0">
           <video
             src={videoUrl}
@@ -89,28 +67,51 @@ const Franchise = () => {
             playsInline
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        {/* Centered Content over video */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 mt-12">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+            Empower your hospitality future
+          </h1>
+          <p className="text-sm text-white/90 mb-6 max-w-2xl mx-auto leading-relaxed">
+            Explore the benefits of joining Parkrise Franchise Network.
+            Maximize your apartments with hotel/real estate investment with Parkrise
+            effective strategies to help you and guests, the most from your place
+          </p>
+          <Button 
+            className="bg-transparent hover:bg-transparent text-white border-2 border-transparent font-medium px-8 py-2 rounded-full text-sm relative"
+            style={{
+              backgroundClip: 'padding-box',
+              border: '2px solid transparent',
+              backgroundImage: 'linear-gradient(to right, #FF9898, #FFE4E4)',
+              WebkitBackgroundClip: 'padding-box',
+            }}
+          >
+            Schedule a call
+          </Button>
         </div>
       </div>
 
       {/* Features Grid Section */}
-      <div className="bg-[#F2F2F2] py-8">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="bg-[#F2F2F2] py-6">
+        <div className="container mx-auto px-8">
+          <div className="grid grid-cols-4 gap-4">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
                 <div 
                   key={index}
-                  className="bg-white rounded-xl p-4 hover:shadow-lg transition-all duration-300"
+                  className="bg-white rounded-xl p-3 hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="w-10 h-10 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-3">
-                    <Icon className="w-5 h-5 text-[#FF9898]" />
+                  <div className="w-8 h-8 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-2">
+                    <Icon className="w-4 h-4 text-[#FF9898]" />
                   </div>
-                  <h3 className="text-sm font-semibold text-[#222222] mb-1 leading-tight">
+                  <h3 className="text-xs font-semibold text-[#222222] mb-1 leading-tight">
                     {feature.title}
                   </h3>
-                  <p className="text-xs text-[#8E9196] leading-relaxed">
+                  <p className="text-[10px] text-[#8E9196] leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
