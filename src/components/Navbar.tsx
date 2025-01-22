@@ -17,7 +17,7 @@ const SAMPLE_LOCATIONS = [
   "San Francisco, CA"
 ];
 
-export const Navbar = ({ showSearch = true }) => {
+export const Navbar = ({ showSearch = true, variant = "light" }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isNotAtTop, setIsNotAtTop] = useState(false);
@@ -35,9 +35,11 @@ export const Navbar = ({ showSearch = true }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isDark = variant === "dark";
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
-      {isNotAtTop && (
+    <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-white py-4' : ''}`}>
+      {!isDark && isNotAtTop && (
         <div className="absolute inset-x-0 top-0 h-24 bg-black/20 backdrop-blur-sm transition-opacity duration-300" />
       )}
       
@@ -45,7 +47,7 @@ export const Navbar = ({ showSearch = true }) => {
         <div className="flex items-center">
           <Link to="/">
             <img 
-              src="/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png" 
+              src={isDark ? "/lovable-uploads/9ef0f884-f629-462e-8c0a-b9a08f680239.png" : "/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png"}
               alt="Parkrise Logo" 
               className="h-6 w-auto"
             />
@@ -95,19 +97,19 @@ export const Navbar = ({ showSearch = true }) => {
 
         <div className="flex items-center space-x-2 mr-20">
           <Link to="/">
-            <Button variant="ghost" className={`text-white hover:text-[#00B2B2] text-xs font-montserrat px-2 ${location.pathname === '/' ? 'text-[#00B2B2]' : ''}`}>
+            <Button variant="ghost" className={`${isDark ? 'text-navy hover:text-[#00B2B2]' : 'text-white hover:text-[#00B2B2]'} text-xs font-montserrat px-2 ${location.pathname === '/' ? 'text-[#00B2B2]' : ''}`}>
               Home
             </Button>
           </Link>
           <Link to="/destinations">
-            <Button variant="ghost" className={`text-white hover:text-[#00B2B2] text-xs font-montserrat px-2 ${location.pathname === '/destinations' ? 'text-[#00B2B2]' : ''}`}>
+            <Button variant="ghost" className={`${isDark ? 'text-navy hover:text-[#00B2B2]' : 'text-white hover:text-[#00B2B2]'} text-xs font-montserrat px-2 ${location.pathname === '/destinations' ? 'text-[#00B2B2]' : ''}`}>
               Destinations
             </Button>
           </Link>
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">Our Brand</Button>
-          <Button variant="ghost" className="text-white hover:text-[#00B2B2] text-xs font-montserrat px-2">For Business</Button>
+          <Button variant="ghost" className={`${isDark ? 'text-navy hover:text-[#00B2B2]' : 'text-white hover:text-[#00B2B2]'} text-xs font-montserrat px-2`}>Our Brand</Button>
+          <Button variant="ghost" className={`${isDark ? 'text-navy hover:text-[#00B2B2]' : 'text-white hover:text-[#00B2B2]'} text-xs font-montserrat px-2`}>For Business</Button>
           <Link to="/franchise">
-            <Button variant="ghost" className={`text-white hover:text-[#00B2B2] text-xs font-montserrat px-2 ${location.pathname === '/franchise' ? 'text-[#00B2B2]' : ''}`}>
+            <Button variant="ghost" className={`${isDark ? 'text-navy hover:text-[#00B2B2]' : 'text-white hover:text-[#00B2B2]'} text-xs font-montserrat px-2 ${location.pathname === '/franchise' ? 'text-[#00B2B2]' : ''}`}>
               Franchise
             </Button>
           </Link>

@@ -54,10 +54,12 @@ const Franchise = () => {
 
   return (
     <div className="min-h-screen bg-[#F2F2F2] font-montserrat">
-      <Navbar showSearch={false} />
+      <div className="h-24 bg-white"> {/* White background extension for navbar */}
+        <Navbar showSearch={false} variant="dark" />
+      </div>
       
       {/* Video Background Section */}
-      <div className="relative h-[50vh] mt-16">
+      <div className="relative h-[calc(50vh-6rem)]">
         <div className="absolute inset-0">
           <video
             src={videoUrl}
@@ -113,7 +115,7 @@ const Franchise = () => {
               return (
                 <div 
                   key={index}
-                  className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 h-[calc(40vh-2rem)]"
+                  className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 h-[calc(50vh-8rem)]"
                 >
                   <div className="w-12 h-12 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-[#FF9898]" />
