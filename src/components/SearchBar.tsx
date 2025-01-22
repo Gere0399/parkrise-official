@@ -60,10 +60,7 @@ export const SearchBar = () => {
               <ChevronDown className="w-4 h-4 text-gray-400" />
             </div>
           </PopoverTrigger>
-          <PopoverContent 
-            className="w-[calc(100vw-3rem)] bg-white shadow-lg border rounded-xl" 
-            align="start"
-          >
+          <PopoverContent className="w-[calc(100vw-3rem)] bg-white p-0" align="start">
             <div className="py-2 max-h-[50vh] overflow-auto">
               {SAMPLE_LOCATIONS.map((loc) => (
                 <div
@@ -82,12 +79,12 @@ export const SearchBar = () => {
         <div className="flex gap-2">
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" className="flex-1 justify-start text-left font-normal bg-white">
+              <Button variant="outline" className="flex-1 justify-start text-left font-normal">
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {arrival ? format(arrival, "MMM dd") : "Check in"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 bg-white shadow-lg rounded-xl border" align="start">
+            <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
                 selected={arrival}
@@ -99,12 +96,12 @@ export const SearchBar = () => {
 
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" className="flex-1 justify-start text-left font-normal bg-white">
+              <Button variant="outline" className="flex-1 justify-start text-left font-normal">
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {duration ? format(duration, "MMM dd") : "Check out"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 bg-white shadow-lg rounded-xl border" align="start">
+            <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
                 selected={duration}
@@ -115,61 +112,64 @@ export const SearchBar = () => {
           </Popover>
         </div>
 
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="outline" className="w-full justify-between text-left font-normal bg-white">
-              <span>{getRoomGuestLabel(rooms, guests)}</span>
-              <ChevronDown className="h-4 w-4" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-[calc(100vw-3rem)] p-4 bg-white shadow-lg rounded-xl border" align="start">
-            <div className="space-y-4">
-              <div>
-                <p className="text-sm font-medium mb-3">Rooms</p>
-                <div className="grid grid-cols-5 gap-2">
-                  {Array.from({length: 5}, (_, i) => i + 1).map((num) => (
-                    <div
-                      key={`room-${num}`}
-                      onClick={() => setRooms(num.toString())}
-                      className={`p-2 text-center rounded-lg cursor-pointer transition-colors ${
-                        num === Number(rooms) 
-                          ? 'bg-primary text-white' 
-                          : 'hover:bg-gray-100 border'
-                      }`}
-                    >
-                      {num}
-                    </div>
-                  ))}
+        <Select value={`${rooms}-${guests}`} onValueChange={(val) => {
+          const [r, g] = val.split('-');
+          setRooms(r);
+          setGuests(g);
+        }}>
+          <SelectTrigger className="w-full">
+            <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
+          </SelectTrigger>
+          <SelectContent className="w-[280px]">
+            <div className="p-2">
+              <h3 className="font-medium mb-2">Rooms & Guests</h3>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm mb-2">Rooms</p>
+                  <div className="grid grid-cols-5 gap-2">
+                    {Array.from({length: 5}, (_, i) => i + 1).map((num) => (
+                      <div
+                        key={`room-${num}`}
+                        onClick={() => setRooms(num.toString())}
+                        className={`p-2 text-center rounded cursor-pointer ${
+                          num === Number(rooms) 
+                            ? 'bg-primary text-white' 
+                            : 'hover:bg-gray-100'
+                        }`}
+                      >
+                        {num}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="w-full h-px bg-gray-200" />
-              <div>
-                <p className="text-sm font-medium mb-3">Guests</p>
-                <div className="grid grid-cols-5 gap-2">
-                  {Array.from({length: 5}, (_, i) => i + 1).map((num) => (
-                    <div
-                      key={`guest-${num}`}
-                      onClick={() => setGuests(num.toString())}
-                      className={`p-2 text-center rounded-lg cursor-pointer transition-colors ${
-                        num === Number(guests) 
-                          ? 'bg-primary text-white' 
-                          : 'hover:bg-gray-100 border'
-                      }`}
-                    >
-                      {num}
-                    </div>
-                  ))}
+                <div>
+                  <p className="text-sm mb-2">Guests</p>
+                  <div className="grid grid-cols-5 gap-2">
+                    {Array.from({length: 5}, (_, i) => i + 1).map((num) => (
+                      <div
+                        key={`guest-${num}`}
+                        onClick={() => setGuests(num.toString())}
+                        className={`p-2 text-center rounded cursor-pointer ${
+                          num === Number(guests) 
+                            ? 'bg-primary text-white' 
+                            : 'hover:bg-gray-100'
+                        }`}
+                      >
+                        {num}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </PopoverContent>
-        </Popover>
+          </SelectContent>
+        </Select>
 
         <Select value={specialRate} onValueChange={setSpecialRate}>
-          <SelectTrigger className="bg-white">
+          <SelectTrigger>
             <SelectValue placeholder="Special rates" />
           </SelectTrigger>
-          <SelectContent className="bg-white">
+          <SelectContent>
             <SelectItem value="group">Group</SelectItem>
             <SelectItem value="corporate">Corporate</SelectItem>
             <SelectItem value="seasonal">Seasonal</SelectItem>

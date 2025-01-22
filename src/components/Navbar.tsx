@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Link, useLocation } from "react-router-dom";
 import { MobileMenu } from "./MobileMenu";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const SAMPLE_LOCATIONS = [
   "New York, NY",
@@ -25,7 +24,6 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
   const [isNotAtTop, setIsNotAtTop] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const location = useLocation();
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,22 +46,20 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
       )}
       
       <div className="relative max-w-[1400px] mx-auto flex items-center justify-between px-4 md:px-8 py-4 md:py-6">
-        {(!isMobile || !isScrolled) && (
-          <div className="flex items-center">
-            <Link to="/">
-              <img 
-                src={isDark ? "/lovable-uploads/b64ac30e-4d72-4f40-94dc-da41b281490e.png" : "/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png"}
-                alt="Parkrise Logo" 
-                className="md:h-8 h-4 w-auto"
-              />
-            </Link>
-          </div>
-        )}
+        <div className="flex items-center">
+          <Link to="/">
+            <img 
+              src={isDark ? "/lovable-uploads/b64ac30e-4d72-4f40-94dc-da41b281490e.png" : "/lovable-uploads/3232ef68-4d90-47b1-af6c-cbce7ac2c0e5.png"}
+              alt="Parkrise Logo" 
+              className="md:h-8 h-4 w-auto"
+            />
+          </Link>
+        </div>
 
         {showSearch && isScrolled && (
           <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
             <PopoverTrigger asChild>
-              <div className={`flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full cursor-pointer border border-white ${isMobile ? 'w-full' : 'w-64'}`}>
+              <div className="flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full w-64 cursor-pointer border border-white">
                 <MapPin className="w-3 h-3 text-white shrink-0" />
                 <input
                   type="text"
