@@ -38,7 +38,7 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
   const isDark = variant === "dark";
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-[#F2F2F2] py-1' : ''}`}>
+    <nav className={`${isDark ? 'bg-[#F2F2F2] py-1' : 'fixed top-0 left-0 right-0'} z-50`}>
       {!isDark && isNotAtTop && (
         <div className="absolute inset-x-0 top-0 h-16 bg-black/20 backdrop-blur-sm transition-opacity duration-300" />
       )}
