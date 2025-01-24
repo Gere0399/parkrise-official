@@ -1,14 +1,28 @@
 import { Heart } from "lucide-react";
 import { Button } from "./ui/button";
 import { Property } from "@/pages/Destinations";
+import { useNavigate } from "react-router-dom";
 
 interface PropertyCardProps {
   property: Property;
 }
 
 export const PropertyCard = ({ property }: PropertyCardProps) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate('/space-detail');
+  };
+
+  const handleHeartClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click when clicking heart
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-4">
+    <div 
+      className="bg-white rounded-lg shadow-sm border p-4 cursor-pointer hover:shadow-md transition-shadow"
+      onClick={handleCardClick}
+    >
       <div className="flex gap-6">
         <div className="w-72 h-48 rounded-lg overflow-hidden">
           <img 
@@ -21,7 +35,12 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
         <div className="flex-1">
           <div className="flex justify-between items-start">
             <h3 className="text-xl font-medium text-gray-900">{property.name}</h3>
-            <Button variant="ghost" size="icon" className="text-gray-500 hover:text-red-500">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="text-gray-500 hover:text-red-500"
+              onClick={handleHeartClick}
+            >
               <Heart className="h-5 w-5" />
             </Button>
           </div>
@@ -43,7 +62,7 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
               ${property.price}
               <span className="text-sm text-gray-600 font-normal">/night</span>
             </div>
-            <Button>Details</Button>
+            <Button onClick={(e) => e.stopPropagation()}>Details</Button>
           </div>
         </div>
       </div>
