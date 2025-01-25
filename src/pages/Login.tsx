@@ -10,7 +10,7 @@ const Login = () => {
           alt="dropdown arrow"
           className="w-[30px] h-[30px] mb-5 lg:mb-[112px]"
         />
-        <div className="flex justify-start items-start flex-wrap lg:flex-nowrap gap-5 lg:gap-[112px] xl:ml-[58px]">
+        <div className="flex justify-start items-start flex-wrap lg:flex-nowrap gap-5 xl:gap-[112px] xl:ml-[58px]">
           <div>
             <p className="max-w-[496px] text-center font-montserrat font-semibold text-2xl leading-[35px] text-[#242424] mt-[29px]">
               Build your customized space, considering local flavours
