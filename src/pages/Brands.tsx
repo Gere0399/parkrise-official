@@ -7,8 +7,8 @@ const Brands = () => {
   return (
     <>
       <Nav />
-      <div>
-        <div className="flex justify-center items-center mt-[175px]">
+      <div className="max-w-[1440px] mx-auto ">
+        <div className="flex justify-center items-center mt-11 md:mt-[116px] px-4">
           <div>
             <h1 className="font-montserrat font-bold text-[36px] leading-[31px] text-[#0A1B2F] text-center">
               Parkrise
@@ -21,25 +21,26 @@ const Brands = () => {
             </p>
           </div>
         </div>
-        {/* <div className=" flex flex-row justify-start items-center w-full h-[430px] flex-wrap bg-[#0A1B2F] mt-[52px]">
+        <div className="grid grid-cols-1 md:grid-cols-[40%,40%,20%]  gap-4 bg-[#0A1B2F] mt-[52px] p-4 overflow-hidden">
           <img
             src="/lovable-uploads/img-1.svg"
             alt="video"
-            className="w-[576px] h-[338px]"
+            className="w-full h-full object-cover"
           />
           <img
             src="/lovable-uploads/img-2.svg"
             alt="video"
-            className="w-[576px] h-[338px]"
+            className="w-full h-full object-cover"
           />
           <img
             src="/lovable-uploads/img-3.svg"
             alt="video"
-            className="w-[289px] h-[336px]"
+            className="w-full  object-cover "
           />
-        </div> */}
-        <div className="xl:w-[1164px] w-full mt-[32px] sm:mt-[76px] xl:ml-[127px]">
-          <p className="font-montserrat font-medium text-[48px] md:text-[130px] sm:text-[70px] leading-[136px] text-[#0A1B2F] ">
+        </div>
+
+        <div className="xl:w-[1164px] w-full mt-[32px] sm:mt-[76px] xl:ml-[127px] px-4 ">
+          <p className="font-montserrat font-medium text-[48px] md:text-[130px] sm:text-[70px] sm:leading-[136px] text-[#0A1B2F] ">
             OUR BRAND
           </p>
           <div className="flex flex-row justify-between flex-wrap xl:flex-nowrap items-start mt-[21px] gap-[24px] xl:gap-[185px]">
@@ -105,7 +106,7 @@ const Brands = () => {
             </div>
           </div>
         </div>
-        <div className="md:ml-[167px] mt-[32px] md:mt-[73px] w-full md:w-[541px]">
+        <div className="md:lg:ml-[120px] lg:ml-[167px] mt-[32px] md:mt-[73px] w-full md:w-[541px] px-4">
           <p className="font-montserrat font-medium text-[36px] sm:text-[74px] leading-[46px] text-[#0A1B2F]">
             CONTACT
           </p>
@@ -184,9 +185,30 @@ const Brands = () => {
             />
           </div>
           <div className="flex justify-end">
-            <button className="text-[#0A1B2F] w-[115px] h-[35px] border border-[#14365F] leading-[22px] rounded-[15px] text-[15px] font-bold mt-[7px]">
-              Contact us
-            </button>
+            <Button
+              className="bg-white hover:bg-white text-[##A1B2F] rounded-[15px] px-5 py-[22px] relative border-0 mt-[23px]"
+              style={{
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              <span className="relative z-10 font-montserrat text-[15px] font-bold leading-[22px]">
+                Contact Us
+              </span>
+              <div
+                className="absolute inset-0 rounded-[14px]"
+                style={{
+                  border: "2px solid transparent",
+                  borderRadius: "14px",
+                  background:
+                    "linear-gradient(135deg, #004BA4 35%, #FF4400 100%) border-box",
+                  WebkitMask:
+                    "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
+                  WebkitMaskComposite: "destination-out",
+                  maskComposite: "exclude",
+                }}
+              />
+            </Button>
           </div>
         </div>
       </div>

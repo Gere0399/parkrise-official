@@ -1,13 +1,23 @@
 import { Navbar } from "@/components/Navbar";
 import { supabase } from "@/integrations/supabase/client";
-import { Building, DollarSign, BarChart3, Briefcase, Users, ChartBar, Award, Store } from "lucide-react";
+import {
+  Building,
+  DollarSign,
+  BarChart3,
+  Briefcase,
+  Users,
+  ChartBar,
+  Award,
+  Store,
+} from "lucide-react";
 import { ScheduleCallDialog } from "@/components/ScheduleCallDialog";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Nav } from "@/components/Nav";
 
 const Franchise = () => {
   const videoUrl = supabase.storage
-    .from('videos-landing')
-    .getPublicUrl('Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4')
+    .from("videos-landing")
+    .getPublicUrl("Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4")
     .data.publicUrl;
 
   const isMobile = useIsMobile();
@@ -16,59 +26,62 @@ const Franchise = () => {
     {
       icon: Building,
       title: "Perfect for Conversions",
-      description: "Quickly transform existing properties with minimal downtime and expense"
+      description:
+        "Quickly transform existing properties with minimal downtime and expense",
     },
     {
       icon: Store,
       title: "Underserved Midscale & Upper-Midscale",
-      description: "Capture growth in these booming markets for greater returns"
+      description:
+        "Capture growth in these booming markets for greater returns",
     },
     {
       icon: Award,
       title: "Renovation Flexibility",
-      description: "Upgrade on your terms, respecting your budget and timeline"
+      description: "Upgrade on your terms, respecting your budget and timeline",
     },
     {
       icon: DollarSign,
       title: "60%+ Operating Margins",
-      description: "Enjoy impressive profitability backed by our proven model"
+      description: "Enjoy impressive profitability backed by our proven model",
     },
     {
       icon: Briefcase,
       title: "Turn-Key Operational Platform",
-      description: "From staffing to marketing—everything you need, all in one place"
+      description:
+        "From staffing to marketing—everything you need, all in one place",
     },
     {
       icon: Users,
       title: "Strategic Exit Assistance",
-      description: "Secure maximum value with expert guidance when you're ready to sell"
+      description:
+        "Secure maximum value with expert guidance when you're ready to sell",
     },
     {
       icon: ChartBar,
       title: "New Business Development Support",
-      description: "Expand confidently with dedicated help to attract and retain customers"
+      description:
+        "Expand confidently with dedicated help to attract and retain customers",
     },
     {
       icon: BarChart3,
       title: "Stable Occupancy for Reliable Cashflow",
-      description: "Depend on consistent demand and year-round earnings"
-    }
+      description: "Depend on consistent demand and year-round earnings",
+    },
   ];
 
   const handleOpenDialog = () => {
-    const dialogTrigger = document.querySelector('[role="dialog"]') as HTMLButtonElement | null;
+    const dialogTrigger = document.querySelector(
+      '[role="dialog"]'
+    ) as HTMLButtonElement | null;
     if (dialogTrigger) {
       dialogTrigger.click();
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#F2F2F2] font-montserrat">
-      <div className="h-20 bg-[#F2F2F2]">
-        <Navbar showSearch={false} variant="dark" />
-      </div>
-      
-      {/* Video Background Section */}
+    <div className="min-h-screen bg-white font-montserrat">
+      <Nav />
       <div className="relative h-[calc(65vh-5rem)]">
         <div className="absolute inset-0">
           <video
@@ -88,32 +101,38 @@ const Franchise = () => {
             Empower your hospitality future
           </h1>
           <p className="text-sm text-white/90 mb-6 max-w-2xl mx-auto leading-relaxed">
-            Explore the benefits of joining Parkrise Franchise Network.
-            Maximize your apartments with hotel/real estate investment with Parkrise
-            effective strategies to help you and guests, the most from your place
+            Explore the benefits of joining Parkrise Franchise Network. Maximize
+            your apartments with hotel/real estate investment with Parkrise
+            effective strategies to help you and guests, the most from your
+            place
           </p>
           {!isMobile && <ScheduleCallDialog />}
         </div>
       </div>
 
       {/* Features Grid Section */}
-      <div className="bg-[#F2F2F2] py-8">
+      <div className="bg-[#F2F2F2] pb-10 pt-[44px]">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <div 
+                <div
                   key={index}
-                  className="bg-white rounded-xl p-8 hover:shadow-lg transition-all duration-300 h-auto md:h-[calc(40vh-4rem)]"
+                  className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 h-auto shadow-[inset_0px_1px_4px_0px_rgba(0,0,0,0.25)] max-w-[299px] hover:cursor-pointer"
                 >
-                  <div className="w-12 h-12 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-[#FF9898]" />
+                  <div className="flex justify-center items-center">
+                    <div className="w-12 h-12 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-4">
+                      <Icon className="w-6 h-6 text-[#FF9898]" />
+                    </div>
                   </div>
-                  <h3 className="text-sm font-semibold text-[#222222] mb-3 leading-tight">
-                    {feature.title}
-                  </h3>
-                  <p className="text-xs text-[#8E9196] leading-relaxed">
+                  <div className="flex justify-center items-center ">
+                    <h3 className="text-sm  text-[#222222] mb-3  font-montserrat text-[15px] font-bold leading-[18px] text-center  max-w-[200px]">
+                      {feature.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-xs text-[#8E9196]  font-montserrat text-[13px] font-medium leading-[22px] text-center ">
                     {feature.description}
                   </p>
                 </div>

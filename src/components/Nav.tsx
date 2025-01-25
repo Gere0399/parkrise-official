@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export function Nav() {
   const sidebarRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation(); // Get the current location/path
 
   const handleOpenSidebar = () => {
     if (sidebarRef?.current) {
@@ -17,6 +18,29 @@ export function Nav() {
     }
   };
 
+  const menuItems = [
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "Destinations",
+      link: "/destinations",
+    },
+    {
+      name: "Our brand",
+      link: "/our-brand",
+    },
+    {
+      name: "Franchise",
+      link: "/franchise",
+    },
+    {
+      name: "For businesses",
+      link: "/for-businesses",
+    },
+  ];
+
   return (
     <nav>
       <div className="max-w-[1440px] mx-auto ">
@@ -27,21 +51,18 @@ export function Nav() {
             className="w-[131px] h-[15px]"
           />
           <ul className="justify-start items-center gap-5 hidden md:flex lg:mr-[180px]">
-            <li className="font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer">
-              Home
-            </li>
-            <li className="font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer">
-              Destinations
-            </li>
-            <li className="font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer">
-              Our brand
-            </li>
-            <li className="font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer">
-              Franchise
-            </li>
-            <li className="font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer">
-              For businesses
-            </li>
+            {menuItems.map((item, index) => (
+              <li
+                key={index}
+                className={`font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer ${
+                  location.pathname === item.link
+                    ? "text-[#00B2B2]"
+                    : "text-black"
+                }`}
+              >
+                <Link to={item.link}>{item.name}</Link>
+              </li>
+            ))}
           </ul>
           {/* Todo- menu icon */}
           <img
@@ -74,21 +95,18 @@ export function Nav() {
             />
           </div>
           <ul className="flex flex-col justify-start items-center gap-5   mt-10">
-            <li className="font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer">
-              Home
-            </li>
-            <li className="font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer">
-              Destinations
-            </li>
-            <li className="font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer">
-              Our brand
-            </li>
-            <li className="font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer">
-              Franchise
-            </li>
-            <li className="font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer">
-              For businesses
-            </li>
+            {menuItems.map((item, index) => (
+              <li
+                key={index}
+                className={`font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer ${
+                  location.pathname === item.link
+                    ? "text-[#00B2B2]"
+                    : "text-black"
+                }`}
+              >
+                <Link to={item.link}>{item.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
