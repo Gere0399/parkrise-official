@@ -1,3 +1,4 @@
+import { Nav } from "@/components/Nav";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -24,6 +25,7 @@ const imgListData = [
 const SpaceDetail = () => {
   return (
     <>
+      <Nav />
       <div className="max-w-[1440px] mx-auto mt-8 mb-8">
         <div className="flex flex-col lg:flex-row justify-start items-start  mx-4 lg:mx-[20px] xl:mx-[60px]">
           <div className="flex-1">
