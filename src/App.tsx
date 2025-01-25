@@ -8,6 +8,7 @@ import Destinations from "./pages/Destinations";
 import Franchise from "./pages/Franchise";
 import SpaceDetail from "./pages/SpaceDetail";
 import SearchSpace from "./pages/SearchSpace";
+import Brands from "./pages/Brands";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/franchise" element={<Franchise />} />
           <Route path="/space-detail" element={<SpaceDetail />} />
           <Route path="/search-space" element={<SearchSpace />} />
+          <Route path="/brands" element={<Brands />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
