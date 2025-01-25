@@ -11,11 +11,13 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
+    console.log("Card clicked, navigating to /space-detail");
     navigate('/space-detail');
   };
 
   const handleHeartClick = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent card click when clicking heart
+    console.log("Heart clicked");
   };
 
   return (
@@ -62,7 +64,10 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
               ${property.price}
               <span className="text-sm text-gray-600 font-normal">/night</span>
             </div>
-            <Button onClick={(e) => e.stopPropagation()}>Details</Button>
+            <Button onClick={(e) => {
+              e.stopPropagation();
+              handleCardClick();
+            }}>Details</Button>
           </div>
         </div>
       </div>
