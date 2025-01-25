@@ -143,21 +143,13 @@ export const Navbar = ({ showSearch = true, variant = "light" }) => {
                 isDark
                   ? "text-navy hover:text-[#00B2B2]"
                   : "text-white hover:text-[#00B2B2]"
-              } text-xs  px-2 font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer `}
+              } text-xs  px-2 font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer ${
+                location.pathname === "/brands" ? "text-[#00B2B2]" : ""
+              }`}
             >
               Our Brand
             </Button>
           </Link>
-          <Button
-            variant="ghost"
-            className={`${
-              isDark
-                ? "text-navy hover:text-[#00B2B2]"
-                : "text-white hover:text-[#00B2B2]"
-            } text-xs font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer  px-2`}
-          >
-            For Business
-          </Button>
           <Link to="/franchise">
             <Button
               variant="ghost"

@@ -13,6 +13,7 @@ export const MobileMenu = () => {
   const menuItems = [
     { path: "/", label: "Home" },
     { path: "/destinations", label: "Destinations" },
+    { path: "/brands", label: "Our Brand" },
     { path: "/franchise", label: "Franchise" },
   ];
 
