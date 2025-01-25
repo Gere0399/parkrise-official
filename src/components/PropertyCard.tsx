@@ -11,12 +11,8 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    console.log("Card clicked, attempting navigation to /space-detail");
-    try {
-      navigate("/space-detail");
-    } catch (error) {
-      console.error("Navigation error:", error);
-    }
+    console.log("Attempting navigation to space-detail");
+    navigate("/space-detail", { replace: true });
   };
 
   const handleHeartClick = (e: React.MouseEvent) => {
