@@ -64,7 +64,6 @@ const Destinations = () => {
           </Button>
         </div>
         <div className="flex gap-6">
-          {/* Left side - Property listings */}
           <div className="w-2/3">
             <div className="space-y-6">
               {SAMPLE_PROPERTIES
@@ -77,7 +76,6 @@ const Destinations = () => {
             </div>
           </div>
           
-          {/* Right side - Map */}
           <div className="w-1/3 sticky top-24 h-[calc(100vh-6rem)]">
             <Map properties={SAMPLE_PROPERTIES} selectedLocation={selectedLocation} />
           </div>

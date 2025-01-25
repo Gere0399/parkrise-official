@@ -11,19 +11,30 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    console.log("Card clicked, navigating to /space-detail");
-    navigate('/space-detail');
+    console.log("Card clicked, attempting navigation to /space-detail");
+    try {
+      navigate("/space-detail");
+    } catch (error) {
+      console.error("Navigation error:", error);
+    }
   };
 
   const handleHeartClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card click when clicking heart
+    e.stopPropagation();
     console.log("Heart clicked");
   };
 
   return (
     <div 
-      className="bg-white rounded-lg shadow-sm border p-4 cursor-pointer hover:shadow-md transition-shadow"
       onClick={handleCardClick}
+      className="bg-white rounded-lg shadow-sm border p-4 cursor-pointer hover:shadow-md transition-shadow"
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          handleCardClick();
+        }
+      }}
     >
       <div className="flex gap-6">
         <div className="w-72 h-48 rounded-lg overflow-hidden">
@@ -64,10 +75,14 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
               ${property.price}
               <span className="text-sm text-gray-600 font-normal">/night</span>
             </div>
-            <Button onClick={(e) => {
-              e.stopPropagation();
-              handleCardClick();
-            }}>Details</Button>
+            <Button 
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCardClick();
+              }}
+            >
+              Details
+            </Button>
           </div>
         </div>
       </div>
