@@ -13,7 +13,7 @@ const Index = () => {
     .getPublicUrl("0121.mp4").data.publicUrl;
 
   return (
-    <div className="min-h-screen font-montserrat">
+    <div className="font-montserrat">
       <div className="relative h-screen">
         <div className="absolute inset-0">
           <video

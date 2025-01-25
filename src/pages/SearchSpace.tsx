@@ -67,9 +67,9 @@ const SearchSpace = () => {
   ];
 
   return (
-    <>
+    <div className="relative">
       <Nav />
-      <div className="max-w-[1440px] mx-auto mt-8 mb-8">
+      <div className="max-w-[1440px] mx-auto mt-32 mb-8">
         <div className="mx-4 lg:mx-0 lg:ml-[20px] xl:ml-[55px]">
           <div className="flex-wrap xl:flex-nowrap flex justify-start items-start gap-4">
             <div>
@@ -343,7 +343,15 @@ const SearchSpace = () => {
           </div>
         </div>
       </div>
-    </>
+      <div className="fixed right-3 bottom-6 w-[4.375rem] h-[4.375rem] bg-[#2E2E2E] rounded-full flex flex-col items-center justify-center ">
+        {" "}
+        <img
+          src="/icons/questionSign.svg"
+          alt="questionSign"
+          className="w-[1.875rem] h-[1.875rem]"
+        />
+      </div>
+    </div>
   );
 };
 

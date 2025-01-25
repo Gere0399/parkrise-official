@@ -4,17 +4,31 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <>
-      <div className="container px-4 py-4 md:px-[89px] md:py-[126px]">
-        <img
-          src="/icons/backArrow.svg"
-          alt="dropdown arrow"
-          className="w-[30px] h-[30px] mb-5 lg:mb-[112px]"
-        />
+      <div className="container px-4 py-4 ">
+        <Link to="/">
+          <img
+            src="/icons/backArrow.svg"
+            alt="dropdown arrow"
+            className="w-[30px] h-[30px] mb-5 lg:mb-[112px]"
+          />
+        </Link>
         <div className="flex justify-center  lg:justify-start items-start flex-wrap lg:flex-nowrap gap-5 xl:gap-[112px] xl:ml-[58px]">
           <div>
             <p className="max-w-[496px] text-center font-montserrat font-semibold text-2xl leading-[35px] text-[#242424] mt-[29px]">
               Build your customized space, considering local flavours
             </p>
+            <div className="w-full">
+              <div className="relative rounded-lg overflow-hidden shadow-xl transition-all duration-500 transform mt-8">
+                <video
+                  src="/videos/login.mp4"
+                  className="w-full h-[350px] object-cover"
+                  muted
+                  playsInline
+                  loop
+                  autoPlay
+                />
+              </div>
+            </div>
           </div>
           <div className="w-[501px]">
             <button className="flex justify-center items-center w-full h-[61px] gap-2 bg-[#242424] border border-[#393939] rounded-[6px]">
@@ -37,12 +51,12 @@ const Login = () => {
                 Facebook
               </p>
             </button>
-            <div className="flex justify-start items-center flex-wrap sm:flex-nowrap mt-[19px] gap-[26px]">
-              <hr className="w-[174px] border-t border-[#3B3940]" />
-              <p className="font-poppins font-medium text-[14px] w-[109px] leading-[21px] text-[#242424]">
+            <div className="flex justify-start items-center  mt-[19px] gap-2">
+              <hr className="w-full md:w-[174px] border-t border-[#3B3940]" />
+              <p className="font-poppins  font-medium text-[14px] text-center min-w-[140px] leading-[21px] text-[#242424]">
                 Or register with
               </p>
-              <hr className="w-[174px] border-t border-[#3B3940]" />
+              <hr className="w-full md:w-[174px]  border-t border-[#3B3940]" />
             </div>
             <input
               type="text"

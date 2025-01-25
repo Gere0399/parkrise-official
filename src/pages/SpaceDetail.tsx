@@ -23,9 +23,9 @@ const imgListData = [
 
 const SpaceDetail = () => {
   return (
-    <>
+    <div className="relative">
       <Nav />
-      <div className="max-w-[1440px] mx-auto mt-8 mb-8">
+      <div className="max-w-[1440px] mx-auto mt-32 mb-8">
         <div className="flex flex-col lg:flex-row justify-start items-start  mx-4 lg:mx-[20px] xl:mx-[60px]">
           <div className="flex-1">
             <Link to="/">
@@ -189,7 +189,15 @@ const SpaceDetail = () => {
           </div>
         </div>
       </div>
-    </>
+      <div className="fixed right-3 bottom-6 w-[4.375rem] h-[4.375rem] bg-[#2E2E2E] rounded-full flex flex-col items-center justify-center ">
+        {" "}
+        <img
+          src="/icons/questionSign.svg"
+          alt="questionSign"
+          className="w-[1.875rem] h-[1.875rem]"
+        />
+      </div>
+    </div>
   );
 };
 
