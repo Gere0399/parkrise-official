@@ -46,9 +46,9 @@ export function Nav() {
           {/* Todo- menu icon */}
           <img
             src="/icons/menu.svg"
-            alt="back arrow"
+            alt="menu"
             onClick={handleOpenSidebar}
-            className="block md:hidden"
+            className="block md:hidden size-8"
           />
         </div>
       </div>
