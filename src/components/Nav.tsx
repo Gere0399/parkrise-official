@@ -45,7 +45,7 @@ export function Nav() {
           </ul>
           {/* Todo- menu icon */}
           <img
-            src="/icons/left-arrow.svg"
+            src="/icons/menu.svg"
             alt="back arrow"
             onClick={handleOpenSidebar}
             className="block md:hidden"
@@ -60,7 +60,7 @@ export function Nav() {
         <div>
           <div className="flex justify-end items-center w-full">
             <img
-              src="/icons/left-arrow.svg"
+              src="/icons/cross.svg"
               alt="back arrow"
               onClick={handleCloseSidebar}
             />
