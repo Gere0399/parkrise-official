@@ -211,6 +211,56 @@ const Brands = () => {
             </Button>
           </div>
         </div>
+        <div className="w-full h-[28px] bg-[#0A1B2F] mt-4"></div>
+        <div className="w-full bg-[#EFECE7] border-[0.5px] border-[#D9D9D9] shadow-[0px_1px_1.8px_#9F9D9A]">
+          <div className="flex flex-row justify-between items-center px-[52px] py-5 flex-wrap lg:flex-nowrap gap-4">
+            <div className="flex flex-row justify-start items-center flex-wrap md:flex-nowrap gap-5 md:gap-10">
+              <p className="font-montserrat font-normal text-[20px] leading-[22px] text-[#0A1B2F]">
+                Home
+              </p>
+              <p className="font-montserrat font-normal text-[20px] leading-[22px] text-[#0A1B2F]">
+                Residents
+              </p>
+              <p className="font-montserrat font-normal text-[20px] leading-[22px] text-[#0A1B2F]">
+                Our brand
+              </p>
+              <p className="font-montserrat font-normal text-[20px] leading-[22px] text-[#0A1B2F]">
+                For Business
+              </p>
+            </div>
+            <div className="flex flex-row justify-start items-center gap-10">
+              <p className="font-montserrat font-normal text-[12px] leading-[13px] text-[#0A1B2F]">
+                hello@parkrise.com
+              </p>
+              <div>
+                <p className="font-montserrat font-normal text-[12px] leading-[13px] text-[#0A1B2F]">
+                  Facebook
+                </p>
+                <p className="font-montserrat font-normal text-[12px] leading-[13px] text-[#0A1B2F]">
+                  Instagram
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="w-full h-0 border-[1px] border-[#979693] transform rotate-[180deg]"></div>
+          <div className="px-[20px] py-[23px] sm:px-[27px] sm:py-[30px] md:px-[37px] md:py-[40px] lg:px-[57px] lg:py-[60px] xl:px-[77px] xl:py-[80px]">
+            <img
+              src={"/lovable-uploads/b64ac30e-4d72-4f40-94dc-da41b281490e.png"}
+              alt="Parkrise Logo"
+              className="w-full h-full"
+            />
+          </div>
+        </div>
+        <div className="flex flex-row justify-between items-center w-full bg-[#FFFFFF] py-5 px-5 md:px-[117px] flex-wrap md:flex-nowrap gap-4">
+          <p className="font-montserrat font-bold text-[20px] leading-[15px] text-[#0A1A31]">
+            Live. Stay. Belong.
+          </p>
+          <p className="font-open-sans font-normal text-[12px] leading-[12px] text-[#717171] max-w-[271px]">
+            Parkrise redefines flexible lodging by creating a seamless blend of
+            residential comfort, hotel convenience, and authentic local
+            immersion.
+          </p>
+        </div>
       </div>
     </>
   );
