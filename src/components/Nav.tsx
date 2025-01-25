@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export function Nav({ variant }: { variant?: string }) {
   const sidebarRef = useRef<HTMLDivElement | null>(null);
-  const location = useLocation(); // Get the current location/path
+  const location = useLocation();
 
   const handleOpenSidebar = () => {
     if (sidebarRef?.current) {
@@ -34,10 +34,6 @@ export function Nav({ variant }: { variant?: string }) {
     {
       name: "Franchise",
       link: "/franchise",
-    },
-    {
-      name: "For businesses",
-      link: "#",
     },
   ];
 
@@ -94,7 +90,6 @@ export function Nav({ variant }: { variant?: string }) {
             />
           </div>
           <div className="flex justify-center items-center">
-            {/* Todo- cross icon */}
             <img
               src={"/lovable-uploads/b64ac30e-4d72-4f40-94dc-da41b281490e.png"}
               alt="Parkrise Logo"
