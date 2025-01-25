@@ -5,9 +5,21 @@ import { useNavigate } from "react-router-dom";
 
 const perks = [
   { id: 1, name: "Outdoor Space", video: "output.mp4" },
-  { id: 2, name: "Premium Fitness", video: "Professional_Mode_Generated_Video (2).mp4" },
-  { id: 3, name: "Food & Beverages", video: "Professional_Mode_the_girl_is_walking_gracefoully_.mp4" },
-  { id: 4, name: "Living Plants & Natural Materials", video: "Professional_Mode_the_girl_is_turning_around_slowl.mp4" },
+  {
+    id: 2,
+    name: "Premium Fitness",
+    video: "Professional_Mode_Generated_Video (2).mp4",
+  },
+  {
+    id: 3,
+    name: "Food & Beverages",
+    video: "Professional_Mode_the_girl_is_walking_gracefoully_.mp4",
+  },
+  {
+    id: 4,
+    name: "Living Plants & Natural Materials",
+    video: "Professional_Mode_the_girl_is_turning_around_slowl.mp4",
+  },
 ];
 
 export const PerksSection = () => {
@@ -20,9 +32,9 @@ export const PerksSection = () => {
 
   const getVideoUrl = (fileName: string): string => {
     const { data } = supabase.storage
-      .from('videos-landing')
+      .from("videos-landing")
       .getPublicUrl(fileName);
-    return data?.publicUrl || '';
+    return data?.publicUrl || "";
   };
 
   // Handle auto-sliding
@@ -31,10 +43,12 @@ export const PerksSection = () => {
       if (autoplayTimeoutRef.current) {
         clearTimeout(autoplayTimeoutRef.current);
       }
-      
+
       autoplayTimeoutRef.current = setInterval(() => {
         if (!isAutoplayPaused) {
-          const currentIndex = perks.findIndex(perk => perk.name === selectedPerk);
+          const currentIndex = perks.findIndex(
+            (perk) => perk.name === selectedPerk
+          );
           const nextIndex = (currentIndex + 1) % perks.length;
           setSelectedPerk(perks[nextIndex].name);
         }
@@ -57,11 +71,11 @@ export const PerksSection = () => {
   const handlePerkSelect = (perkName: string) => {
     setSelectedPerk(perkName);
     setIsAutoplayPaused(true);
-    
+
     if (pauseTimeoutRef.current) {
       clearTimeout(pauseTimeoutRef.current);
     }
-    
+
     pauseTimeoutRef.current = setTimeout(() => {
       setIsAutoplayPaused(false);
     }, 15000);
@@ -69,7 +83,7 @@ export const PerksSection = () => {
 
   // Preload all videos
   useEffect(() => {
-    perks.forEach(perk => {
+    perks.forEach((perk) => {
       const video = new Audio();
       video.src = getVideoUrl(perk.video);
       video.preload = "auto";
@@ -80,23 +94,24 @@ export const PerksSection = () => {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.load();
-      videoRef.current.play().catch(error => {
-        if (error.name !== 'AbortError') {
-          console.error('Error playing video:', error);
+      videoRef.current.play().catch((error) => {
+        if (error.name !== "AbortError") {
+          console.error("Error playing video:", error);
         }
       });
     }
   }, [selectedPerk]);
 
-  const selectedVideo = perks.find(perk => perk.name === selectedPerk)?.video || perks[0].video;
+  const selectedVideo =
+    perks.find((perk) => perk.name === selectedPerk)?.video || perks[0].video;
 
   const handleNavigateToDestinations = () => {
-    navigate('/destinations');
+    navigate("/destinations");
   };
 
   return (
     <div className="bg-navy">
-      <div className="min-h-screen py-20">
+      <div className="py-20">
         <div className="max-w-[1400px] mx-auto px-8 md:px-16">
           {/* Title Section */}
           <div className="text-center mb-16">
@@ -125,8 +140,8 @@ export const PerksSection = () => {
             <div className="w-full md:w-1/3 space-y-8">
               <div className="space-y-6">
                 <p className="text-white text-xl font-light leading-relaxed">
-                  This is your space, and our neighborhood is about to be yours. Check out some of 
-                  the Parkrise perks
+                  This is your space, and our neighborhood is about to be yours.
+                  Check out some of the Parkrise perks
                 </p>
               </div>
 
@@ -137,20 +152,24 @@ export const PerksSection = () => {
                     className="flex items-center space-x-3 text-white cursor-pointer group transition-all duration-300"
                     onClick={() => handlePerkSelect(perk.name)}
                   >
-                    <div className={`w-3 h-3 rounded-full transition-all duration-300 flex items-center justify-center ${
-                      selectedPerk === perk.name 
-                        ? "bg-transparent border-2 border-white scale-110" 
-                        : "border border-white/50 hover:border-white"
-                    }`}>
+                    <div
+                      className={`w-3 h-3 rounded-full transition-all duration-300 flex items-center justify-center ${
+                        selectedPerk === perk.name
+                          ? "bg-transparent border-2 border-white scale-110"
+                          : "border border-white/50 hover:border-white"
+                      }`}
+                    >
                       {selectedPerk === perk.name && (
                         <div className="w-1.5 h-1.5 bg-white rounded-full animate-fade-in" />
                       )}
                     </div>
-                    <span className={`text-base font-light tracking-wide transition-all duration-300 ${
-                      selectedPerk === perk.name
-                        ? "text-secondary translate-x-1"
-                        : "group-hover:text-secondary/80"
-                    }`}>
+                    <span
+                      className={`text-base font-light tracking-wide transition-all duration-300 ${
+                        selectedPerk === perk.name
+                          ? "text-secondary translate-x-1"
+                          : "group-hover:text-secondary/80"
+                      }`}
+                    >
                       {perk.name}
                     </span>
                   </div>
@@ -160,9 +179,14 @@ export const PerksSection = () => {
           </div>
 
           {/* Arrows and Text Section */}
-          <div className="flex flex-col items-center mt-16 space-y-4 cursor-pointer" onClick={handleNavigateToDestinations}>
+          <div
+            className="flex flex-col items-center mt-16 space-y-4 cursor-pointer"
+            onClick={handleNavigateToDestinations}
+          >
             <ArrowDown className="w-8 h-8 text-white animate-bounce" />
-            <p className="text-white text-lg font-medium hover:text-[#F97316] transition-colors">See our spaces</p>
+            <p className="text-white text-lg font-medium hover:text-[#F97316] transition-colors">
+              See our spaces
+            </p>
             <ArrowUp className="w-8 h-8 text-white animate-bounce-delayed" />
           </div>
         </div>

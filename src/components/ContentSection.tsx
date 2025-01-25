@@ -9,14 +9,16 @@ export const ContentSection = () => {
   const [isManualSelection, setIsManualSelection] = useState(false);
   const [isTextPulsing, setIsTextPulsing] = useState(false);
   const [slidePosition, setSlidePosition] = useState(0);
-  const [preloadedVideos, setPreloadedVideos] = useState<Record<string, boolean>>({});
+  const [preloadedVideos, setPreloadedVideos] = useState<
+    Record<string, boolean>
+  >({});
   const videoEndedRef = useRef<boolean>(false);
   const isMobile = useIsMobile();
 
   useEffect(() => {
     const preloadVideos = async () => {
       const preloaded: Record<string, boolean> = {};
-      
+
       for (const tag of tags) {
         const videos = slideContent[tag].videos;
         for (const video of videos) {
@@ -30,7 +32,7 @@ export const ContentSection = () => {
           }
         }
       }
-      
+
       setPreloadedVideos(preloaded);
     };
 
@@ -65,15 +67,15 @@ export const ContentSection = () => {
   const handleSlideChange = () => {
     const currentIndex = tags.indexOf(activeTag);
     const nextIndex = (currentIndex + 1) % tags.length;
-    
+
     setSlidePosition(-100);
     videoEndedRef.current = false;
-    
+
     setTimeout(() => {
       setActiveTag(tags[nextIndex]);
       setSlidePosition(0);
       setIsTextPulsing(true);
-      
+
       setTimeout(() => {
         setIsTextPulsing(false);
       }, 300);
@@ -85,12 +87,12 @@ export const ContentSection = () => {
       setIsManualSelection(true);
       setSlidePosition(-100);
       videoEndedRef.current = false;
-      
+
       setTimeout(() => {
         setActiveTag(tag);
         setSlidePosition(0);
         setIsTextPulsing(true);
-        
+
         setTimeout(() => {
           setIsTextPulsing(false);
         }, 300);
@@ -101,10 +103,10 @@ export const ContentSection = () => {
         (acc, video) => acc + (video.duration || 5),
         0
       );
-      
+
       // Add buffer time for transitions
       const totalDurationWithBuffer = totalDuration + 0.5;
-      
+
       setTimeout(() => {
         setIsManualSelection(false);
       }, totalDurationWithBuffer * 1000);
@@ -119,28 +121,32 @@ export const ContentSection = () => {
   };
 
   return (
-    <div className="min-h-screen bg-navy py-20 px-6">
+    <div className=" bg-navy py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-4xl font-semibold text-secondary mb-2">
+        <h2 className="text-4xl md:text-4xl font-semibold text-[#FF723F] mb-2 ">
           Live here in a furnished apartment-style suite.
         </h2>
-        <p className="text-4xl md:text-4xl font-semibold text-secondary mb-8">
+        <p className="text-4xl md:text-4xl font-semibold text-[#FF723F] mb-8">
           Or, stay for a quick trip.
         </p>
 
-        <TagButtons 
-          tags={tags} 
-          activeTag={activeTag} 
-          onTagClick={handleTagClick} 
+        <TagButtons
+          tags={tags}
+          activeTag={activeTag}
+          onTagClick={handleTagClick}
         />
 
         <div className="relative overflow-hidden">
-          <div 
+          <div
             className="transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(${slidePosition}%)` }}
           >
-            <div className={`grid ${isMobile ? 'grid-cols-1 gap-6' : 'grid-cols-2 gap-8'}`}>
-              <SlideContent 
+            <div
+              className={`grid ${
+                isMobile ? "grid-cols-1 gap-6" : "grid-cols-2 gap-8"
+              }`}
+            >
+              <SlideContent
                 videos={slideContent[activeTag].videos}
                 text={slideContent[activeTag].text}
                 isTextPulsing={isTextPulsing}
