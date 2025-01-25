@@ -20,7 +20,7 @@ const Login = () => {
             <div className="w-full">
               <div className="relative rounded-lg overflow-hidden shadow-xl transition-all duration-500 transform mt-8">
                 <video
-                  src="/videos/login.mp4"
+                  src="/videos/login-short.mp4"
                   className="w-full h-[350px] object-cover"
                   muted
                   playsInline
