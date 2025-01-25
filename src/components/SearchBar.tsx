@@ -57,7 +57,7 @@ export const SearchBar = () => {
 
   if (isMobile) {
     return (
-      <div className="flex flex-col gap-4 w-full bg-white md:bg-white/90 backdrop-blur-sm rounded-3xl p-4 ml-16"> {/* Changed ml-4 to ml-16 */}
+      <div className="flex flex-col gap-4 w-full bg-white md:bg-white/90 backdrop-blur-sm rounded-3xl p-4 ml-4">
         <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
           <PopoverTrigger asChild>
             <div className="flex items-center p-3 bg-white rounded-xl border cursor-pointer">
@@ -411,4 +411,3 @@ export const SearchBar = () => {
     </div>
   );
 };
-
