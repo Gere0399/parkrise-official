@@ -1,161 +1,51 @@
-import { Navbar } from "@/components/Navbar";
-import { supabase } from "@/integrations/supabase/client";
-import {
-  Building,
-  DollarSign,
-  BarChart3,
-  Briefcase,
-  Users,
-  ChartBar,
-  Award,
-  Store,
-} from "lucide-react";
-import { ScheduleCallDialog } from "@/components/ScheduleCallDialog";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
+import HelpButton from "@/components/HelpButton";
 
 const Franchise = () => {
-  const videoUrl = supabase.storage
-    .from("videos-landing")
-    .getPublicUrl("Professional_Mode_16x9_The_2_man_are_talking_and_there_.mp4")
-    .data.publicUrl;
-
-  const isMobile = useIsMobile();
-
-  const features = [
-    {
-      icon: Building,
-      title: "Perfect for Conversions",
-      description:
-        "Quickly transform existing properties with minimal downtime and expense",
-    },
-    {
-      icon: Store,
-      title: "Underserved Midscale & Upper-Midscale",
-      description:
-        "Capture growth in these booming markets for greater returns",
-    },
-    {
-      icon: Award,
-      title: "Renovation Flexibility",
-      description: "Upgrade on your terms, respecting your budget and timeline",
-    },
-    {
-      icon: DollarSign,
-      title: "60%+ Operating Margins",
-      description: "Enjoy impressive profitability backed by our proven model",
-    },
-    {
-      icon: Briefcase,
-      title: "Turn-Key Operational Platform",
-      description:
-        "From staffing to marketing—everything you need, all in one place",
-    },
-    {
-      icon: Users,
-      title: "Strategic Exit Assistance",
-      description:
-        "Secure maximum value with expert guidance when you're ready to sell",
-    },
-    {
-      icon: ChartBar,
-      title: "New Business Development Support",
-      description:
-        "Expand confidently with dedicated help to attract and retain customers",
-    },
-    {
-      icon: BarChart3,
-      title: "Stable Occupancy for Reliable Cashflow",
-      description: "Depend on consistent demand and year-round earnings",
-    },
-  ];
-
-  const handleOpenDialog = () => {
-    const dialogTrigger = document.querySelector(
-      '[role="dialog"]'
-    ) as HTMLButtonElement | null;
-    if (dialogTrigger) {
-      dialogTrigger.click();
-    }
-  };
-
   return (
-    <div className="relative bg-white font-montserrat mt-20">
+    <div>
       <Nav />
-      <div className="relative h-[calc(65vh-5rem)]">
-        <div className="absolute inset-0">
-          <video
-            src={videoUrl}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-
-        {/* Centered Content over video */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            Empower your hospitality future
+      <div className="max-w-[1440px] mx-auto mt-32 px-4 lg:px-0">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-4xl font-bold text-center mb-8">
+            Franchise Opportunities
           </h1>
-          <p className="text-sm text-white/90 mb-6 max-w-2xl mx-auto leading-relaxed">
-            Explore the benefits of joining Parkrise Franchise Network. Maximize
-            your apartments with hotel/real estate investment with Parkrise
-            effective strategies to help you and guests, the most from your
-            place
+          <p className="text-lg text-gray-600 text-center max-w-2xl mb-12">
+            Join our growing network of successful franchisees and be part of a
+            revolutionary space-sharing platform. We offer comprehensive support,
+            proven business models, and extensive training to help you succeed.
           </p>
-          {!isMobile && <ScheduleCallDialog />}
-        </div>
-      </div>
-
-      {/* Features Grid Section */}
-      <div className="bg-[#F2F2F2] pb-10 pt-[44px]">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 h-auto shadow-[inset_0px_1px_4px_0px_rgba(0,0,0,0.25)] w-full md:max-w-[299px] max-w-[340px] hover:cursor-pointer"
-                >
-                  <div className="flex justify-center items-center">
-                    <div className="w-12 h-12 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-[#FF9898]" />
-                    </div>
-                  </div>
-                  <div className="flex justify-center items-center ">
-                    <h3 className="text-sm  text-[#222222] mb-3  font-montserrat text-[15px] font-bold leading-[18px] text-center  max-w-[200px]">
-                      {feature.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-xs text-[#8E9196]  font-montserrat text-[13px] font-medium leading-[22px] text-center ">
-                    {feature.description}
-                  </p>
-                </div>
-              );
-            })}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <div className="p-6 bg-white rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">Initial Investment</h3>
+              <p className="text-gray-600">
+                Learn about the financial requirements and investment opportunities
+                available for potential franchisees.
+              </p>
+            </div>
+            <div className="p-6 bg-white rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">Training & Support</h3>
+              <p className="text-gray-600">
+                Comprehensive training programs and ongoing support to ensure your
+                success in the market.
+              </p>
+            </div>
+            <div className="p-6 bg-white rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">Market Analysis</h3>
+              <p className="text-gray-600">
+                Detailed market research and territory analysis to help you make
+                informed decisions.
+              </p>
+            </div>
           </div>
+          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+            Request Information
+          </button>
         </div>
       </div>
-
-      {/* Mobile CTA */}
-      {isMobile && (
-        <div className="fixed bottom-6 left-0 right-0 flex justify-center px-4 z-30">
-          <ScheduleCallDialog />
-        </div>
-      )}
-      <div className="fixed right-3 bottom-6 w-[4.375rem] h-[4.375rem] bg-[#2E2E2E] rounded-full flex flex-col items-center justify-center ">
-        {" "}
-        <img
-          src="/icons/questionSign.svg"
-          alt="questionSign"
-          className="w-[1.875rem] h-[1.875rem]"
-        />
-      </div>
+      <Footer />
+      <HelpButton />
     </div>
   );
 };
