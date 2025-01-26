@@ -28,7 +28,7 @@ const SpaceDetail = () => {
       <div className="max-w-[1440px] mx-auto mt-32 mb-8">
         <div className="flex flex-col lg:flex-row justify-start items-start  mx-4 lg:mx-[20px] xl:mx-[60px]">
           <div className="flex-1">
-            <Link to="/">
+            <Link to="/destinations">
               <img src="/icons/left-arrow.svg" alt="back arrow" />
             </Link>
             <h1 className="mt-4 font-montserrat text-[28px] lg:text-[40px] font-medium leading-[34px] lg:leading-[38px] tracking-[-0.01em] text-left text-[#092D58] w-full lg:w-[294px]">

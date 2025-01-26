@@ -13,7 +13,7 @@ export const MapView = () => {
   if (!isLoaded) return <div>Loading...</div>;
 
   return (
-    <div className="w-full h-[500px]  md:h-[750px] mx-auto p-4">
+    <div className="w-full h-[300px] lg:h-[calc(100vh-160px)] mx-auto ">
       <div className="relative w-full  rounded-lg  h-full  overflow-hidden">
         <GoogleMap
           mapContainerStyle={{

@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
 import { Nav } from "@/components/Nav";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { MapView } from "@/components/GoogleMap";
+import { Link } from "react-router-dom";
 
 const SearchSpace = () => {
   const [selectedOption, setSelectedOption] = useState("1 Room, 1 Guest");
@@ -21,6 +20,7 @@ const SearchSpace = () => {
     "Kyoto, Japan",
     "Hokkaido, Japan",
   ];
+  const [sortOrder, setSortOrder] = useState("lowest"); // Track sort order
 
   const cardData = [
     {
@@ -66,10 +66,17 @@ const SearchSpace = () => {
     },
   ];
 
+  const sortedData = [...cardData].sort((a, b) => {
+    if (sortOrder === "highest") {
+      return a.price - b.price;
+    } else {
+      return b.price - a.price;
+    }
+  });
   return (
-    <div className="relative">
+    <div className="relative ">
       <Nav />
-      <div className="max-w-[1440px] mx-auto mt-32 mb-8">
+      <div className="max-w-[1440px] mx-auto mt-32  h-auto xl:max-h-[calc(100vh-160px)] overflow-auto xl:overflow-hidden">
         <div className="mx-4 lg:mx-0 lg:ml-[20px] xl:ml-[55px]">
           <div className="flex-wrap xl:flex-nowrap flex justify-start items-start gap-4">
             <div>
@@ -266,18 +273,29 @@ const SearchSpace = () => {
                   />
                 </div>
               </div>
-              <div className="flex flex-row justify-start items-center gap-[11px] mt-6 w-[272px] h-[36px] bg-[#F0F4F9] rounded-[25px] px-[8px] py-1">
-                <button className="ml-[15px] font-montserrat font-medium text-[14px] leading-[23px] text-[#0A1B2F]">
+              <div className="flex flex-row justify-start items-center  mt-6 w-[272px] h-[36px] bg-[#F0F4F9] rounded-[25px] px-[8px] py-1">
+                <button
+                  onClick={() => setSortOrder("highest")}
+                  className={`w-[131px] h-[28px] ${
+                    sortOrder === "highest" ? "bg-[#FFFFFF]" : "bg-transparent"
+                  } rounded-[25px] font-montserrat font-semibold text-[14px] leading-[23px] text-[#0A1B2F]`}
+                >
                   Highest Price
                 </button>
-                <button className="w-[131px] h-[28px] bg-[#FFFFFF] rounded-[25px] font-montserrat font-semibold text-[14px] leading-[23px] text-[#0A1B2F]">
+                <button
+                  onClick={() => setSortOrder("lowest")}
+                  className={`w-[131px] h-[28px] ${
+                    sortOrder === "lowest" ? "bg-[#FFFFFF]" : "bg-transparent"
+                  } rounded-[25px] font-montserrat font-semibold text-[14px] leading-[23px] text-[#0A1B2F]`}
+                >
                   Lowest Price
                 </button>{" "}
               </div>
               {/* card */}
-              <div className="flex flex-col gap-[30px] mt-[18px] max-h-[600px] overflow-y-auto pb-20">
-                {cardData.map((card) => (
-                  <div
+              <div className="flex flex-col gap-[30px] mt-[18px] max-h-[calc(100vh-160px)] overflow-y-auto pb-20">
+                {sortedData.map((card) => (
+                  <Link
+                    to={`/space-detail/${card.id}`}
                     key={card.id}
                     className="bg-[#f9f8fc] hover:bg-[#F7FBFF] border-l border-t border-b border-[#F5F5F5] shadow-[0px_2px_2px_rgba(0,0,0,0.13)] rounded-[25px] flex flex-row items-center justify-between gap-[23px] w-full md:w-[750px] lg:w-[865px] py-[13px] pl-[18px] px-[9px] flex-wrap md:flex-nowrap  hover:cursor-pointer pr-7"
                   >
@@ -335,7 +353,7 @@ const SearchSpace = () => {
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -344,7 +362,6 @@ const SearchSpace = () => {
         </div>
       </div>
       <div className="fixed right-3 bottom-6 w-[4.375rem] h-[4.375rem] bg-[#2E2E2E] rounded-full flex flex-col items-center justify-center ">
-        {" "}
         <img
           src="/icons/questionSign.svg"
           alt="questionSign"

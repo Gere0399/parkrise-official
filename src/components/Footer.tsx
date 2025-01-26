@@ -132,19 +132,19 @@ export function Footer() {
             </p>
           </div>
           <div className="flex flex-row justify-start items-center gap-10 mr-0 lg:mr-40">
-            <p className="font-montserrat font-normal text-[12px] leading-[13px] text-[#0A1B2F]">
+            <p className="font-montserrat font-normal text-[14px] leading-[13px] text-[#0A1B2F]">
               <span className="border-b-[2px] border-[#A8A8A8]">
                 hello@parkrise
               </span>
               .com
             </p>
             <div className="flex flex-col gap-1">
-              <p className="font-montserrat font-normal text-[12px] leading-[13px] text-[#0A1B2F]">
+              <p className="font-montserrat font-normal text-[14px] leading-[13px] text-[#0A1B2F]">
                 <span className="border-b-[2px] border-[#A8A8A8]">Facebo</span>
                 ok
               </p>
 
-              <p className="font-montserrat font-normal text-[12px] leading-[13px] text-[#0A1B2F]">
+              <p className="font-montserrat font-normal text-[14px] leading-[13px] text-[#0A1B2F]">
                 <span className="border-b-[2px] border-[#A8A8A8]">
                   Instagra
                 </span>
@@ -167,7 +167,7 @@ export function Footer() {
         <p className="font-montserrat font-bold text-[20px] leading-[15px] text-[#0A1A31]">
           Live. Stay. Belong.
         </p>
-        <p className="font-open-sans font-normal text-[12px] leading-[12px] text-[#717171] max-w-[271px]">
+        <p className="font-open-sans font-normal text-[14px] leading-[12px] text-[#717171] max-w-[271px]">
           Parkrise redefines flexible lodging by creating a seamless blend of
           residential comfort, hotel convenience, and authentic local immersion.
         </p>
