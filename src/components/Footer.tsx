@@ -56,7 +56,7 @@ export function Footer() {
         <p className="font-montserrat font-bold text-[20px] leading-[15px] text-[#0A1A31]">
           Live. Stay. Belong.
         </p>
-        <p className="font-open-sans font-normal text-[14px] leading-[12px] text-[#717171] max-w-[271px]">
+        <p className="font-open-sans font-normal text-[13px] leading-[22px] text-[#717171] max-w-[271px] line-clamp-3">
           Parkrise redefines flexible lodging by creating a seamless blend of
           residential comfort, hotel convenience, and authentic local immersion.
         </p>
