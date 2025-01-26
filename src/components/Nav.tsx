@@ -28,7 +28,7 @@ export function Nav({ variant }: { variant?: string }) {
       link: "/destinations",
     },
     {
-      name: "Our brand",
+      name: "Our Brand",
       link: "/brands",
     },
     {
@@ -45,7 +45,7 @@ export function Nav({ variant }: { variant?: string }) {
   return (
     <nav className="fixed top-0 w-full z-50 bg-white">
       <div className="max-w-[1440px] mx-auto">
-        <div className="flex justify-between items-center py-6   mx-4 lg:mx-[20px] xl:mx-[60px] ">
+        <div className="flex justify-between items-center py-6 mx-4 lg:mx-[20px] xl:mx-[60px]">
           <img
             src={logoUrl}
             alt="Parkrise Logo"
@@ -55,7 +55,7 @@ export function Nav({ variant }: { variant?: string }) {
             {menuItems.map((item, index) => (
               <li
                 key={index}
-                className={`font-montserrat text-[14px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer ${
+                className={`font-montserrat text-[13px] font-medium leading-[30px] text-center [text-underline-position:from-font] [text-decoration-skip-ink:none] hover:text-[#00B2B2] cursor-pointer ${
                   location.pathname === item.link
                     ? "text-[#00B2B2]"
                     : variant === "home"
