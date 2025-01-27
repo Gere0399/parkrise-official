@@ -6,7 +6,7 @@ const Franchise = () => {
   return (
     <div>
       <Nav />
-      <div className="max-w-[1440px] mx-auto mt-32 px-4 lg:px-0">
+      <div className="max-w-[1440px] mx-auto mt-32 px-4 lg:px-[55px]">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-4xl font-bold text-center mb-8">
             Franchise Opportunities
