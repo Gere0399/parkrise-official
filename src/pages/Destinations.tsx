@@ -2,16 +2,6 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import HelpButton from "@/components/HelpButton";
 
-export interface Property {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  coordinates: [number, number];
-  amenities: string[];
-}
-
 const Destinations = () => {
   return (
     <div>
