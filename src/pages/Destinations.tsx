@@ -39,12 +39,11 @@ const SAMPLE_PROPERTIES: Property[] = [
 const Destinations = () => {
   const [selectedLocation, setSelectedLocation] = useState<string>("Osaka, Japan");
   const [sortBy, setSortBy] = useState<"highest" | "lowest">("highest");
-  const [showMap, setShowMap] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
       <Navbar showSearch={false} />
-      <div className="pt-24 px-4 md:px-8 max-w-[1400px] mx-auto">
+      <div className="pt-24 px-8 max-w-[1400px] mx-auto">
         <div className="mb-8">
           <SearchBar />
         </div>
@@ -64,21 +63,8 @@ const Destinations = () => {
             Lowest Price
           </Button>
         </div>
-
-        {/* Mobile Map Toggle Button */}
-        <div className="md:hidden mb-4">
-          <Button 
-            onClick={() => setShowMap(!showMap)}
-            variant="outline"
-            className="w-full"
-          >
-            {showMap ? "Hide Map" : "Show Map"}
-          </Button>
-        </div>
-
-        <div className="flex flex-col md:flex-row gap-6">
-          {/* Properties List */}
-          <div className={`w-full md:w-2/3 ${showMap ? 'hidden md:block' : 'block'}`}>
+        <div className="flex gap-6">
+          <div className="w-2/3">
             <div className="space-y-6">
               {SAMPLE_PROPERTIES
                 .sort((a, b) => 
@@ -90,13 +76,7 @@ const Destinations = () => {
             </div>
           </div>
           
-          {/* Map Container */}
-          <div 
-            className={`
-              ${showMap ? 'fixed bottom-0 left-0 right-0 h-[60vh] z-10' : 'hidden'} 
-              md:static md:block md:w-1/3 md:h-[calc(100vh-6rem)] md:sticky md:top-24
-            `}
-          >
+          <div className="w-1/3 sticky top-24 h-[calc(100vh-6rem)]">
             <Map properties={SAMPLE_PROPERTIES} selectedLocation={selectedLocation} />
           </div>
         </div>
