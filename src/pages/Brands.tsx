@@ -38,7 +38,7 @@ const Brands = () => {
           />
         </div>
 
-        <div className="xl:w-[1164px] w-full mt-[32px] sm:mt-[76px] xl:ml-[127px] px-4 ">
+        <div className="xl:w-[1164px] w-full mt-[32px] sm:mt-[76px] xl:ml-[127px] px-6">
           <p className="font-montserrat font-medium text-[48px] md:text-[130px] sm:text-[70px] sm:leading-[136px] text-[#0A1B2F] ">
             OUR BRAND
           </p>
