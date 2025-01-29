@@ -57,17 +57,17 @@ export const SearchBar = () => {
 
   if (isMobile) {
     return (
-      <div className="flex flex-col gap-4 w-full bg-white md:bg-white/90 backdrop-blur-sm rounded-3xl p-4 ml-4">
+      <div className="flex flex-col gap-4  bg-white md:bg-white/90 backdrop-blur-sm rounded-3xl p-4 ">
         <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
           <PopoverTrigger asChild>
             <div className="flex items-center p-3 bg-white rounded-xl border cursor-pointer">
-              <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0 " />
+              <MapPin className="size-5 text-[#00B2B2] shrink-0 " />
               <input
                 type="text"
                 placeholder="Search location..."
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="bg-transparent border-none focus:outline-none text-[#222222] w-full font-montserrat text-sm placeholder:text-[#222222] px-2"
+                className="bg-transparent border-none focus:outline-none text-[#222222] w-full font-montserrat text-sm placeholder:text-[#222222] px-2 font-semibold"
               />
               <ChevronDown className="w-4 h-4 text-gray-400" />
             </div>
@@ -98,7 +98,7 @@ export const SearchBar = () => {
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className="flex-1 justify-start text-left font-normal"
+                className="flex-1 justify-start text-left font-semibold"
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {arrival ? format(arrival, "MMM dd") : "Check in"}
@@ -119,7 +119,7 @@ export const SearchBar = () => {
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className="flex-1 justify-start text-left font-normal"
+                className="flex-1 justify-start text-left font-semibold"
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {duration ? format(duration, "MMM dd") : "Check out"}
@@ -145,7 +145,7 @@ export const SearchBar = () => {
             setGuests(g);
           }}
         >
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full font-semibold">
             <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
           <SelectContent className="w-[280px] bg-white">
@@ -194,7 +194,7 @@ export const SearchBar = () => {
         </Select>
 
         <Select value={specialRate} onValueChange={setSpecialRate}>
-          <SelectTrigger>
+          <SelectTrigger className="font-semibold">
             <SelectValue placeholder="Special rates" />
           </SelectTrigger>
           <SelectContent className="bg-white">
@@ -222,14 +222,14 @@ export const SearchBar = () => {
     <div className="flex items-center justify-between bg-white rounded-full h-12 w-full max-w-5xl">
       <Popover open={isLocationOpen} onOpenChange={setIsLocationOpen}>
         <PopoverTrigger asChild>
-          <div className="flex items-center pl-4 h-full cursor-pointer">
-            <MapPin className="w-4 h-4 text-[#00B2B2] shrink-0" />
+          <div className="flex items-center pl-4 h-full cursor-pointer gap-1">
+            <MapPin className="size-5 text-[#00B2B2] shrink-0 ml-1 " />
             <input
               type="text"
               placeholder="Search location..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="bg-transparent border-none focus:outline-none text-[#222222] w-full font-montserrat text-sm placeholder:text-[#222222] px-2"
+              className="bg-transparent font-semibold border-none focus:outline-none text-[#222222] w-full font-montserrat text-sm placeholder:text-[#222222] px-2"
             />
             <ChevronDown className="w-4 h-4 text-gray-400" />
           </div>
@@ -263,7 +263,7 @@ export const SearchBar = () => {
           <PopoverTrigger asChild>
             <Button
               variant="ghost"
-              className="h-full border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-2"
+              className="h-full  font-semibold border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-2"
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
               {arrival ? (
@@ -292,7 +292,7 @@ export const SearchBar = () => {
           <PopoverTrigger asChild>
             <Button
               variant="ghost"
-              className="h-full border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-2"
+              className="h-full font-semibold border-0 bg-white/5 backdrop-blur-sm hover:bg-gray-50 hover:text-[#00B2B2] px-2"
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
               {duration ? (
@@ -327,7 +327,7 @@ export const SearchBar = () => {
             setGuests(g);
           }}
         >
-          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-[#222222] px-2">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[140px] text-[#222222] px-2 font-semibold">
             <SelectValue>{getRoomGuestLabel(rooms, guests)}</SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-white w-[280px] overflow-hidden">
@@ -340,7 +340,7 @@ export const SearchBar = () => {
                     onClick={() => {
                       setRooms(num.toString());
                     }}
-                    className="px-2 py-1.5 rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center gap-1"
+                    className="px-2 py-1.5  rounded hover:bg-gray-100 cursor-pointer text-sm flex items-center gap-1"
                   >
                     <span className="text-gray-900">{num}</span>
                     {num === Number(rooms) && (
@@ -376,7 +376,7 @@ export const SearchBar = () => {
 
       <div className="h-full flex items-center -ml-2">
         <Select value={specialRate} onValueChange={setSpecialRate}>
-          <SelectTrigger className="h-full border-0 bg-transparent w-[130px] text-[#222222] px-2">
+          <SelectTrigger className="h-full border-0 bg-transparent w-[130px] text-[#222222] px-2 font-semibold">
             <SelectValue placeholder="Special rates" />
           </SelectTrigger>
           <SelectContent className="bg-white overflow-hidden">
@@ -403,7 +403,7 @@ export const SearchBar = () => {
       </div>
 
       <Button
-        className="bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mr-1"
+        className="bg-[#00B2B2] hover:bg-[#00B2B2]/90 text-white px-4 h-10 rounded-full font-montserrat text-sm mr-1"
         onClick={() => navigate("/destinations")}
       >
         Let's GO!

@@ -8,17 +8,29 @@ export function Footer() {
       <div className="w-full bg-[#EFECE7] border-[0.5px] border-[#D9D9D9] shadow-[0px_1px_1.8px_#9F9D9A] ">
         <div className="flex flex-col lg:flex-row justify-between items-center px-4 md:px-[52px] py-5 gap-4 container">
           <div className="flex flex-row justify-start items-center flex-nowrap gap-4 md:gap-8 overflow-x-auto w-full lg:w-auto whitespace-nowrap">
-            <Link to="/" className="font-montserrat font-normal text-[16px] leading-[22px] text-[#0A1B2F]">
+            <Link
+              to="/"
+              className="font-montserrat font-normal text-[16px] leading-[22px] text-[#0A1B2F]"
+            >
               Home
             </Link>
-            <Link to="/destinations" className="font-montserrat font-normal text-[16px] leading-[22px] text-[#0A1B2F]">
+            <Link
+              to="/destinations"
+              className="font-montserrat font-normal text-[16px] leading-[22px] text-[#0A1B2F]"
+            >
               Destinations
             </Link>
-            <Link to="/brands" className="font-montserrat font-normal text-[16px] leading-[22px] text-[#0A1B2F]">
+            <Link
+              to="/brands"
+              className="font-montserrat font-normal text-[16px] leading-[22px] text-[#0A1B2F]"
+            >
               Our Brand
             </Link>
-            <Link to="/franchise" className="font-montserrat font-normal text-[16px] leading-[22px] text-[#0A1B2F]">
-              For Business
+            <Link
+              to="/franchise"
+              className="font-montserrat font-normal text-[16px] leading-[22px] text-[#0A1B2F]"
+            >
+              Franchise
             </Link>
           </div>
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-10 w-full lg:w-auto text-center lg:text-left">
@@ -31,7 +43,9 @@ export function Footer() {
             <div className="flex flex-row justify-center lg:justify-end items-center gap-6 lg:gap-10">
               <div className="flex flex-col gap-1">
                 <p className="font-montserrat font-normal text-[14px] leading-[13px] text-[#0A1B2F]">
-                  <span className="border-b-[2px] border-[#A8A8A8]">Facebo</span>
+                  <span className="border-b-[2px] border-[#A8A8A8]">
+                    Facebo
+                  </span>
                   ok
                 </p>
                 <p className="font-montserrat font-normal text-[14px] leading-[13px] text-[#0A1B2F]">

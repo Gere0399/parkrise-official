@@ -122,8 +122,8 @@ const Franchise = () => {
                   className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 h-auto shadow-[inset_0px_1px_4px_0px_rgba(0,0,0,0.25)] w-full md:max-w-[299px] max-w-[340px] hover:cursor-pointer"
                 >
                   <div className="flex justify-center items-center">
-                    <div className="w-12 h-12 bg-[#FFE4E4] rounded-full flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-[#FF9898]" />
+                    <div className="w-12 h-12 bg-[#00B2B2] rounded-full flex items-center justify-center mb-4">
+                      <Icon className="w-6 h-6 text-white" />
                     </div>
                   </div>
                   <div className="flex justify-center items-center ">
