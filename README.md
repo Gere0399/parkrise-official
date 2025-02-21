@@ -7,16 +7,12 @@
 ## How can I edit this code?
 
 There are several ways of editing your application.
+You can use the GitHub code files and update the Supabase backend with another if you want, as backend hasn't been set up yet
 
-**Use Lovable**
+Or if lovable project creator you can use it with Lovable (Geremy). But you still can use it with lovable in another project if you want if you are someone else, you create a new project in lovable and connect the github repo where you have the code. and then you start making requests to the AI with the new code, she will see. For lovable, just be specific and go in details with prompts when you want to code a new part.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/01bb196a-cf0b-4f83-b5da-2ff041f70cb7) and start prompting.
 
-Changes made via Lovable will be committed automatically to this repo.
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
